@@ -1,0 +1,5 @@
+include 'despachalo-configuration'
+
+include 'adapters:despachalo-web'
+include 'adapters:despachalo-persistence'
+include 'despachalo-application'

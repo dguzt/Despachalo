@@ -1,0 +1,19 @@
+plugins {
+    id "org.springframework.boot" version "2.4.2"
+}
+
+version '1.0.0-SNAPSHOT'
+
+dependencies {
+    implementation project(':despachalo-application')
+    implementation project(':adapters:despachalo-persistence')
+    implementation project(':adapters:despachalo-web')
+
+    implementation 'org.springframework.boot:spring-boot-starter'
+
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+}
+
+test {
+    useJUnitPlatform()
+}

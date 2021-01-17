@@ -1,0 +1,30 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/despachalo_pe
+    username: despachalo_pe
+    password: despachalo_pe
+    driver-class-name: org.postgresql.Driver
+
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+  data:
+    web:
+      pageable:
+        size-parameter: pagesize
+        page-parameter: page
+        default-page-size: 10
+        max-page-size: 50
+
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
+logging:
+  file:
+    path: logs/
+  level:
+    org.hibernate.SQL: INFO
