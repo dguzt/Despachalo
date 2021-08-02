@@ -1,9 +1,18 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /api
+
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/despachalo_pe
-    username: despachalo_pe
-    password: despachalo_pe
+    url: jdbc:postgresql://localhost:5432/despachalo
+    username: despachalo
+    password: despachalo
     driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
 
   servlet:
     multipart:
@@ -17,11 +26,6 @@ spring:
         page-parameter: page
         default-page-size: 10
         max-page-size: 50
-
-server:
-  port: 8080
-  servlet:
-    context-path: /api
 
 logging:
   file:
