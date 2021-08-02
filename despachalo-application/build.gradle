@@ -5,6 +5,9 @@ repositories {
 }
 
 dependencies {
+    implementation project(':commons:common-error')
+    implementation project(':commons:common-hexagonal')
+
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
 
