@@ -1,7 +1,5 @@
 server:
   port: 8080
-  servlet:
-    context-path: /api
 
 spring:
   datasource:
@@ -32,3 +30,7 @@ logging:
     path: logs/
   level:
     org.hibernate.SQL: INFO
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
