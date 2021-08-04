@@ -7,5 +7,4 @@ package org.guzman.despachalo.commons.errors;
 public interface BusinessException {
     String getMessage();
     String getCode();
-    Object getData();
 }

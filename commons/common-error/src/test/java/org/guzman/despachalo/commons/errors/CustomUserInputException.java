@@ -7,7 +7,7 @@ import lombok.Value;
 public class CustomUserInputException extends RuntimeException implements UserInputException {
     private final String code = "CUSTOM_USER_INPUT_ERROR";
     private final String message;
-    private final Object data;
+    private final Data data;
 
     @Value
     static class Data {

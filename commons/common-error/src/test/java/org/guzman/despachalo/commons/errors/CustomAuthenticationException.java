@@ -7,7 +7,7 @@ import lombok.Value;
 public class CustomAuthenticationException extends RuntimeException implements AuthenticationException {
     private final String code = "CUSTOM_AUTHENTICATION_ERROR";
     private final String message;
-    private final Object data;
+    private final Data data;
 
     @Value @Getter
     static class Data {

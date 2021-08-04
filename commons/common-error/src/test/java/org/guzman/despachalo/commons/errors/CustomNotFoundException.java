@@ -7,7 +7,7 @@ import lombok.Value;
 public class CustomNotFoundException extends RuntimeException implements NotFoundException {
     private final String code = "CUSTOM_NOT_FOUND_ERROR";
     private final String message;
-    private final Object data;
+    private final Data data;
 
     @Value
     static class Data {
