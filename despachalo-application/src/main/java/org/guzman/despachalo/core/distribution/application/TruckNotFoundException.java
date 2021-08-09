@@ -10,7 +10,7 @@ import java.io.Serializable;
 public class TruckNotFoundException extends RuntimeException implements NotFoundException {
     private final String code = "DIST_001";
     private final String message;
-    private final Object data;
+    private final Data data;
 
     @Value
     static class Data implements Serializable {
