@@ -1,0 +1,4 @@
+sentry:
+  dsn: ""
+  environment: ""
+  send-default-pii: true
