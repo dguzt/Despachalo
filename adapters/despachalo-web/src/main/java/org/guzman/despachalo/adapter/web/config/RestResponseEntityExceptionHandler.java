@@ -1,5 +1,6 @@
 package org.guzman.despachalo.adapter.web.config;
 
+import io.sentry.Sentry;
 import lombok.Builder;
 import lombok.Getter;
 import org.guzman.despachalo.commons.errors.*;
@@ -66,6 +67,7 @@ public class RestResponseEntityExceptionHandler extends ResponseEntityExceptionH
             return HttpStatus.UNAUTHORIZED;
         }
 
+        Sentry.captureException(ex);
         return HttpStatus.INTERNAL_SERVER_ERROR;
     }
 }
