@@ -18,7 +18,7 @@ gradle-build:
   artifacts:
     expire_in: 1h
     paths:
-      - build/libs/*.jar
+      - ./**/build/libs/*.jar
   only:
     - master
     - production
@@ -34,7 +34,7 @@ unit-test:
       - build/reports/jacoco/test/jacocoTestReport.xml
     reports:
       junit:
-        - build/test-results/test/TEST-*.xml
+        - ./**/build/test-results/test/TEST-*.xml
   only:
     - master
     - production
