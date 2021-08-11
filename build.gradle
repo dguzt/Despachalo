@@ -31,6 +31,8 @@ subprojects {
 
 sonarqube {
     properties {
+        property "sonar.projectKey", "despachalo-pe_core"
+        property "sonar.organization", "despachalo-pe"
         property "sonar.sourceEncoding", "UTF-8"
     }
 }
