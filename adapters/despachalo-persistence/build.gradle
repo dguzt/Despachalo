@@ -1,4 +1,4 @@
-version '1.0.0-SNAPSHOT'
+version '1.0.0'
 
 dependencies {
     implementation project(':commons:common-hexagonal')
@@ -14,6 +14,9 @@ dependencies {
 
     runtimeOnly 'org.postgresql:postgresql'
     runtimeOnly 'com.h2database:h2'
+
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 }
 
 test {
