@@ -4,9 +4,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class ApplicationTest {
+class PersistenceApplicationTest {
 
     public static void main(String[] args) {
-        SpringApplication.run(ApplicationTest.class, args);
+        SpringApplication.run(PersistenceApplicationTest.class, args);
     }
 }

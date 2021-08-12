@@ -1,7 +1,5 @@
-
 plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-    id 'org.sonarqube' version '3.3'
 }
 
 subprojects {
@@ -20,19 +18,5 @@ subprojects {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.2")
         }
-    }
-
-    sonarqube {
-        properties {
-            property "sonar.sources", "src"
-        }
-    }
-}
-
-sonarqube {
-    properties {
-        property "sonar.projectKey", "despachalo-pe_core"
-        property "sonar.organization", "despachalo-pe"
-        property "sonar.sourceEncoding", "UTF-8"
     }
 }
