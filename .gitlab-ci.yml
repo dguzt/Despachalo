@@ -25,7 +25,7 @@ gradle-build:
     - merge_requests
 
 
-unit-test:
+test-all:
   stage: test
   script:
     - ./gradlew test
@@ -49,16 +49,6 @@ sonarcloud-check:
       - .sonar/cache
   script:
     - ./gradlew sonarqube
-  only:
-    - master
-    - production
-    - merge_requests
-
-
-integration-test:
-  stage: test
-  script:
-    - echo "running integration tests"
   only:
     - master
     - production
