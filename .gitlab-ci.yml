@@ -28,7 +28,8 @@ gradle-build:
 core-test:
   stage: test
   script:
-    - ./gradlew :commons:test
+    - ./gradlew :commons:common-error:test
+    - ./gradlew :commons:common-hexagonal:test
     - ./gradlew :despachalo-application:test
   artifacts:
     reports:
@@ -43,7 +44,8 @@ core-test:
 adapters-test:
   stage: test
   script:
-    - ./gradlew :adapters:test
+    - ./gradlew :adapters:despachalo-persistence:test
+    - ./gradlew :adapters:despachalo-web:test
   artifacts:
     reports:
       junit:
