@@ -28,7 +28,7 @@ public class GetTruckPersistenceAdapterTest {
     private GetTruckPort getTruckPort;
 
     @Test
-    @Sql("classpath:db/sql/get-truck.sql")
+    @Sql("classpath:sql/distribution/get-truck-persistence-adapter-test.sql")
     void whenGetATruck_AndExistsInDB_ShouldReturnIt() {
         var truckId = 1L;
         assertTrue(truckRepository.existsById(truckId));
