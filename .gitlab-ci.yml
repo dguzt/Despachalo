@@ -63,7 +63,7 @@ config-test:
   artifacts:
     reports:
       junit:
-        - adapters/**/build/test-results/test/TEST-*.xml
+        - despachalo-configuration/build/test-results/test/TEST-*.xml
   only:
     - master
     - production
