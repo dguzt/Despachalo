@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence;
+package org.guzman.despachalo.adapter.persistence.distribution;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

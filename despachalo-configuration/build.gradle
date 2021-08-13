@@ -9,7 +9,11 @@ dependencies {
     implementation project(':adapters:despachalo-persistence')
     implementation project(':adapters:despachalo-web')
 
-    implementation 'org.springframework.boot:spring-boot-starter'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    testRuntimeOnly 'com.h2database:h2'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.junit.jupiter:junit-jupiter-engine'
 
     annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 }

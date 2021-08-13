@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence;
+package org.guzman.despachalo.adapter.persistence.distribution;
 
 import lombok.*;
 import org.hibernate.Hibernate;

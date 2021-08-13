@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence;
+package org.guzman.despachalo.adapter.persistence.distribution;
 
 import org.guzman.despachalo.core.distribution.domain.Truck;
 import org.mapstruct.Mapper;

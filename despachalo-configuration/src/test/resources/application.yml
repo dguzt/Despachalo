@@ -1,0 +1,33 @@
+server:
+  port: 8080
+  error:
+    include-message: always
+    include-binding-errors: never
+    include-stacktrace: never
+    include-exception: false
+
+spring:
+  datasource:
+    url: jdbc:h2:mem:despachalo;DB_CLOSE_DELAY=1;DB_CLOSE_ON_EXIT=FALSE
+    platform: h2
+    username: despachalo
+    password: despachalo
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    database-platform: org.hibernate.dialect.H2Dialect
+
+  servlet:
+    multipart:
+      max-file-size: 500MB
+      max-request-size: 500MB
+
+  data:
+    web:
+      pageable:
+        size-parameter: pagesize
+        page-parameter: page
+        default-page-size: 10
+        max-page-size: 50
