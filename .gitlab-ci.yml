@@ -25,16 +25,43 @@ gradle-build:
     - merge_requests
 
 
-test-all:
+core-test:
   stage: test
   script:
-    - ./gradlew test
+    - ./gradlew :commons:test
+    - ./gradlew :despachalo-application:test
   artifacts:
-    paths:
-      - build/reports/jacoco/test/jacocoTestReport.xml
     reports:
       junit:
-        - ./**/build/test-results/test/TEST-*.xml
+        - despachalo-application/build/test-results/test/TEST-*.xml
+        - commons/**/build/test-results/test/TEST-*.xml
+  only:
+    - master
+    - production
+    - merge_requests
+
+adapters-test:
+  stage: test
+  script:
+    - ./gradlew :adapters:test
+  artifacts:
+    reports:
+      junit:
+        - adapters/**/build/test-results/test/TEST-*.xml
+  only:
+    - master
+    - production
+    - merge_requests
+
+
+config-test:
+  stage: test
+  script:
+    - ./gradlew :despachalo-configuration:test
+  artifacts:
+    reports:
+      junit:
+        - adapters/**/build/test-results/test/TEST-*.xml
   only:
     - master
     - production
@@ -53,6 +80,7 @@ sonarcloud-check:
     - master
     - production
     - merge_requests
+  when: manual
 
 
 coverage-gitlab:
@@ -70,3 +98,4 @@ coverage-gitlab:
       cobertura: build/cobertura.xml
   only:
     - merge_requests
+  when: manual
