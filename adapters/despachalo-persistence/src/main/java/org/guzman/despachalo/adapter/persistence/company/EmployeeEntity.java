@@ -11,7 +11,8 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @Entity @Table(name = "MT_EMPLOYEE")
 public class EmployeeEntity {
-    @Id @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "employee_id")
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", length = 100, nullable = false)

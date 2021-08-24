@@ -1,3 +1,10 @@
+
+despachalo:
+  module-name: Despáchalo
+  api-version: 1.0.0
+  security:
+    jwt-key: PBNkWc2Nz8VqIYzH1aw1JbrBRDiNyIl2i1gbNx4SatQ=
+
 server:
   port: 8080
   error:
@@ -38,4 +45,6 @@ logging:
 
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
+    path: /docs/swagger-ui.html
+  api-docs:
+    path: /docs/api-docs
