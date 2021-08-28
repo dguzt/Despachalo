@@ -14,11 +14,11 @@ import java.util.function.Function;
 
 @Service
 public class JwtService {
-    private final String secretKey;
+    private final Key secretKey;
 
     public JwtService(
-            @Value("${despachalo.security.jwt-key}") String secretKey) {
-        this.secretKey = secretKey;
+            @Value("${despachalo.security.jwt-key}") String jwtKey) {
+        this.secretKey = secretKey(jwtKey);
     }
 
     public String generateToken(UserDetails userDetails) {
@@ -30,16 +30,8 @@ public class JwtService {
         return extractClaim(token, Claims::getSubject);
     }
 
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    private Key secretKey() {
-        return Keys.hmacShaKeyFor(secretKey.getBytes());
-    }
-
-    private Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    private Key secretKey(String jwtKey) {
+        return Keys.hmacShaKeyFor(jwtKey.getBytes());
     }
 
     private String createToken(Map<String, Object> claims, String subject) {
@@ -49,7 +41,7 @@ public class JwtService {
                 .setSubject(subject)
                 .setIssuedAt(new Date(time))
                 .setExpiration(new Date(time + 1000 * 60 * 60 * 10))
-                .signWith(secretKey())
+                .signWith(secretKey)
                 .compact();
     }
 

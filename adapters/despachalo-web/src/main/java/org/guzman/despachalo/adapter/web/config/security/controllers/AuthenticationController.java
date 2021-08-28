@@ -26,13 +26,13 @@ public class AuthenticationController {
 
     @PostMapping("/authenticate")
     @ResponseStatus(HttpStatus.OK)
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) throws Exception {
+    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             var authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword());
             authenticationManager.authenticate(authToken);
         } catch (BadCredentialsException ex) {
-            logger.error(ex.getMessage(), ex);
-            throw new Exception("Incorrect username or password");
+            logger.info("Trying to login with email: {}", authenticationRequest.getEmail());
+            throw new WrongCredentialsException();
         }
 
         final var userDetails = webUserDetailsService.loadUserByUsername(authenticationRequest.getEmail());

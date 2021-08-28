@@ -28,21 +28,17 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        logger.info("Start filtering internal JWT");
         final var authorizationHeader = request.getHeader("Authorization");
 
         if (authorizationHeader == null || !authorizationHeader.startsWith(PREFIX)) {
-            logger.info("Request does not have Authorization Header or start with '{}'", PREFIX);
             filterChain.doFilter(request, response);
             return;
         }
 
         var jwt = authorizationHeader.substring(PREFIX.length());
         var username = jwtService.extractUsername(jwt);
-        logger.info("Authenticated as {}", username);
 
         if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-            logger.info("Request user details of {}", username);
             var userDetails = userDetailsService.loadUserByUsername(username);
             var authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
