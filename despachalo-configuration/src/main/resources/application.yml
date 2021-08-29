@@ -3,7 +3,7 @@ despachalo:
   module-name: Despáchalo
   api-version: 1.0.0
   security:
-    jwt-key: PBNkWc2Nz8VqIYzH1aw1JbrBRDiNyIl2i1gbNx4SatQ=
+    jwt-key: ZnzljzqCsk/Zh9jKN27N1JteCrIv3LhzIzXg3kv0gz4=
 
 server:
   port: 8080
@@ -23,6 +23,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: off
 
   servlet:
     multipart:

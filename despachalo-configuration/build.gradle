@@ -1,3 +1,5 @@
+import org.guzman.despachalo.tasks.GenJwtKeyTask
+
 plugins {
     id "org.springframework.boot" version "2.4.2"
 }
@@ -21,3 +23,5 @@ dependencies {
 test {
     useJUnitPlatform()
 }
+
+tasks.register('genJwtKey', GenJwtKeyTask)
