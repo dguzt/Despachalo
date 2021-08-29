@@ -1,0 +1,17 @@
+version: "3.9"
+
+services:
+  db:
+    image: postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: despachalo
+      POSTGRES_PASSWORD: despachalo
+      POSTGRES_DB: despachalo
+    ports:
+      - "5432:5432"
+    volumes:
+      - despachalo-db:/var/lib/postgresql/data
+
+volumes:
+  despachalo-db:
