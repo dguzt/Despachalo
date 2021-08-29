@@ -1,0 +1,1 @@
+web: java -jar despachalo-configuration/build/libs/despachalo-configuration-1.0.0.jar

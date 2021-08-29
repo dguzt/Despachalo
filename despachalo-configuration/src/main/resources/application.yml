@@ -1,3 +1,10 @@
+
+despachalo:
+  module-name: Despáchalo
+  api-version: 1.0.0
+  security:
+    jwt-key: ZnzljzqCsk/Zh9jKN27N1JteCrIv3LhzIzXg3kv0gz4=
+
 server:
   port: 8080
   error:
@@ -16,6 +23,7 @@ spring:
   jpa:
     hibernate:
       ddl-auto: update
+    open-in-view: off
 
   servlet:
     multipart:
@@ -33,9 +41,9 @@ spring:
 logging:
   file:
     path: logs/
-  level:
-    org.hibernate.SQL: INFO
 
 springdoc:
   swagger-ui:
-    path: /swagger-ui.html
+    path: /docs/swagger-ui.html
+  api-docs:
+    path: /docs/api-docs

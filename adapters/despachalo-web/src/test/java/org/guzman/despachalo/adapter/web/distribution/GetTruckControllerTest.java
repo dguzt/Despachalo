@@ -10,6 +10,7 @@ import org.skyscreamer.jsonassert.JSONParser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -35,6 +36,7 @@ class GetTruckControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "ADMIN")
     void whenRequestGetATruck_andExists_shouldReturnItWithOk() throws Exception {
         var truckId = 1L;
         var truckFound = truck();
@@ -52,6 +54,7 @@ class GetTruckControllerTest {
     }
 
     @Test
+    @WithMockUser(roles = "ADMIN")
     void whenRequestGetATruck_andNoExist_shouldReturnNotFoundException() throws Exception {
         var truckId = 1L;
         when(getTruckUseCase.execute(truckId)).thenThrow(new TruckNotFoundException(truckId));

@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class GetTruckController {
     private final GetTruckUseCase getTruckUseCase;
 
-    @GetMapping(path = "/trucks/{truckId}")
     @ResponseStatus(HttpStatus.OK)
+    @GetMapping(path = "/trucks/{truckId}")
     public Truck getTruck(@PathVariable Long truckId) {
         return getTruckUseCase.execute(truckId);
     }
