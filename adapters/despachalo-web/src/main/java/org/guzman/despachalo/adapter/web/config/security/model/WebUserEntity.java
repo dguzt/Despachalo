@@ -1,7 +1,7 @@
 package org.guzman.despachalo.adapter.web.config.security.model;
 
 import lombok.*;
-import org.guzman.despachalo.adapter.persistence.company.EmployeeEntity;
+import org.guzman.despachalo.adapter.persistence.user.UserEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -19,8 +19,8 @@ public class WebUserEntity {
     @Column(name = "password", nullable = false)
     private String password;
 
-    @Column(name = "employee_id", nullable = false)
-    private Long employeeId;
+    @Column(name = "user_id", nullable = false)
+    private Long userId;
 
     @Column(name = "active", nullable = false)
     private Boolean active;
@@ -29,9 +29,9 @@ public class WebUserEntity {
     private String roles;
 
     @ToString.Exclude
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employee_id", insertable = false, updatable = false)
-    private EmployeeEntity employee;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", insertable = false, updatable = false)
+    private UserEntity user;
 
     @Override
     public boolean equals(Object o) {

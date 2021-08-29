@@ -15,7 +15,7 @@ public class WebUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        var user = repository.findByEmployeeEmail(email)
+        var user = repository.findByUserEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with email: " + email));
 
         return new WebUserDetails(email, user);

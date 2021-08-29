@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence.company;
+package org.guzman.despachalo.adapter.persistence.user;
 
 import lombok.*;
 import org.hibernate.Hibernate;
@@ -9,9 +9,9 @@ import java.util.Objects;
 @ToString
 @Getter @Setter
 @RequiredArgsConstructor
-@Entity @Table(name = "MT_EMPLOYEE")
-public class EmployeeEntity {
-    @Column(name = "employee_id")
+@Entity @Table(name = "MT_USER")
+public class UserEntity {
+    @Column(name = "user_id")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
@@ -28,7 +28,7 @@ public class EmployeeEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        EmployeeEntity that = (EmployeeEntity) o;
+        UserEntity that = (UserEntity) o;
 
         return Objects.equals(id, that.id);
     }

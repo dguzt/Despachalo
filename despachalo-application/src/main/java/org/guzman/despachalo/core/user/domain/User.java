@@ -1,9 +1,9 @@
-package org.guzman.despachalo.core.company.domain;
+package org.guzman.despachalo.core.user.domain;
 
 import lombok.Value;
 
 @Value
-public class Employee {
+public class User {
     Long id;
     String name;
     String lastname;
