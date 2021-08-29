@@ -40,8 +40,6 @@ spring:
 logging:
   file:
     path: logs/
-  level:
-    org.hibernate.SQL: INFO
 
 springdoc:
   swagger-ui:
