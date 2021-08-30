@@ -15,6 +15,6 @@ abstract class GenJwtKeyTask extends DefaultTask {
         SecretKey key = Keys.secretKeyFor(SignatureAlgorithm.HS256)
         String secretString = Encoders.BASE64.encode(key.getEncoded())
 
-        println secretString
+        println "jwt secret key ==> ${secretString}"
     }
 }

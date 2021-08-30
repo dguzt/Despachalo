@@ -1,10 +1,22 @@
 # Despachalo API
 
-# Deployment
-## 1. Heroku
+## Env Variables
+1. Generate the JWT secret key. Then, store it in the `.env` file:
+    ```bash
+    # In terminal
+    ./gradlew genJtwKey -q
+    # secret key ==> T05nwOMsphgZ9J1AUD+s0YMHiLO/SY7ea6qkoYBiAws=
+    ```
+    ```properties
+    # .env
+    DESPACHALO_SECURITY_JWT=T05nwOMsphgZ9J1AUD+s0YMHiLO/SY7ea6qkoYBiAws=
+    ```
+
+## Deployment
+### 1. Heroku
 Login into Heroku CLI
 
-Create an app using a creative name:
+Create an app using a creative name like `despachalo`:
 ```bash
 heroku create despachalo
 ```
@@ -14,13 +26,16 @@ Change the default task for `assemble` to avoid tests execution:
 heroku config:set GRADLE_TASK="assemble"
 ```
 
-Push the code to Heroku:
+Create a database:
 ```bash
-git push heroku master
+heroku addons:create heroku-postgresql
+heroku config # copy DATABASE_URL variable
+heroku config:set SPRING_DATASOURCE_URL= # paste DATABASE_URL value here
 ```
 
-Ensure one web instance for the app:
+Push the code to Heroku and ensure one web instance for the app:
 ```bash
+git push heroku master
 heroku ps:scale web=1
 ```
 
