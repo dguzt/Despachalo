@@ -9,12 +9,14 @@ import org.mapstruct.Mapping;
 public interface DistributionCenterMapper {
 
     @Mapping(target = "id", ignore = true)
+    @Mapping(target = "name", source = "name")
     @Mapping(target = "address", source = "address")
     @Mapping(target = "latitude", source = "location.latitude")
     @Mapping(target = "longitude", source = "location.longitude")
     DistributionCenterEntity toEntity(DistributionCenterToRegister toRegister);
 
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "name", source = "name")
     @Mapping(target = "address", source = "address")
     @Mapping(target = "location", ignore = true)
     @Mapping(target = "location.latitude", source = "latitude")

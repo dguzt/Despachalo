@@ -15,6 +15,9 @@ public class DistributionCenterEntity {
     @Column(name = "id")
     private Long id;
 
+    @Column(name = "nombre", length = 100)
+    private String name;
+
     @Column(name = "ubi_longitud")
     private Double longitude;
 
