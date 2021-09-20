@@ -1,7 +1,7 @@
 package org.guzman.despachalo.adapter.web.config.security.model;
 
 import lombok.*;
-import org.guzman.despachalo.adapter.persistence.user.UserEntity;
+import org.guzman.despachalo.adapter.persistence.user.OldUserEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -31,7 +31,7 @@ public class WebUserEntity {
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", insertable = false, updatable = false)
-    private UserEntity user;
+    private OldUserEntity user;
 
     @Override
     public boolean equals(Object o) {

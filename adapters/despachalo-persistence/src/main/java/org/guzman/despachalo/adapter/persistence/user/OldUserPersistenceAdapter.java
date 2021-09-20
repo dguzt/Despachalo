@@ -9,9 +9,9 @@ import java.util.Optional;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class UserPersistenceAdapter implements GetUserPort {
-    private final UserRepository repository;
-    private final UserMapper mapper;
+public class OldUserPersistenceAdapter implements GetUserPort {
+    private final OldUserRepository repository;
+    private final OldUserMapper mapper;
 
     @Override
     public Optional<User> getById(Long id) {

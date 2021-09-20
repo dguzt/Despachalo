@@ -10,7 +10,7 @@ import java.util.Objects;
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "MT_USER")
-public class UserEntity {
+public class OldUserEntity {
     @Column(name = "user_id")
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,7 +28,7 @@ public class UserEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        UserEntity that = (UserEntity) o;
+        OldUserEntity that = (OldUserEntity) o;
 
         return Objects.equals(id, that.id);
     }
