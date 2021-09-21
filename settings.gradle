@@ -7,3 +7,5 @@ include 'despachalo-application'
 include 'commons:common-error'
 include 'commons:common-hexagonal'
 include 'commons:common-pagination'
+include 'algorithm'
+
