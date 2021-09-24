@@ -2,6 +2,7 @@ package org.guzman.despachalo.algorithm;
 
 import com.opencsv.CSVReader;
 import com.opencsv.exceptions.CsvValidationException;
+import org.guzman.despachalo.algorithm.helpers.Matrix;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -28,29 +29,25 @@ public class Inputs {
         return demand;
     }
 
-    public static double[][] costs() {
-        var records = new ArrayList<double[]>();
+    public static Matrix<Double> costs() {
+        var matrix = new Matrix<Double>();
+
         try (var csvReader = new CSVReader(new FileReader(PAIRWISE_CSV))) {
             String[] values = null;
             while ((values = csvReader.readNext()) != null) {
-                var row = new double[values.length];
+                var row = new ArrayList<Double>();
 
-                for (int i = 0; i < values.length; i++) {
-                    row[i] = Double.parseDouble(values[i]);
+                for (String value : values) {
+                    row.add(Double.parseDouble(value));
                 }
 
-                records.add(row);
+                matrix.addRow(row);
             }
 
         } catch (IOException | CsvValidationException e) {
             e.printStackTrace();
         }
 
-        var res = new double[records.size()][];
-        for (int i = 0; i < records.size(); i++) {
-            res[i] = records.get(i);
-        }
-
-        return res;
+        return matrix;
     }
 }
