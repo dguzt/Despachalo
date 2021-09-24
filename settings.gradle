@@ -1,8 +1,8 @@
-include 'despachalo-configuration'
+include 'despachalo-app'
 
+include 'despachalo-core'
 include 'adapters:despachalo-web'
 include 'adapters:despachalo-persistence'
-include 'despachalo-application'
 
 include 'commons:common-error'
 include 'commons:common-hexagonal'

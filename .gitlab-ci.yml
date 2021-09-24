@@ -11,7 +11,11 @@ stages:
   - visualize
 
 include:
+  - local: /commons/.gitlab-ci.yml
+  - local: /adapters/.gitlab-ci.yml
   - local: /algorithm/.gitlab-ci.yml
+  - local: /despachalo-app/.gitlab-ci.yml
+  - local: /despachalo-core/.gitlab-ci.yml
 
 gradle-build:
   stage: build
@@ -21,69 +25,6 @@ gradle-build:
     expire_in: 1h
     paths:
       - ./**/build/libs/*.jar
-  only:
-    - master
-    - production
-    - merge_requests
-
-
-core-test:
-  stage: test
-  script:
-    - ./gradlew :commons:common-error:test
-    - ./gradlew :commons:common-hexagonal:test
-    - ./gradlew :commons:common-pagination:test
-    - ./gradlew :despachalo-application:test
-  artifacts:
-    reports:
-      junit:
-        - despachalo-application/build/test-results/test/TEST-*.xml
-        - commons/**/build/test-results/test/TEST-*.xml
-  only:
-    - master
-    - production
-    - merge_requests
-
-
-persistence-integration-test:
-  stage: test
-  script:
-    - ./gradlew :adapters:despachalo-persistence:test
-  artifacts:
-    reports:
-      junit:
-        - adapters/despachalo-persistence/build/test-results/test/TEST-*.xml
-  allow_failure: true
-  only:
-    - master
-    - production
-    - merge_requests
-
-
-web-integration-test:
-  stage: test
-  script:
-    - ./gradlew :adapters:despachalo-web:test
-  artifacts:
-    reports:
-      junit:
-        - adapters/despachalo-web/build/test-results/test/TEST-*.xml
-  allow_failure: true
-  only:
-    - master
-    - production
-    - merge_requests
-
-
-config-test:
-  stage: test
-  script:
-    - ./gradlew :despachalo-configuration:test
-  artifacts:
-    reports:
-      junit:
-        - despachalo-configuration/build/test-results/test/TEST-*.xml
-  allow_failure: true
   only:
     - master
     - production

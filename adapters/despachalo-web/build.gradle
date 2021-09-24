@@ -5,7 +5,7 @@ dependencies {
     implementation project(':commons:common-error')
     implementation project(':commons:common-hexagonal')
     implementation project(':commons:common-pagination')
-    implementation project(':despachalo-application')
+    implementation project(':despachalo-core')
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springdoc:springdoc-openapi-ui:1.5.2'

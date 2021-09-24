@@ -1,0 +1,15 @@
+
+commons-unit-test:
+  stage: test
+  script:
+    - ./gradlew :commons:common-error:test
+    - ./gradlew :commons:common-hexagonal:test
+    - ./gradlew :commons:common-pagination:test
+  artifacts:
+    reports:
+      junit:
+        - commons/**/build/test-results/test/TEST-*.xml
+  only:
+    - master
+    - production
+    - merge_requests

@@ -1,0 +1,14 @@
+
+app-system-test:
+  stage: test
+  script:
+    - ./gradlew :despachalo-configuration:test
+  artifacts:
+    reports:
+      junit:
+        - despachalo-configuration/build/test-results/test/TEST-*.xml
+  allow_failure: true
+  only:
+    - master
+    - production
+    - merge_requests
