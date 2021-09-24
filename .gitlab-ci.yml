@@ -10,6 +10,8 @@ stages:
   - test
   - visualize
 
+include:
+  - local: /algorithm/.gitlab-ci.yml
 
 gradle-build:
   stage: build
@@ -30,6 +32,7 @@ core-test:
   script:
     - ./gradlew :commons:common-error:test
     - ./gradlew :commons:common-hexagonal:test
+    - ./gradlew :commons:common-pagination:test
     - ./gradlew :despachalo-application:test
   artifacts:
     reports:
@@ -41,15 +44,31 @@ core-test:
     - production
     - merge_requests
 
-adapters-test:
+
+persistence-integration-test:
   stage: test
   script:
     - ./gradlew :adapters:despachalo-persistence:test
+  artifacts:
+    reports:
+      junit:
+        - adapters/despachalo-persistence/build/test-results/test/TEST-*.xml
+  allow_failure: true
+  only:
+    - master
+    - production
+    - merge_requests
+
+
+web-integration-test:
+  stage: test
+  script:
     - ./gradlew :adapters:despachalo-web:test
   artifacts:
     reports:
       junit:
-        - adapters/**/build/test-results/test/TEST-*.xml
+        - adapters/despachalo-web/build/test-results/test/TEST-*.xml
+  allow_failure: true
   only:
     - master
     - production
@@ -64,6 +83,7 @@ config-test:
     reports:
       junit:
         - despachalo-configuration/build/test-results/test/TEST-*.xml
+  allow_failure: true
   only:
     - master
     - production

@@ -1,0 +1,13 @@
+
+algorithm-white-box-test:
+  stage: test
+  script:
+    - ./gradlew :algorithm:test
+  artifacts:
+    reports:
+      junit:
+        - algorithm/build/test-results/test/TEST-*.xml
+  only:
+    - master
+    - production
+    - merge_requests
