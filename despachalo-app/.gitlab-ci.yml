@@ -2,11 +2,11 @@
 app-system-test:
   stage: test
   script:
-    - ./gradlew :despachalo-configuration:test
+    - ./gradlew :despachalo-app:test
   artifacts:
     reports:
       junit:
-        - despachalo-configuration/build/test-results/test/TEST-*.xml
+        - despachalo-app/build/test-results/test/TEST-*.xml
   allow_failure: true
   only:
     - master
