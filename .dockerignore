@@ -2,7 +2,8 @@
 Procfile
 README.md
 **/.gitlab-ci.yml
-logs/
+logs
+.env
 
 ### Gradle template
 .gradle
