@@ -37,7 +37,7 @@ public class UserEntity {
     private Boolean isAdmin;
 
     @Column(name = "contrasena_hash")
-    private Boolean hashedPassword;
+    private String hashedPassword;
 
     @Column(name = "rol_id")
     private Long roleId;

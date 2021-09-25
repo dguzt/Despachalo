@@ -1,7 +1,6 @@
 include 'despachalo-app'
 
 include 'despachalo-core'
-include 'adapters:despachalo-web'
 include 'adapters:despachalo-persistence'
 
 include 'commons:common-error'

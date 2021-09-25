@@ -3,7 +3,7 @@ FROM adoptopenjdk:11-jdk-hotspot as builder
 WORKDIR /app
 COPY . .
 
-RUN ./gradlew assemble
+RUN ./gradlew build
 
 
 ## API jar Release
