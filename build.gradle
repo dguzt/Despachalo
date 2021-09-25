@@ -10,7 +10,7 @@ sonarqube {
     properties {
         property "sonar.projectKey", "despachalo-pe_core"
         property "sonar.organization", "despachalo-pe"
-        property "sonar.jacoco.reportPath", allTestCoverageFile
+        property "sonar.coverage.jacoco.xmlReportPaths", "${rootDir}/build/reports/jacoco/codeCoverageReport/codeCoverageReport.xml"
     }
 }
 
@@ -53,4 +53,18 @@ task jacocoMergeTest(type: JacocoMerge) {
 
 task jacocoMerge(dependsOn: ['jacocoMergeTest']) {
     // used to run the other merge tasks
+}
+
+task codeCoverageReport(type: JacocoReport) {
+    executionData fileTree(project.rootDir.absolutePath).include("**/build/jacoco/*.exec")
+
+    subprojects.each {
+        sourceSets it.sourceSets.main
+    }
+
+    reports {
+        xml.enabled true
+        html.enabled true
+        csv.enabled false
+    }
 }
