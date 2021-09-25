@@ -38,12 +38,12 @@ sonarcloud-check:
     paths:
       - .sonar/cache
   script:
+    - ./gradlew codeCoverageReport
     - ./gradlew sonarqube
   only:
     - master
     - production
     - merge_requests
-  when: manual
 
 
 coverage-gitlab:

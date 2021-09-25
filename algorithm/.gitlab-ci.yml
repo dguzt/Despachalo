@@ -4,6 +4,8 @@ algorithm-white-box-test:
   script:
     - ./gradlew :algorithm:test
   artifacts:
+    paths:
+      - algorithm/build/jacoco/test.exec
     reports:
       junit:
         - algorithm/build/test-results/test/TEST-*.xml

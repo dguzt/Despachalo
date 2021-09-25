@@ -6,6 +6,8 @@ commons-unit-test:
     - ./gradlew :commons:common-hexagonal:test
     - ./gradlew :commons:common-pagination:test
   artifacts:
+    paths:
+      - commons/**/build/jacoco/test.exec
     reports:
       junit:
         - commons/**/build/test-results/test/TEST-*.xml

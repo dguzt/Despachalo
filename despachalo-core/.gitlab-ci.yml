@@ -4,6 +4,8 @@ core-unit-test:
   script:
     - ./gradlew :despachalo-core:test
   artifacts:
+    paths:
+      - despachalo-core/build/jacoco/test.exec
     reports:
       junit:
         - despachalo-core/build/test-results/test/TEST-*.xml

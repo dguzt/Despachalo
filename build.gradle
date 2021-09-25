@@ -4,8 +4,6 @@ plugins {
     id 'jacoco'
 }
 
-def allTestCoverageFile = "$buildDir/jacoco/allTestCoverage.exec"
-
 sonarqube {
     properties {
         property "sonar.projectKey", "despachalo-pe_core"
@@ -24,6 +22,7 @@ subprojects {
 
     apply plugin: 'java'
     apply plugin: 'java-library'
+    apply plugin: 'jacoco'
     apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = 11
@@ -33,26 +32,18 @@ subprojects {
         mavenCentral()
     }
 
-    sonarqube {
-        properties {
-            property "sonar.jacoco.reportPath", allTestCoverageFile
-        }
-    }
-
     dependencyManagement {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.2")
         }
     }
-}
 
-task jacocoMergeTest(type: JacocoMerge) {
-    destinationFile = file(allTestCoverageFile)
-    executionData = project.fileTree(dir: '.', include:'**/build/jacoco/test.exec')
-}
-
-task jacocoMerge(dependsOn: ['jacocoMergeTest']) {
-    // used to run the other merge tasks
+    test {
+        finalizedBy jacocoTestReport // report is always generated after tests run
+    }
+    jacocoTestReport {
+        dependsOn test // tests are required to run before generating the report
+    }
 }
 
 task codeCoverageReport(type: JacocoReport) {

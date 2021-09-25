@@ -4,6 +4,8 @@ persistence-integration-test:
   script:
     - ./gradlew :adapters:despachalo-persistence:test
   artifacts:
+    paths:
+      - adapters/despachalo-persistence/build/jacoco/test.exec
     reports:
       junit:
         - adapters/despachalo-persistence/build/test-results/test/TEST-*.xml

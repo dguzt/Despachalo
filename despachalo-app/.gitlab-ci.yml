@@ -4,6 +4,8 @@ app-system-test:
   script:
     - ./gradlew :despachalo-app:test
   artifacts:
+    paths:
+      - despachalo-app/build/jacoco/test.exec
     reports:
       junit:
         - despachalo-app/build/test-results/test/TEST-*.xml
