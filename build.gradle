@@ -1,5 +1,21 @@
 plugins {
     id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'org.sonarqube' version '3.3'
+    id 'jacoco'
+}
+
+def allTestCoverageFile = "$buildDir/jacoco/allTestCoverage.exec"
+
+sonarqube {
+    properties {
+        property "sonar.projectKey", "despachalo-pe_core"
+        property "sonar.organization", "despachalo-pe"
+        property "sonar.jacoco.reportPath", allTestCoverageFile
+    }
+}
+
+repositories {
+    mavenCentral()
 }
 
 subprojects {
@@ -17,9 +33,24 @@ subprojects {
         mavenCentral()
     }
 
+    sonarqube {
+        properties {
+            property "sonar.jacoco.reportPath", allTestCoverageFile
+        }
+    }
+
     dependencyManagement {
         imports {
             mavenBom("org.springframework.boot:spring-boot-dependencies:2.4.2")
         }
     }
+}
+
+task jacocoMergeTest(type: JacocoMerge) {
+    destinationFile = file(allTestCoverageFile)
+    executionData = project.fileTree(dir: '.', include:'**/build/jacoco/test.exec')
+}
+
+task jacocoMerge(dependsOn: ['jacocoMergeTest']) {
+    // used to run the other merge tasks
 }
