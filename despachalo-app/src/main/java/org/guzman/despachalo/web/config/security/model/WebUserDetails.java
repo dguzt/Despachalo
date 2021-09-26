@@ -1,7 +1,7 @@
 package org.guzman.despachalo.web.config.security.model;
 
 import lombok.RequiredArgsConstructor;
-import org.guzman.despachalo.adapter.persistence.company.user.UserEntity;
+import org.guzman.despachalo.adapter.persistence.modules.company.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

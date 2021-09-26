@@ -23,7 +23,7 @@ public class Inputs {
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Cannot read demands csv");
         }
 
         return demand;
@@ -45,7 +45,7 @@ public class Inputs {
             }
 
         } catch (IOException | CsvValidationException e) {
-            e.printStackTrace();
+            throw new RuntimeException("Cannot read pair costs csv");
         }
 
         return matrix;

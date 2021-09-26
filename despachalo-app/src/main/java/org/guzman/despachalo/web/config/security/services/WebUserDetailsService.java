@@ -1,7 +1,7 @@
 package org.guzman.despachalo.web.config.security.services;
 
 import lombok.RequiredArgsConstructor;
-import org.guzman.despachalo.adapter.persistence.company.user.UserRepository;
+import org.guzman.despachalo.adapter.persistence.modules.company.user.UserRepository;
 import org.guzman.despachalo.web.config.security.model.WebUserDetails;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

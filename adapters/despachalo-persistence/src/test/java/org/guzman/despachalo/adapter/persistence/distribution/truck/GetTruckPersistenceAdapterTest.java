@@ -1,8 +1,8 @@
 package org.guzman.despachalo.adapter.persistence.distribution.truck;
 
-import org.guzman.despachalo.adapter.persistence.distribution.TruckMapper;
-import org.guzman.despachalo.adapter.persistence.distribution.TruckPersistenceAdapter;
-import org.guzman.despachalo.adapter.persistence.distribution.TruckRepository;
+import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckMapper;
+import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckPersistenceAdapter;
+import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckRepository;
 import org.guzman.despachalo.core.distribution.application.port.out.GetTruckPort;
 import org.guzman.despachalo.core.distribution.domain.Truck;
 import org.junit.jupiter.api.Test;
