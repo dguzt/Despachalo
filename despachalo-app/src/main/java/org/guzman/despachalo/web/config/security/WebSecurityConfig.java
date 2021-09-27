@@ -30,15 +30,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http.cors().and()
+                .authorizeRequests()
                 .antMatchers("/authenticate").permitAll()
                 .antMatchers("/docs/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-
-        http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and()
+                .addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     public PasswordEncoder passwordEncoder() {
