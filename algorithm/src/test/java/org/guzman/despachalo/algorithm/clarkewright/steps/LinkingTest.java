@@ -27,7 +27,7 @@ class LinkingTest {
     }
 
     @Test
-    void givenMatrixWithIncrementalSavings_shouldOrderLinksMustMatchWithTheirPositions() {
+    void givenMatrixWithIncrementalSavings_shouldOrderLinksMustMatchWithTheirNodeNumbers() {
         var totalDestinationNodes = 9;
         var savings = MatrixMocks.incrementalMatrix(totalDestinationNodes + 1);
         var demand = DemandMocks.zeroDemand(totalDestinationNodes + 1);
