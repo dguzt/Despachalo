@@ -1,2 +1,2 @@
 
-INSERT INTO mt_truck(id, code) VALUES (1, '123456');
+INSERT INTO vehiculo(id, code) VALUES (1, '123456');
