@@ -39,7 +39,7 @@ public final class Routing {
             if (existsInnerNodes(info)) continue;
             if (nodesNotFound(routes, info, link, destinationNodes)) continue;
             if (onlyOneNodeIsExtreme(info, link, demand, commonCapacity, destinationNodes)) continue;
-            bothNodesAreExtreme(info, commonCapacity, routes, demand);
+            bothNodesAreExtreme(info, commonCapacity, routes);
         }
 
         convertPendingNodesToRoutes(destinationNodes, routes, demand);
@@ -98,7 +98,7 @@ public final class Routing {
         return false;
     }
 
-    void bothNodesAreExtreme(LinkInfo info, Double commonCapacity, Set<Route> routes, List<Double> demand) {
+    void bothNodesAreExtreme(LinkInfo info, Double commonCapacity, Set<Route> routes) {
         var route1 = info.getRoute1();
         var route2 = info.getRoute2();
         if (info.getRoute1().isNot(info.getRoute2())) {
@@ -108,7 +108,7 @@ public final class Routing {
             }
             routes.remove(route1);
             routes.remove(route2);
-            var mergedRoute = mergeRoutes(route1, route2, info.status1, info.status2, demand);
+            var mergedRoute = mergeRoutes(route1, route2, info.status1, info.status2);
             routes.add(mergedRoute);
         }
     }
@@ -125,14 +125,13 @@ public final class Routing {
     }
 
     Route mergeRoutes(Route route1,
-                                     Route route2,
-                                     NodeStatus extremeStatus1,
-                                     NodeStatus extremeStatus2,
-                                     List<Double> demand) {
+                      Route route2,
+                      NodeStatus extremeStatus1,
+                      NodeStatus extremeStatus2) {
         if (extremeStatus1 == FIRST_EXTREME) route1.reverse();
         if (extremeStatus2 == LAST_EXTREME) route2.reverse();
 
-        route1.merge(route2, demand);
+        route1.merge(route2);
         return route1;
     }
 

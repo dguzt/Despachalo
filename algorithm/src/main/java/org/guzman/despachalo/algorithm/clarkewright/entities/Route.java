@@ -51,22 +51,16 @@ public class Route {
     }
 
     public boolean isNot(Route route) {
-        return this == route;
+        return this != route;
     }
 
-    public void merge(Route anotherRoute, List<Double> demand) {
-        anotherRoute.removeFirst(demand);
+    public void merge(Route anotherRoute) {
         this.nodes.addAll(anotherRoute.getNodes());
         this.accumulatedDemand += anotherRoute.accumulatedDemand;
     }
 
     public void reverse() {
         Collections.reverse(this.nodes);
-    }
-
-    private void removeFirst(List<Double> demand) {
-        this.accumulatedDemand -= demand.get(this.nodes.get(0));
-        this.nodes.remove(0);
     }
 
     public void addNodeAsLast(List<Double> demand, Integer node) {
