@@ -72,7 +72,7 @@ public final class Routing {
                                          List<Double> demand,
                                          Double commonCapacity,
                                          DestinationNodes destinationNodes) {
-        if (info.getStatus1() != NOT_FOUND || info.getStatus2() != NOT_FOUND) {
+        if (info.getStatus1() == NOT_FOUND || info.getStatus2() == NOT_FOUND) {
             var isNode1NotInRoutes = info.getStatus1() == NOT_FOUND;
             var nodeToConsider = isNode1NotInRoutes ? link.getDestinationNode1() : link.getDestinationNode2();
 

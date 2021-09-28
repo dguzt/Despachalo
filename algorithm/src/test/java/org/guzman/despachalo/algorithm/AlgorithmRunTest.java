@@ -1,11 +1,13 @@
 package org.guzman.despachalo.algorithm;
 
 import org.guzman.despachalo.algorithm.clarkewright.ClarkeWrightAlgorithmFactory;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class AlgorithmRunTest {
 
     @Test
+    @Disabled
     void main() {
         var costs = Inputs.costs();
         var demand = Inputs.demand();

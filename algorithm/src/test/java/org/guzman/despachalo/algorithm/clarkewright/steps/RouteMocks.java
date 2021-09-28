@@ -10,4 +10,10 @@ public class RouteMocks {
     public static Set<Route> emptyRoutesSet() {
         return new HashSet<>();
     }
+
+    public static Set<Route> withOneRoute(Route route) {
+        var routes = emptyRoutesSet();
+        routes.add(route);
+        return routes;
+    }
 }
