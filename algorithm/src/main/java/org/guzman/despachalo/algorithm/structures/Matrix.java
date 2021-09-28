@@ -33,8 +33,17 @@ public class Matrix<T> {
         matrix.get(row).set(col, val);
     }
 
-    public void addRow(ArrayList<T> row) {
-        this.size = row.size();
+    public void addRow(List<T> row) {
+        if (this.size == null) {
+            this.size = row.size();
+        }
+
+        if (this.size != row.size()) {
+            throw new IllegalArgumentException(String.format("Rows must be the same size as the other rows in matrix. Matrix size: %d, Row size given: %d",
+                    this.size,
+                    row.size()));
+        }
+
         matrix.add(row);
     }
 }
