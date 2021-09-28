@@ -6,7 +6,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class MatrixTest {
+class MatrixTest {
 
     @Test
     void givenEmptyMatrix_whenAddFirstRow_shouldSetSize() {
