@@ -1,13 +1,13 @@
 package org.guzman.despachalo.algorithm.clarkewright.entities;
 
-import lombok.Data;
+import lombok.Getter;
 
 import java.util.HashSet;
 import java.util.Set;
 
-@Data
+@Getter
 public class DestinationNodes {
-    private Set<Integer> pendingNodes;
+    private final Set<Integer> pendingNodes;
 
     public DestinationNodes(Integer totalPendingNodes) {
         this.pendingNodes = new HashSet<>();
@@ -17,11 +17,7 @@ public class DestinationNodes {
     }
 
     public void removeFromRoute(Route route) {
-        route.getNodes().forEach(node -> this.pendingNodes.remove(node));
-    }
-
-    public Integer size() {
-        return this.pendingNodes.size();
+        route.getNodes().forEach(this.pendingNodes::remove);
     }
 
     public void removeNode(Integer destinationNode1) {

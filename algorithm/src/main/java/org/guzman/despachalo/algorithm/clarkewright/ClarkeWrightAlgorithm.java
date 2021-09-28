@@ -1,16 +1,20 @@
 package org.guzman.despachalo.algorithm.clarkewright;
 
+import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.algorithm.AlgorithmCommand;
 import org.guzman.despachalo.algorithm.RoutingAlgorithm;
 import org.guzman.despachalo.algorithm.clarkewright.entities.Route;
+import org.guzman.despachalo.algorithm.clarkewright.steps.Linking;
+import org.guzman.despachalo.algorithm.clarkewright.steps.Routing;
+import org.guzman.despachalo.algorithm.clarkewright.steps.Saving;
 
 import java.util.Set;
 
-import static org.guzman.despachalo.algorithm.clarkewright.Routing.buildOptimalRoutes;
-import static org.guzman.despachalo.algorithm.clarkewright.Saving.calculateSavings;
-import static org.guzman.despachalo.algorithm.clarkewright.factories.LinkFactory.getLinkOrderedBySaving;
-
+@RequiredArgsConstructor
 public class ClarkeWrightAlgorithm implements RoutingAlgorithm {
+    private final Saving saving;
+    private final Linking linking;
+    private final Routing routing;
 
     @Override
     public Set<Route> execute(AlgorithmCommand command) {
@@ -20,9 +24,9 @@ public class ClarkeWrightAlgorithm implements RoutingAlgorithm {
 
         var totalDestinationNodes = command.getTotalDestinationNodes();
 
-        var savings = calculateSavings(costs, totalDestinationNodes);
-        var orderedLinks = getLinkOrderedBySaving(savings, demand);
+        var savings = saving.calculateSavings(costs, totalDestinationNodes);
+        var orderedLinks = linking.getLinkOrderedBySaving(savings, demand);
 
-        return buildOptimalRoutes(demand, totalDestinationNodes, capacity, orderedLinks);
+        return routing.buildOptimalRoutes(demand, totalDestinationNodes, capacity, orderedLinks);
     }
 }

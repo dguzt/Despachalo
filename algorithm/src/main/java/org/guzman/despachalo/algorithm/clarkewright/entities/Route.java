@@ -1,21 +1,20 @@
 package org.guzman.despachalo.algorithm.clarkewright.entities;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Getter;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.List;
 import java.util.Objects;
 
 import static org.guzman.despachalo.algorithm.clarkewright.entities.Constants.ORIGIN_NODE;
 
-@Data
-@NoArgsConstructor
+@Getter
 @AllArgsConstructor
 public class Route {
-    ArrayList<Integer> nodes;
-    Double accumulatedDemand = 0.0;
+    private List<Integer> nodes;
+    private Double accumulatedDemand;
 
     public NodeStatus evaluate(Integer node) {
         var first = nodes.get(0);
@@ -43,7 +42,7 @@ public class Route {
         return new Route(nodes, link.getAccumulatedDemand());
     }
 
-    public static Route fromNode(Integer node, ArrayList<Double> demand) {
+    public static Route fromNode(Integer node, List<Double> demand) {
         var accumulatedDemand = demand.get(node);
         var nodes = new ArrayList<Integer>();
         nodes.add(node);
@@ -55,7 +54,7 @@ public class Route {
         return this == route;
     }
 
-    public void merge(Route anotherRoute, ArrayList<Double> demand) {
+    public void merge(Route anotherRoute, List<Double> demand) {
         anotherRoute.removeFirst(demand);
         this.nodes.addAll(anotherRoute.getNodes());
         this.accumulatedDemand += anotherRoute.accumulatedDemand;
@@ -65,17 +64,17 @@ public class Route {
         Collections.reverse(this.nodes);
     }
 
-    private void removeFirst(ArrayList<Double> demand) {
+    private void removeFirst(List<Double> demand) {
         this.accumulatedDemand -= demand.get(this.nodes.get(0));
         this.nodes.remove(0);
     }
 
-    public void addNodeAsLast(ArrayList<Double> demand, Integer node) {
+    public void addNodeAsLast(List<Double> demand, Integer node) {
         this.nodes.add(node);
         this.accumulatedDemand += demand.get(node);
     }
 
-    public void addNodeAsFirst(ArrayList<Double> demand, Integer node) {
+    public void addNodeAsFirst(List<Double> demand, Integer node) {
         this.nodes.add(0, node);
         this.accumulatedDemand += demand.get(node);
     }

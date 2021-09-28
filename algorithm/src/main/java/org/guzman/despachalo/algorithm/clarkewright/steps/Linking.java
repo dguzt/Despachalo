@@ -1,14 +1,15 @@
-package org.guzman.despachalo.algorithm.clarkewright.factories;
+package org.guzman.despachalo.algorithm.clarkewright.steps;
 
 import org.guzman.despachalo.algorithm.clarkewright.entities.Link;
-import org.guzman.despachalo.algorithm.helpers.Matrix;
+import org.guzman.despachalo.algorithm.structures.Matrix;
 import org.javatuples.Pair;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
-public class LinkFactory {
-    public static ArrayList<Link> getLinkOrderedBySaving(Matrix<Double> savings, ArrayList<Double> demand) {
+public class Linking {
+    public List<Link> getLinkOrderedBySaving(Matrix<Double> savings, List<Double> demand) {
         var size = savings.getSize();
         var links = new ArrayList<Pair<Link, Double>>();
         for (int n1 = 1; n1 < size; n1++) {
@@ -19,7 +20,7 @@ public class LinkFactory {
             }
         }
 
-        return (ArrayList<Link>) links.stream()
+        return links.stream()
                 .sorted((p1, p2) -> Double.compare(p2.getValue1(), p1.getValue1()))
                 .map(Pair::getValue0)
                 .collect(Collectors.toList());

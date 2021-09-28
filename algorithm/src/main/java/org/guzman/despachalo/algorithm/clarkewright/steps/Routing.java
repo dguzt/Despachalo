@@ -1,4 +1,4 @@
-package org.guzman.despachalo.algorithm.clarkewright;
+package org.guzman.despachalo.algorithm.clarkewright.steps;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -7,35 +7,32 @@ import org.guzman.despachalo.algorithm.clarkewright.entities.Link;
 import org.guzman.despachalo.algorithm.clarkewright.entities.NodeStatus;
 import org.guzman.despachalo.algorithm.clarkewright.entities.Route;
 
-import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import static org.guzman.despachalo.algorithm.clarkewright.entities.NodeStatus.*;
 
 public class Routing {
-    public static Set<Route> buildOptimalRoutes(
-            ArrayList<Double> demand,
+    public Set<Route> buildOptimalRoutes(
+            List<Double> demand,
             Integer totalDestinationNodes,
             Double capacity,
-            ArrayList<Link> orderedLinks) {
+            List<Link> orderedLinks) {
 
         var destinationNodes = new DestinationNodes(totalDestinationNodes);
         return assignLinksToRoutes(orderedLinks, demand, destinationNodes, capacity);
     }
 
-    private static Set<Route> assignLinksToRoutes(
-            ArrayList<Link> links,
-            ArrayList<Double> demand,
+    private Set<Route> assignLinksToRoutes(
+            List<Link> links,
+            List<Double> demand,
             DestinationNodes destinationNodes,
             Double commonCapacity) {
 
         var routes = new HashSet<Route>();
 
         for (var link : links) {
-            System.out.printf("%n%n");
-            System.out.printf("[ROUTES]: %s%n", routes);
-            System.out.printf("[EVALUATE]: %s%n", link);
             if (link.getAccumulatedDemand() > commonCapacity) {
                 continue;
             }
@@ -50,7 +47,6 @@ public class Routing {
                 var route = Route.fromLink(link);
                 routes.add(route);
                 destinationNodes.removeFromRoute(route);
-                System.out.printf("[1ST -> LINK AS ROUTE]: %s%n", link);
                 continue;
             }
 
@@ -70,11 +66,9 @@ public class Routing {
                 destinationNodes.removeNode(nodeToConsider);
                 if (statusToInsertIn == FIRST_EXTREME) {
                     routeToInsertIn.addNodeAsFirst(demand, nodeToConsider);
-                    System.out.printf("[2ND -> LINK FIRST EXTREME]: %s%n", link);
                     continue;
                 }
 
-                System.out.printf("[2ND -> LINK LAST EXTREME]: %s%n", link);
                 routeToInsertIn.addNodeAsLast(demand, nodeToConsider);
                 continue;
             }
@@ -91,7 +85,6 @@ public class Routing {
                 routes.remove(route2);
                 var mergedRoute = mergeRoutes(route1, route2, info.status1, info.status2, demand);
                 routes.add(mergedRoute);
-                System.out.printf("[3RD -> LINK AS MERGE]: %s%n", link);
             }
         }
 
@@ -105,7 +98,11 @@ public class Routing {
         return routes;
     }
 
-    private static Route mergeRoutes(Route route1, Route route2, NodeStatus extremeStatus1, NodeStatus extremeStatus2, ArrayList<Double> demand) {
+    private Route mergeRoutes(Route route1,
+                                     Route route2,
+                                     NodeStatus extremeStatus1,
+                                     NodeStatus extremeStatus2,
+                                     List<Double> demand) {
         if (extremeStatus1 == FIRST_EXTREME) route1.reverse();
         if (extremeStatus2 == LAST_EXTREME) route2.reverse();
 

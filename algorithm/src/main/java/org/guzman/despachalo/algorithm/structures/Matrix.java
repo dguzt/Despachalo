@@ -1,15 +1,16 @@
-package org.guzman.despachalo.algorithm.helpers;
+package org.guzman.despachalo.algorithm.structures;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @NoArgsConstructor
 public class Matrix<T> {
     @Getter
     private Integer size;
-    private ArrayList<ArrayList<T>> matrix = new ArrayList<>();
+    private List<List<T>> matrix = new ArrayList<>();
 
     public Matrix(Integer size) {
         this.size = size;

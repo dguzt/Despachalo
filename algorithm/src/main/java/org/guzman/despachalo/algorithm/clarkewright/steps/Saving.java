@@ -1,12 +1,12 @@
-package org.guzman.despachalo.algorithm.clarkewright;
+package org.guzman.despachalo.algorithm.clarkewright.steps;
 
-import org.guzman.despachalo.algorithm.helpers.Matrix;
+import org.guzman.despachalo.algorithm.structures.Matrix;
 
 import static org.guzman.despachalo.algorithm.clarkewright.entities.Constants.ORIGIN_NODE;
 
 public class Saving {
 
-    public static Matrix<Double> calculateSavings(
+    public Matrix<Double> calculateSavings(
             Matrix<Double> costs,
             Integer totalDestinationNodes) {
         var savings = new Matrix<Double>(totalDestinationNodes + 1);
@@ -26,7 +26,7 @@ public class Saving {
         return savings;
     }
 
-    private static double calculateSaving(Matrix<Double> costs, int n1, int n2) {
+    private double calculateSaving(Matrix<Double> costs, int n1, int n2) {
         return costs.get(ORIGIN_NODE, n1) + costs.get(ORIGIN_NODE, n2) - costs.get(n1, n2);
     }
 }

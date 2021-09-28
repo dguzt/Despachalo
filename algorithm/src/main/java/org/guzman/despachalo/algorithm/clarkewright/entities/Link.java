@@ -1,12 +1,14 @@
 package org.guzman.despachalo.algorithm.clarkewright.entities;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class Link {
-    Integer destinationNode1;
-    Integer destinationNode2;
-    Double accumulatedDemand;
+    private Integer destinationNode1;
+    private Integer destinationNode2;
+    private Double accumulatedDemand;
 
     @Override
     public String toString() {
