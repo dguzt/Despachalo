@@ -33,69 +33,95 @@ public class Routing {
         var routes = new HashSet<Route>();
 
         for (var link : links) {
-            if (link.getAccumulatedDemand() > commonCapacity) {
-                continue;
-            }
-
+            if (exceedsCapacity(link, commonCapacity)) continue;
             var info = getLinkInfoAccordingToRoutes(link, routes);
 
-            if (info.getStatus1() == INNER || info.getStatus2() == INNER) {
-                continue;
-            }
-
-            if (info.getStatus1() == NOT_FOUND && info.getStatus2() == NOT_FOUND) {
-                var route = Route.fromLink(link);
-                routes.add(route);
-                destinationNodes.removeFromRoute(route);
-                continue;
-            }
-
-            if (info.getStatus1() != NOT_FOUND || info.getStatus2() != NOT_FOUND) {
-                var isNode1NotInRoutes = info.getStatus1() == NOT_FOUND;
-                var nodeToConsider = isNode1NotInRoutes ? link.getDestinationNode1() : link.getDestinationNode2();
-
-                var routeToInsertIn = isNode1NotInRoutes ? info.getRoute2() : info.getRoute1();
-                var statusToInsertIn = isNode1NotInRoutes ? info.getStatus2() : info.getStatus1();
-
-                var newDemand = routeToInsertIn.getAccumulatedDemand() + demand.get(nodeToConsider);
-
-                if (newDemand > commonCapacity) {
-                    continue;
-                }
-
-                destinationNodes.removeNode(nodeToConsider);
-                if (statusToInsertIn == FIRST_EXTREME) {
-                    routeToInsertIn.addNodeAsFirst(demand, nodeToConsider);
-                    continue;
-                }
-
-                routeToInsertIn.addNodeAsLast(demand, nodeToConsider);
-                continue;
-            }
-
-
-            var route1 = info.getRoute1();
-            var route2 = info.getRoute2();
-            if (info.getRoute1().isNot(info.getRoute2())) {
-                var newDemand = route1.getAccumulatedDemand() + route2.getAccumulatedDemand();
-                if (newDemand > commonCapacity) {
-                    continue;
-                }
-                routes.remove(route1);
-                routes.remove(route2);
-                var mergedRoute = mergeRoutes(route1, route2, info.status1, info.status2, demand);
-                routes.add(mergedRoute);
-            }
+            if (existsInnerNodes(info)) continue;
+            if (nodesNotFound(routes, info, link, destinationNodes)) continue;
+            if (onlyOneNodeIsExtreme(info, link, demand, commonCapacity, destinationNodes)) continue;
+            bothNodesAreExtreme(info, commonCapacity, routes, demand);
         }
 
+        convertPendingNodesToRoutes(destinationNodes, routes, demand);
+        setOriginNodeToRoutes(routes);
+
+        return routes;
+    }
+
+    private boolean exceedsCapacity(Link link, Double commonCapacity) {
+        return link.getAccumulatedDemand() > commonCapacity;
+    }
+
+    private boolean existsInnerNodes(LinkInfo info) {
+        return info.getStatus1() == INNER || info.getStatus2() == INNER;
+    }
+
+    private boolean nodesNotFound(Set<Route> routes, LinkInfo info, Link link, DestinationNodes destinationNodes) {
+        if (info.getStatus1() == NOT_FOUND && info.getStatus2() == NOT_FOUND) {
+            var route = Route.fromLink(link);
+            routes.add(route);
+            destinationNodes.removeFromRoute(route);
+            return true;
+        }
+
+        return false;
+    }
+
+    private boolean onlyOneNodeIsExtreme(LinkInfo info,
+                                         Link link,
+                                         List<Double> demand,
+                                         Double commonCapacity,
+                                         DestinationNodes destinationNodes) {
+        if (info.getStatus1() != NOT_FOUND || info.getStatus2() != NOT_FOUND) {
+            var isNode1NotInRoutes = info.getStatus1() == NOT_FOUND;
+            var nodeToConsider = isNode1NotInRoutes ? link.getDestinationNode1() : link.getDestinationNode2();
+
+            var routeToInsertIn = isNode1NotInRoutes ? info.getRoute2() : info.getRoute1();
+            var statusToInsertIn = isNode1NotInRoutes ? info.getStatus2() : info.getStatus1();
+
+            var newDemand = routeToInsertIn.getAccumulatedDemand() + demand.get(nodeToConsider);
+
+            if (newDemand > commonCapacity) {
+                return true;
+            }
+
+            destinationNodes.removeNode(nodeToConsider);
+            if (statusToInsertIn == FIRST_EXTREME) {
+                routeToInsertIn.addNodeAsFirst(demand, nodeToConsider);
+                return true;
+            }
+
+            routeToInsertIn.addNodeAsLast(demand, nodeToConsider);
+            return true;
+        }
+
+        return false;
+    }
+
+    private void bothNodesAreExtreme(LinkInfo info, Double commonCapacity, Set<Route> routes, List<Double> demand) {
+        var route1 = info.getRoute1();
+        var route2 = info.getRoute2();
+        if (info.getRoute1().isNot(info.getRoute2())) {
+            var newDemand = route1.getAccumulatedDemand() + route2.getAccumulatedDemand();
+            if (newDemand > commonCapacity) {
+                return;
+            }
+            routes.remove(route1);
+            routes.remove(route2);
+            var mergedRoute = mergeRoutes(route1, route2, info.status1, info.status2, demand);
+            routes.add(mergedRoute);
+        }
+    }
+
+    private void convertPendingNodesToRoutes(DestinationNodes destinationNodes, Set<Route> routes, List<Double> demand) {
         destinationNodes.getPendingNodes().forEach(node -> {
             var route = Route.fromNode(node, demand);
             routes.add(route);
         });
+    }
 
+    private void setOriginNodeToRoutes(Set<Route> routes) {
         routes.forEach(Route::setOriginNodeAsFirstAndLast);
-
-        return routes;
     }
 
     private Route mergeRoutes(Route route1,
