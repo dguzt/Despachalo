@@ -13,7 +13,7 @@ import java.util.Set;
 
 import static org.guzman.despachalo.algorithm.clarkewright.entities.NodeStatus.*;
 
-public class Routing {
+public final class Routing {
     public Set<Route> buildOptimalRoutes(
             List<Double> demand,
             Integer totalDestinationNodes,
@@ -24,7 +24,7 @@ public class Routing {
         return assignLinksToRoutes(orderedLinks, demand, destinationNodes, capacity);
     }
 
-    private Set<Route> assignLinksToRoutes(
+    Set<Route> assignLinksToRoutes(
             List<Link> links,
             List<Double> demand,
             DestinationNodes destinationNodes,
@@ -48,15 +48,15 @@ public class Routing {
         return routes;
     }
 
-    private boolean exceedsCapacity(Link link, Double commonCapacity) {
+    boolean exceedsCapacity(Link link, Double commonCapacity) {
         return link.getAccumulatedDemand() > commonCapacity;
     }
 
-    private boolean existsInnerNodes(LinkInfo info) {
+    boolean existsInnerNodes(LinkInfo info) {
         return info.getStatus1() == INNER || info.getStatus2() == INNER;
     }
 
-    private boolean nodesNotFound(Set<Route> routes, LinkInfo info, Link link, DestinationNodes destinationNodes) {
+    boolean nodesNotFound(Set<Route> routes, LinkInfo info, Link link, DestinationNodes destinationNodes) {
         if (info.getStatus1() == NOT_FOUND && info.getStatus2() == NOT_FOUND) {
             var route = Route.fromLink(link);
             routes.add(route);
@@ -67,7 +67,7 @@ public class Routing {
         return false;
     }
 
-    private boolean onlyOneNodeIsExtreme(LinkInfo info,
+    boolean onlyOneNodeIsExtreme(LinkInfo info,
                                          Link link,
                                          List<Double> demand,
                                          Double commonCapacity,
@@ -98,7 +98,7 @@ public class Routing {
         return false;
     }
 
-    private void bothNodesAreExtreme(LinkInfo info, Double commonCapacity, Set<Route> routes, List<Double> demand) {
+    void bothNodesAreExtreme(LinkInfo info, Double commonCapacity, Set<Route> routes, List<Double> demand) {
         var route1 = info.getRoute1();
         var route2 = info.getRoute2();
         if (info.getRoute1().isNot(info.getRoute2())) {
@@ -113,18 +113,18 @@ public class Routing {
         }
     }
 
-    private void convertPendingNodesToRoutes(DestinationNodes destinationNodes, Set<Route> routes, List<Double> demand) {
+    void convertPendingNodesToRoutes(DestinationNodes destinationNodes, Set<Route> routes, List<Double> demand) {
         destinationNodes.getPendingNodes().forEach(node -> {
             var route = Route.fromNode(node, demand);
             routes.add(route);
         });
     }
 
-    private void setOriginNodeToRoutes(Set<Route> routes) {
+    void setOriginNodeToRoutes(Set<Route> routes) {
         routes.forEach(Route::setOriginNodeAsFirstAndLast);
     }
 
-    private Route mergeRoutes(Route route1,
+    Route mergeRoutes(Route route1,
                                      Route route2,
                                      NodeStatus extremeStatus1,
                                      NodeStatus extremeStatus2,
@@ -136,7 +136,7 @@ public class Routing {
         return route1;
     }
 
-    private static LinkInfo getLinkInfoAccordingToRoutes(Link link, Set<Route> routes) {
+    LinkInfo getLinkInfoAccordingToRoutes(Link link, Set<Route> routes) {
         var linkInfo = new LinkInfo();
         routes.forEach(route -> {
             var status1 = route.evaluate(link.getDestinationNode1());
@@ -156,7 +156,7 @@ public class Routing {
 
     @Getter
     @NoArgsConstructor
-    private static class LinkInfo {
+    static class LinkInfo {
         private NodeStatus status1 = NOT_FOUND;
         private Route route1;
         private NodeStatus status2 = NOT_FOUND;

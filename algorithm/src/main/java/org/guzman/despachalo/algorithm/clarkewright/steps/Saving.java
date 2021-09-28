@@ -4,7 +4,7 @@ import org.guzman.despachalo.algorithm.structures.Matrix;
 
 import static org.guzman.despachalo.algorithm.clarkewright.entities.Constants.ORIGIN_NODE;
 
-public class Saving {
+public final class Saving {
 
     public Matrix<Double> calculateSavings(
             Matrix<Double> costs,

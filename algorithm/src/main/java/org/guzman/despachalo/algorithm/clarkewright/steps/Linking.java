@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class Linking {
+public final class Linking {
     public List<Link> getLinkOrderedBySaving(Matrix<Double> savings, List<Double> demand) {
         var size = savings.getSize();
         var links = new ArrayList<Pair<Link, Double>>();
