@@ -83,9 +83,4 @@ public class Route {
         this.nodes.add(0, ORIGIN_NODE);
         this.nodes.add(ORIGIN_NODE);
     }
-
-    @Override
-    public String toString() {
-        return String.format("{%s => %s}", accumulatedDemand, nodes);
-    }
 }
