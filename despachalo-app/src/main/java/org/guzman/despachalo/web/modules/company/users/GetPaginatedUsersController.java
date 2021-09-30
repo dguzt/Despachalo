@@ -1,4 +1,4 @@
-package org.guzman.despachalo.web.modules.company;
+package org.guzman.despachalo.web.modules.company.users;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;

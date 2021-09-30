@@ -7,12 +7,13 @@ import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @ToString
 @Getter @Setter
 @RequiredArgsConstructor
-@Entity @Table(name = "ITEM_MERCADERIA")
+@Entity @Table(name = "MERCADERIA")
 public class CommodityEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -28,6 +29,9 @@ public class CommodityEntity {
 
     @Column(name = "estado", length = 15, nullable = false)
     private String state;
+
+    @Column(name = "hora_llegada", nullable = false)
+    private LocalDateTime arrivalTime;
 
     @Override
     public boolean equals(Object o) {
