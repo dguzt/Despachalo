@@ -3,7 +3,7 @@ package org.guzman.despachalo.web.config.security.services;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
-import org.springframework.beans.factory.annotation.Value;
+import org.guzman.despachalo.web.config.SecurityVars;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
@@ -15,10 +15,11 @@ import java.util.function.Function;
 @Service
 public class JwtService {
     private final Key secretKey;
+    private final Integer expPlusInMinutes;
 
-    public JwtService(
-            @Value("${despachalo.security.jwt-key}") String jwtKey) {
-        this.secretKey = secretKey(jwtKey);
+    public JwtService(SecurityVars securityVars) {
+        this.secretKey = secretKey(securityVars.getJwtKey());
+        this.expPlusInMinutes = securityVars.getExpirationInMinutes();
     }
 
     public String generateToken(UserDetails userDetails) {
@@ -36,11 +37,12 @@ public class JwtService {
 
     private String createToken(Map<String, Object> claims, String subject) {
         var time = System.currentTimeMillis();
+        var plusExpInMillis = this.expPlusInMinutes * 60 * 10;
         return Jwts.builder()
                 .setClaims(claims)
                 .setSubject(subject)
                 .setIssuedAt(new Date(time))
-                .setExpiration(new Date(time + 1000 * 60 * 60 * 10))
+                .setExpiration(new Date(time + plusExpInMillis))
                 .signWith(secretKey)
                 .compact();
     }

@@ -14,4 +14,5 @@ import java.util.ArrayList;
 public class SecurityVars {
     private ArrayList<URL> allowedDomains;
     private String jwtKey;
+    private Integer expirationInMinutes;
 }

@@ -4,6 +4,7 @@ despachalo:
   api-version: 1.0.0
   security:
     jwt-key: ZnzljzqCsk/Zh9jKN27N1JteCrIv3LhzIzXg3kv0gz4=
+    expiration-in-minutes: 432000
     allowed-domains:
       - http://127.0.0.1:3000
 
