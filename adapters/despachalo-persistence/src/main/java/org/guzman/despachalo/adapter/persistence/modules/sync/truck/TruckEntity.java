@@ -14,7 +14,7 @@ public class TruckEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "code")
+    @Column(name = "codigo")
     private String code;
 
     @Override
