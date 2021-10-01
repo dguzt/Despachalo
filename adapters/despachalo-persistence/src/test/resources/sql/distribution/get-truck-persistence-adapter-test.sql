@@ -1,2 +1,2 @@
 
-INSERT INTO vehiculo(id, code) VALUES (1, '123456');
+INSERT INTO vehiculo(id, codigo) VALUES (1, '123456');
