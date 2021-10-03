@@ -1,15 +1,12 @@
 package org.guzman.despachalo.commons.pagination;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
+import lombok.*;
 
 import java.util.Collections;
 import java.util.List;
 
-@Data
 @Builder
-@AllArgsConstructor
+@Getter @Setter
 public class Paginator<T> {
     private List<T> data;
     private Integer page;

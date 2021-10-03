@@ -1,10 +1,11 @@
 package org.guzman.despachalo.commons.pagination;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
 @Builder
+@Getter @Setter
 public class Filters {
     private Integer page;
     private Integer pageSize;
