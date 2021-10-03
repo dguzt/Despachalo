@@ -1,10 +1,12 @@
 package org.guzman.despachalo.core.company.domain;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class Company {
-    Long id;
-    String ruc;
-    String businessName;
+    private Long id;
+    private String ruc;
+    private String businessName;
 }

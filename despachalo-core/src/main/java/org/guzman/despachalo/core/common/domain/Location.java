@@ -1,8 +1,11 @@
 package org.guzman.despachalo.core.common.domain;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
+@AllArgsConstructor
 public class Location {
     private Double latitude;
     private Double longitude;

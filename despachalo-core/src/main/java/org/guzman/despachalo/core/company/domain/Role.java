@@ -1,13 +1,16 @@
 package org.guzman.despachalo.core.company.domain;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.Value;
 
 import java.time.LocalDateTime;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class Role {
-    Long id;
-    String name;
-    LocalDateTime registeredAt;
-    LocalDateTime updatedAt;
+    private Long id;
+    private String name;
+    private LocalDateTime registeredAt;
+    private LocalDateTime updatedAt;
 }

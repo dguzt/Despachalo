@@ -1,16 +1,18 @@
 package org.guzman.despachalo.core.company.domain;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import org.guzman.despachalo.core.common.domain.IdentityDoc;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class User {
-    Long id;
-    String names;
-    String lastnames;
-    IdentityDoc doc;
-    String email;
-    Boolean active;
+    private Long id;
+    private String names;
+    private String lastnames;
+    private IdentityDoc doc;
+    private String email;
+    private Boolean active;
 
-    Role role;
+    private Role role;
 }

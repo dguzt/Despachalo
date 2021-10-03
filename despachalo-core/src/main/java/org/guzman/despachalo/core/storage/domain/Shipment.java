@@ -1,16 +1,18 @@
 package org.guzman.despachalo.core.storage.domain;
 
-import lombok.Value;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 
 import java.time.LocalDateTime;
 
-@Value
+@Getter
+@AllArgsConstructor
 public class Shipment {
-    Long id;
-    String code;
-    String state;
-    String licensePlate;
+    private Long id;
+    private String code;
+    private String state;
+    private String licensePlate;
 
-    LocalDateTime arrivalTime;
-    Long warehouseId;
+    private LocalDateTime arrivalTime;
+    private Long warehouseId;
 }
