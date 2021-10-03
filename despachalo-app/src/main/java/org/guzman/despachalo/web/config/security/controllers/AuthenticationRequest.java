@@ -1,8 +1,11 @@
 package org.guzman.despachalo.web.config.security.controllers;
 
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter @Setter
+@AllArgsConstructor
 public class AuthenticationRequest {
     private String email;
     private String password;
