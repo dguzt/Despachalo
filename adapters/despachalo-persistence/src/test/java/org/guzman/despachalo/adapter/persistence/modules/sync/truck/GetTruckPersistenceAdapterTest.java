@@ -1,8 +1,5 @@
-package org.guzman.despachalo.adapter.persistence.distribution.truck;
+package org.guzman.despachalo.adapter.persistence.modules.sync.truck;
 
-import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckMapper;
-import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckPersistenceAdapter;
-import org.guzman.despachalo.adapter.persistence.modules.sync.truck.TruckRepository;
 import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
 import org.guzman.despachalo.core.sync.domain.Truck;
 import org.junit.jupiter.api.Test;
@@ -28,7 +25,7 @@ public class GetTruckPersistenceAdapterTest {
     private GetTruckPort getTruckPort;
 
     @Test
-    @Sql("classpath:sql/distribution/get-truck-persistence-adapter-test.sql")
+    @Sql("classpath:sql/sync/get-truck-persistence-adapter-test.sql")
     void whenGetATruck_AndExistsInDB_ShouldReturnIt() {
         var truckId = 1L;
         assertTrue(truckRepository.existsById(truckId));
