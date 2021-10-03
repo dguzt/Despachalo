@@ -1,7 +1,7 @@
-package org.guzman.despachalo.core.distribution.application;
+package org.guzman.despachalo.core.sync.application;
 
-import org.guzman.despachalo.core.distribution.application.port.out.GetTruckPort;
-import org.guzman.despachalo.core.distribution.domain.Truck;
+import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
+import org.guzman.despachalo.core.sync.domain.Truck;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

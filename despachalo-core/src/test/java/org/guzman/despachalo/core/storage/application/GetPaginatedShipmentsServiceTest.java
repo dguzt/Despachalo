@@ -47,7 +47,7 @@ public class GetPaginatedShipmentsServiceTest {
     }
 
     @Test
-    void whenGetForRolesPage_shouldReturnIt() {
+    void whenGetForShipmentsPage_shouldReturnIt() {
         var shipment = shipment();
         var filters = filters();
         var page = page(List.of(shipment));

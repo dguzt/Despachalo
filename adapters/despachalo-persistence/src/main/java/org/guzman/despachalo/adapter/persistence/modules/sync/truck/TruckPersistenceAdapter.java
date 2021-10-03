@@ -2,8 +2,8 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.truck;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
-import org.guzman.despachalo.core.distribution.application.port.out.GetTruckPort;
-import org.guzman.despachalo.core.distribution.domain.Truck;
+import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
+import org.guzman.despachalo.core.sync.domain.Truck;
 
 import java.util.Optional;
 

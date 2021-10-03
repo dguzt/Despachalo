@@ -1,10 +1,10 @@
-package org.guzman.despachalo.core.distribution.application;
+package org.guzman.despachalo.core.sync.application;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.UseCase;
-import org.guzman.despachalo.core.distribution.application.port.in.GetTruckUseCase;
-import org.guzman.despachalo.core.distribution.application.port.out.GetTruckPort;
-import org.guzman.despachalo.core.distribution.domain.Truck;
+import org.guzman.despachalo.core.sync.application.port.in.GetTruckUseCase;
+import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
+import org.guzman.despachalo.core.sync.domain.Truck;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -1,4 +1,4 @@
-package org.guzman.despachalo.core.distribution.application;
+package org.guzman.despachalo.core.sync.application;
 
 import lombok.Getter;
 import lombok.Value;

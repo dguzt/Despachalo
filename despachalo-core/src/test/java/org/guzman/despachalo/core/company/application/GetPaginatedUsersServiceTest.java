@@ -46,7 +46,7 @@ public class GetPaginatedUsersServiceTest {
     }
 
     @Test
-    void whenGetForRolesPage_shouldReturnIt() {
+    void whenGetForUsersPage_shouldReturnIt() {
         var user = user();
         var filters = filters();
         var page = page(List.of(user));
