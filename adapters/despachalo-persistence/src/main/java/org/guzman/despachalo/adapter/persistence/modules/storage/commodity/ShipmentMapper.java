@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync.commodity;
+package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 
 import org.guzman.despachalo.core.storage.domain.Shipment;
 import org.mapstruct.Mapper;
@@ -13,5 +13,6 @@ public interface ShipmentMapper {
     @Mapping(target = "arrivalTime", source = "arrivalTime")
     @Mapping(target = "warehouseId", source = "warehouseId")
     @Mapping(target = "licensePlate", source = "vehiclePlate")
+    @Mapping(target = "items", ignore = true)
     Shipment toShipment(CommodityEntity entity);
 }

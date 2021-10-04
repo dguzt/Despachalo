@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync.commodity;
+package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
