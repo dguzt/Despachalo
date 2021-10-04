@@ -26,6 +26,10 @@ public class ProductDetailEntity {
     @Column(name = "volumen", nullable = false)
     private Float volume;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="producto_id", nullable=false, insertable = false, updatable = false)
+    private ProductEntity product;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
