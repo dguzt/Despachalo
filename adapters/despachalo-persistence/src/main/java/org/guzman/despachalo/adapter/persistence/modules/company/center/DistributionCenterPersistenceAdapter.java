@@ -4,18 +4,26 @@ import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
+import org.guzman.despachalo.core.company.application.port.in.CenterData;
 import org.guzman.despachalo.core.company.application.port.in.DistributionCenterToRegister;
 import org.guzman.despachalo.core.company.application.port.out.CheckIfCenterExistsPort;
+import org.guzman.despachalo.core.company.application.port.out.GetAllCentersDataPort;
 import org.guzman.despachalo.core.company.application.port.out.GetPaginatedDistributionCentersPort;
 import org.guzman.despachalo.core.company.application.port.out.RegisterDistributionCenterPort;
 import org.guzman.despachalo.core.company.domain.DistributionCenter;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class DistributionCenterPersistenceAdapter implements RegisterDistributionCenterPort, GetPaginatedDistributionCentersPort, CheckIfCenterExistsPort {
+public class DistributionCenterPersistenceAdapter implements
+        RegisterDistributionCenterPort,
+        GetPaginatedDistributionCentersPort,
+        CheckIfCenterExistsPort,
+        GetAllCentersDataPort {
+
     private final DistributionCenterRepository repository;
     private final DistributionCenterMapper mapper;
 
@@ -46,7 +54,14 @@ public class DistributionCenterPersistenceAdapter implements RegisterDistributio
 
     @Override
     public Boolean checkIfCenterExists(Long centerId) {
-        var a = repository.existsByIdAndDeletedIsFalse(centerId);
-        return a;
+        return repository.existsByIdAndDeletedIsFalse(centerId);
+    }
+
+    @Override
+    public List<CenterData> getAllCenters() {
+        return repository.findAllByDeletedIsFalse()
+                .stream()
+                .map(mapper::toCenterData)
+                .collect(Collectors.toList());
     }
 }
