@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence.modules.storage;
+package org.guzman.despachalo.adapter.persistence.modules.storage.area;
 
 import lombok.*;
 import org.hibernate.Hibernate;
