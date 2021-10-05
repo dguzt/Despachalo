@@ -10,7 +10,7 @@ import java.util.Objects;
 @ToString
 @Getter @Setter
 @RequiredArgsConstructor
-@Entity @Table(name = "ZONA_ALMACENAMIENTO")
+@Entity @Table(name = "ITEM_ALMACENADO")
 public class StoredItemEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")

@@ -4,6 +4,6 @@ import org.guzman.despachalo.core.storage.domain.ZoneToAssign;
 
 import java.util.List;
 
-public interface GetZonesByOrderItemsPort {
-    List<ZoneToAssign> getZonesByOrderIds(List<Long> orderIds);
+public interface GetAreasByOrderItemsPort {
+    List<ZoneToAssign> getAreasByOrderIds(List<Long> orderIds);
 }

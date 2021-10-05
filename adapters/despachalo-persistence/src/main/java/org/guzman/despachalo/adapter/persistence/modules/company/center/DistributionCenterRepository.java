@@ -6,4 +6,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DistributionCenterRepository extends JpaRepository<DistributionCenterEntity, Long> {
     Page<DistributionCenterEntity> findAllByNameContainingIgnoreCase(Pageable pageable, String name);
+    Boolean existsByIdAndDeletedIsFalse(Long id);
 }

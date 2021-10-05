@@ -1,6 +1,10 @@
 package org.guzman.despachalo.adapter.persistence.modules.storage.area;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.company.center.DistributionCenterEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -23,6 +27,13 @@ public class AreaEntity {
 
     @Column(name = "capacidad_disponible")
     private Integer availableCapacity = 0;
+
+    @Column(name = "centro_distribucion_id", nullable = false)
+    private Long centerId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="centro_distribucion_id", insertable = false, updatable = false)
+    private DistributionCenterEntity center;
 
     @Override
     public boolean equals(Object o) {

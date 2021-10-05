@@ -43,7 +43,7 @@ public class AuthenticationControllerTest {
         var body = Map.of("email", email, "password", rawPassword);
         var request = new HttpEntity<>(body, headers());
 
-        return restTemplate.exchange("/authenticate",
+        return restTemplate.exchange("/auth/login",
                 HttpMethod.POST,
                 request,
                 String.class);

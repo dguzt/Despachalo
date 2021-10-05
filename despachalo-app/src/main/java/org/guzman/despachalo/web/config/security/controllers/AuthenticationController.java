@@ -24,9 +24,9 @@ public class AuthenticationController {
     private final JwtService jwtService;
     private final WebUserDetailsService webUserDetailsService;
 
-    @PostMapping("/authenticate")
+    @PostMapping("/auth/login")
     @ResponseStatus(HttpStatus.OK)
-    public AuthenticationResponse authenticate(@RequestBody AuthenticationRequest authenticationRequest) {
+    public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) {
         try {
             var authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword());
             authenticationManager.authenticate(authToken);

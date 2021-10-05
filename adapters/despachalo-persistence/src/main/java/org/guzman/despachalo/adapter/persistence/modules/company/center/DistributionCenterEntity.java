@@ -27,6 +27,9 @@ public class DistributionCenterEntity {
     @Column(name = "direccion")
     private String address;
 
+    @Column(name = "eliminado")
+    private Boolean deleted = false;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

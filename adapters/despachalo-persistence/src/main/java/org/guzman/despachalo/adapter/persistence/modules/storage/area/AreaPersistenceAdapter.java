@@ -4,8 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
+import org.guzman.despachalo.core.storage.application.port.in.AreaToRegister;
 import org.guzman.despachalo.core.storage.application.port.out.GetPaginatedAreasPort;
-import org.guzman.despachalo.core.storage.application.port.out.GetZonesByOrderItemsPort;
+import org.guzman.despachalo.core.storage.application.port.out.GetAreasByOrderItemsPort;
+import org.guzman.despachalo.core.storage.application.port.out.RegisterAreaPort;
 import org.guzman.despachalo.core.storage.domain.Area;
 import org.guzman.despachalo.core.storage.domain.ZoneToAssign;
 import org.springframework.data.domain.PageRequest;
@@ -16,12 +18,12 @@ import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class AreaPersistenceAdapter implements GetZonesByOrderItemsPort, GetPaginatedAreasPort {
+public class AreaPersistenceAdapter implements GetAreasByOrderItemsPort, GetPaginatedAreasPort, RegisterAreaPort {
     private final AreaRepository repository;
     private final AreaMapper mapper;
 
     @Override
-    public List<ZoneToAssign> getZonesByOrderIds(List<Long> orderIds) {
+    public List<ZoneToAssign> getAreasByOrderIds(List<Long> orderIds) {
         return Collections.emptyList();
     }
 
@@ -41,5 +43,11 @@ public class AreaPersistenceAdapter implements GetZonesByOrderItemsPort, GetPagi
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    @Override
+    public Long registerArea(AreaToRegister toRegister) {
+        var row = mapper.toEntity(toRegister);
+        return repository.save(row).getId();
     }
 }

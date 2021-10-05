@@ -3,7 +3,7 @@ package org.guzman.despachalo.core.storage.application;
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.UseCase;
 import org.guzman.despachalo.core.storage.application.port.in.AssignAreasToItemsUseCase;
-import org.guzman.despachalo.core.storage.application.port.out.GetZonesByOrderItemsPort;
+import org.guzman.despachalo.core.storage.application.port.out.GetAreasByOrderItemsPort;
 import org.guzman.despachalo.core.storage.domain.Item;
 import org.guzman.despachalo.core.storage.domain.ZoneToAssign;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 @UseCase
 @RequiredArgsConstructor
 public class AssignAreasToItemsService implements AssignAreasToItemsUseCase {
-    private final GetZonesByOrderItemsPort getZonesByOrderItemsPort;
+    private final GetAreasByOrderItemsPort getZonesByOrderItemsPort;
 
     @Override
     public List<ZoneToAssign> execute(List<Item> items) {
@@ -21,7 +21,7 @@ public class AssignAreasToItemsService implements AssignAreasToItemsUseCase {
                 .map(Item::getOrderId)
                 .collect(Collectors.toList());
 
-        var zones = getZonesByOrderItemsPort.getZonesByOrderIds(orderIds);
+        var zones = getZonesByOrderItemsPort.getAreasByOrderIds(orderIds);
 
         return null;
     }

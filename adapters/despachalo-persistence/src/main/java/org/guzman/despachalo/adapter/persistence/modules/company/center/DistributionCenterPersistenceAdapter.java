@@ -5,6 +5,7 @@ import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.company.application.port.in.DistributionCenterToRegister;
+import org.guzman.despachalo.core.company.application.port.out.CheckIfCenterExistsPort;
 import org.guzman.despachalo.core.company.application.port.out.GetPaginatedDistributionCentersPort;
 import org.guzman.despachalo.core.company.application.port.out.RegisterDistributionCenterPort;
 import org.guzman.despachalo.core.company.domain.DistributionCenter;
@@ -14,7 +15,7 @@ import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class DistributionCenterPersistenceAdapter implements RegisterDistributionCenterPort, GetPaginatedDistributionCentersPort {
+public class DistributionCenterPersistenceAdapter implements RegisterDistributionCenterPort, GetPaginatedDistributionCentersPort, CheckIfCenterExistsPort {
     private final DistributionCenterRepository repository;
     private final DistributionCenterMapper mapper;
 
@@ -41,5 +42,11 @@ public class DistributionCenterPersistenceAdapter implements RegisterDistributio
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    @Override
+    public Boolean checkIfCenterExists(Long centerId) {
+        var a = repository.existsByIdAndDeletedIsFalse(centerId);
+        return a;
     }
 }
