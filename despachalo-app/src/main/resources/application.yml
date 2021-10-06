@@ -40,6 +40,7 @@ spring:
         page-parameter: page
         default-page-size: 10
         max-page-size: 50
+        one-indexed-parameters: true
 
 logging:
   file:

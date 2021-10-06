@@ -24,7 +24,7 @@ public class DistributionCenterEntity {
     @Column(name = "ubi_latitud")
     private Double latitude;
 
-    @Column(name = "direccion")
+    @Column(name = "direccion", length = 100)
     private String address;
 
     @Column(name = "eliminado")
