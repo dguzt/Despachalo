@@ -6,14 +6,12 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.company.application.port.in.CenterData;
 import org.guzman.despachalo.core.company.application.port.in.DistributionCenterToRegister;
-import org.guzman.despachalo.core.company.application.port.out.CheckIfCenterExistsPort;
-import org.guzman.despachalo.core.company.application.port.out.GetAllCentersDataPort;
-import org.guzman.despachalo.core.company.application.port.out.GetPaginatedDistributionCentersPort;
-import org.guzman.despachalo.core.company.application.port.out.RegisterDistributionCenterPort;
+import org.guzman.despachalo.core.company.application.port.out.*;
 import org.guzman.despachalo.core.company.domain.DistributionCenter;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
@@ -22,7 +20,8 @@ public class DistributionCenterPersistenceAdapter implements
         RegisterDistributionCenterPort,
         GetPaginatedDistributionCentersPort,
         CheckIfCenterExistsPort,
-        GetAllCentersDataPort {
+        GetAllCentersDataPort,
+        FindCenterPort {
 
     private final DistributionCenterRepository repository;
     private final DistributionCenterMapper mapper;
@@ -63,5 +62,11 @@ public class DistributionCenterPersistenceAdapter implements
                 .stream()
                 .map(mapper::toCenterData)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public Optional<DistributionCenter> findCenter(Long centerId) {
+        return repository.findByIdAndDeletedIsFalse(centerId)
+                .map(mapper::toDistributionCenter);
     }
 }
