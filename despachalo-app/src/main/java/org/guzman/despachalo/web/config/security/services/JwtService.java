@@ -4,7 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import org.guzman.despachalo.web.config.SecurityVars;
-import org.springframework.security.core.userdetails.UserDetails;
+import org.guzman.despachalo.web.config.security.model.WebUserDetails;
 import org.springframework.stereotype.Service;
 
 import java.security.Key;
@@ -22,8 +22,11 @@ public class JwtService {
         this.expPlusInMinutes = securityVars.getExpirationInMinutes();
     }
 
-    public String generateToken(UserDetails userDetails) {
-        var claims = Map.<String, Object>of();
+    public String generateToken(WebUserDetails userDetails) {
+        var claims = Map.<String, Object>of(
+                "name", userDetails.getFullName(),
+                "admin", userDetails.isAdmin()
+        );
         return createToken(claims, userDetails.getUsername());
     }
 

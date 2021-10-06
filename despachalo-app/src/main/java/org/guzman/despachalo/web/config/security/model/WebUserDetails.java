@@ -23,6 +23,14 @@ public class WebUserDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    public Boolean isAdmin() {
+        return user.getIsAdmin();
+    }
+
+    public String getFullName() {
+        return user.getNames() + " " + user.getLastnames();
+    }
+
     @Override
     public String getPassword() {
         return user.getHashedPassword();

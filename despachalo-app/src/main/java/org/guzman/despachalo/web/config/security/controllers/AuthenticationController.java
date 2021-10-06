@@ -2,6 +2,7 @@ package org.guzman.despachalo.web.config.security.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;
+import org.guzman.despachalo.web.config.security.model.WebUserDetails;
 import org.guzman.despachalo.web.config.security.services.JwtService;
 import org.guzman.despachalo.web.config.security.services.WebUserDetailsService;
 import org.slf4j.Logger;
@@ -35,7 +36,7 @@ public class AuthenticationController {
             throw new WrongCredentialsException();
         }
 
-        final var userDetails = webUserDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        final var userDetails = (WebUserDetails) webUserDetailsService.loadUserByUsername(authenticationRequest.getEmail());
         final var token = jwtService.generateToken(userDetails);
 
         return new AuthenticationResponse(token);
