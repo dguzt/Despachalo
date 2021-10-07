@@ -13,6 +13,7 @@ public interface ShipmentMapper {
     @Mapping(target = "arrivalTime", source = "arrivalTime")
     @Mapping(target = "warehouseId", source = "warehouseId")
     @Mapping(target = "licensePlate", source = "vehiclePlate")
+    @Mapping(target = "assignedCenterId", source = "assignedCenterId")
     @Mapping(target = "items", ignore = true)
     Shipment toShipment(CommodityEntity entity);
 }

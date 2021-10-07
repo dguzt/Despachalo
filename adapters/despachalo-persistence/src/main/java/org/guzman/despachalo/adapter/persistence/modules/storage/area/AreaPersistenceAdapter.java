@@ -5,10 +5,7 @@ import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.storage.application.port.in.AreaToRegister;
-import org.guzman.despachalo.core.storage.application.port.out.FindAreaPort;
-import org.guzman.despachalo.core.storage.application.port.out.GetPaginatedAreasPort;
-import org.guzman.despachalo.core.storage.application.port.out.GetAreasByOrderItemsPort;
-import org.guzman.despachalo.core.storage.application.port.out.RegisterAreaPort;
+import org.guzman.despachalo.core.storage.application.port.out.*;
 import org.guzman.despachalo.core.storage.domain.Area;
 import org.guzman.despachalo.core.storage.domain.ZoneToAssign;
 import org.springframework.data.domain.PageRequest;
@@ -24,10 +21,13 @@ public class AreaPersistenceAdapter implements
         GetAreasByOrderItemsPort,
         GetPaginatedAreasPort,
         RegisterAreaPort,
-        FindAreaPort {
+        FindAreaPort,
+        FindAreaForOrderPort,
+        GetLeastOccupiedAreaPort{
 
-    private final AreaRepository repository;
-    private final AreaMapper mapper;
+    private final StoreItemRepository storeItemRepository;
+    private final AreaRepository areaRepository;
+    private final AreaMapper areaMapper;
 
     @Override
     public List<ZoneToAssign> getAreasByOrderIds(List<Long> orderIds) {
@@ -37,11 +37,11 @@ public class AreaPersistenceAdapter implements
     @Override
     public Paginator<Area> getPage(Filters filters) {
         var pageable = PageRequest.of(filters.getPage(), filters.getPageSize());
-        var page = repository.findAll(pageable);
+        var page = areaRepository.findAll(pageable);
 
         var data = page.getContent()
                 .stream()
-                .map(mapper::toArea)
+                .map(areaMapper::toArea)
                 .collect(Collectors.toList());
 
         return Paginator.<Area>builder()
@@ -54,12 +54,23 @@ public class AreaPersistenceAdapter implements
 
     @Override
     public Long registerArea(AreaToRegister toRegister) {
-        var row = mapper.toEntity(toRegister);
-        return repository.save(row).getId();
+        var row = areaMapper.toEntity(toRegister);
+        return areaRepository.save(row).getId();
     }
 
     @Override
     public Optional<Area> findArea(Long areaId) {
-        return repository.findById(areaId).map(mapper::toArea);
+        return areaRepository.findById(areaId).map(areaMapper::toArea);
+    }
+
+    @Override
+    public Optional<Long> findAreaForOrder(Long orderId) {
+        return storeItemRepository.findTopByItem_OrderIdOrderByStoredAtAsc(orderId)
+                .map(StoredItemEntity::getAreaId);
+    }
+
+    @Override
+    public Long getLeastOccupiedArea(Long centerId) {
+        return areaRepository.findTopByCenterIdOrderByAvailableCapacityDesc(centerId).getId();
     }
 }

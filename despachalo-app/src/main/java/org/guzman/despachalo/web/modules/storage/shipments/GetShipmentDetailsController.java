@@ -2,6 +2,7 @@ package org.guzman.despachalo.web.modules.storage.shipments;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;
+import org.guzman.despachalo.core.storage.application.port.in.CheckForAllShipmentOrdersItemsUseCase;
 import org.guzman.despachalo.core.storage.application.port.in.GetShipmentDetailsUseCase;
 import org.guzman.despachalo.core.storage.domain.Item;
 import org.guzman.despachalo.core.sync.application.port.in.GetCertainProductsUseCase;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class GetShipmentDetailsController {
     private final GetShipmentDetailsUseCase useCase;
     private final GetCertainProductsUseCase productsUseCase;
+    private final CheckForAllShipmentOrdersItemsUseCase ordersItemsUseCase;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/storage/shipments/{shipmentId}")
@@ -32,6 +34,14 @@ public class GetShipmentDetailsController {
 
         var products = productsUseCase.execute(productDetailIds);
 
-        return new ShipmentDetailsDTO(shipment, products);
+        var ordersIds = shipment.getItems()
+                .stream()
+                .map(Item::getOrderId)
+                .distinct()
+                .collect(Collectors.toList());
+
+        var checkedOrders = ordersItemsUseCase.execute(ordersIds, shipmentId, shipment.getAssignedCenterId());
+
+        return new ShipmentDetailsDTO(shipment, products, checkedOrders);
     }
 }

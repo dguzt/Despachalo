@@ -11,12 +11,13 @@ import java.util.List;
 @AllArgsConstructor
 public class Shipment {
     private Long id;
+    private Long warehouseId;
+    private Long assignedCenterId;
+
     private String code;
     private String state;
     private String licensePlate;
-
     private LocalDateTime arrivalTime;
-    private Long warehouseId;
 
     @Setter
     private List<Item> items;

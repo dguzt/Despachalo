@@ -106,8 +106,8 @@ VALUES ('Av. Santísima Cruz, San Martín de Porres 15113', 'ORIG-002', now(), n
 
 -- COMMODITIES
 -- COMMODITY 001
-INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id)
-VALUES (now(), 'MERC-001', now(), 'POR LLEGAR', null, 'ABC-121', 1);
+INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id, centro_id)
+VALUES (now(), 'MERC-001', now(), 'POR LLEGAR', null, 'ABC-121', 1, 1);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('001-2021-10-12-001', 1, 1, 1, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('001-2021-10-12-002', 1, 1, 1, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('001-2021-10-12-003', 1, 1, 1, null);
@@ -120,8 +120,8 @@ INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_i
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('001-2021-10-12-010', 1, 7, 1, null);
 
 -- COMMODITY 002
-INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id)
-VALUES (now(), 'MERC-002', now(), 'POR LLEGAR', null, 'ABC-122', 1);
+INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id, centro_id)
+VALUES (now(), 'MERC-002', now(), 'POR LLEGAR', null, 'ABC-122', 1, 1);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('002-2021-10-12-001', 2, 2, 2, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('002-2021-10-12-002', 2, 2, 2, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('002-2021-10-12-003', 2, 2, 2, null);
@@ -138,8 +138,8 @@ INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_i
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('002-2021-10-12-010', 2, 8, 2, null);
 
 -- COMMODITY 003
-INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id)
-VALUES (now(), 'MERC-003', now(), 'POR LLEGAR', null, 'ABC-123', 2);
+INSERT INTO mercaderia(hora_llegada, codigo, fecha_creado, estado, fecha_actualizado, placa_vehiculo, almacen_id, centro_id)
+VALUES (now(), 'MERC-003', now(), 'POR LLEGAR', null, 'ABC-123', 2, 1);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('003-2021-10-12-001', 3, 3, 3, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('003-2021-10-12-002', 3, 3, 3, null);
 INSERT INTO item_mercaderia(codigo, mercaderia_id, pedido_id, detalle_producto_id, orden_devolucion_id) VALUES ('003-2021-10-12-003', 3, 6, 3, null);

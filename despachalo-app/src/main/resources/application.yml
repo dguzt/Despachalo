@@ -28,6 +28,10 @@ spring:
     hibernate:
       ddl-auto: create
     open-in-view: off
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
 
   servlet:
     multipart:
