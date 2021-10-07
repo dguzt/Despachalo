@@ -6,7 +6,6 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "PERMISO")
@@ -20,6 +19,14 @@ public class PermissionEntity {
 
     @Column(name = "rol_id", nullable = false)
     private Long roleId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="rol_id", insertable = false, updatable = false)
+    private RoleEntity role;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="accion_id", insertable = false, updatable = false)
+    private ActionEntity action;
 
     @Override
     public boolean equals(Object o) {

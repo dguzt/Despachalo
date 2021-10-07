@@ -1,15 +1,14 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync.driver;
+package org.guzman.despachalo.adapter.persistence.modules.dispatch.driver;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "CONDUCTOR")
@@ -22,6 +21,12 @@ public class DriverEntity {
 
     @Column(name = "num_documento", length = 15, nullable = false)
     private String documentNumber;
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

@@ -9,7 +9,7 @@ public interface RoleMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "name", source = "name")
-    @Mapping(target = "registeredAt", ignore = true)
-    @Mapping(target = "updatedAt", ignore = true)
+    @Mapping(target = "registeredAt", source = "createdAt")
+    @Mapping(target = "updatedAt", source = "updatedAt")
     Role toRole(RoleEntity entity);
 }

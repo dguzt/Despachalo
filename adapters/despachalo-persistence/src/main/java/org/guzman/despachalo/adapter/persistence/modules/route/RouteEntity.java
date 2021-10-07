@@ -4,12 +4,13 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.programming.ProgrammedVehicleEntity;
+import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "RUTA")
@@ -26,6 +27,14 @@ public class RouteEntity {
 
     @Column(name = "pedido_id", nullable = false)
     private Long orderId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "vehiculo_id", insertable = false, updatable = false)
+    private ProgrammedVehicleEntity programmedVehicle;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
+    private OrderEntity order;
 
     @Override
     public boolean equals(Object o) {

@@ -3,13 +3,14 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.order;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.dispatch.DispatchEntity;
+import org.guzman.despachalo.adapter.persistence.modules.sync.client.EndPointEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "PEDIDO")
@@ -22,6 +23,20 @@ public class OrderEntity {
 
     @Column(name = "despacho_id")
     private Long dispatchId;
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "despacho_id", insertable = false, updatable = false)
+    private DispatchEntity dispatch;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "tienda_id", insertable = false, updatable = false)
+    private EndPointEntity endPoint;
 
     @Override
     public boolean equals(Object o) {

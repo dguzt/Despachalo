@@ -3,14 +3,12 @@ package org.guzman.despachalo.adapter.persistence.modules.sync;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "SINCRONIZACION")

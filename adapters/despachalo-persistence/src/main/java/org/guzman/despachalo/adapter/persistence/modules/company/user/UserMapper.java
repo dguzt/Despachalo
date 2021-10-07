@@ -8,6 +8,7 @@ import org.mapstruct.Mapping;
 public interface UserMapper {
 
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "centerId", source = "centerId")
     @Mapping(target = "names", source = "names")
     @Mapping(target = "lastnames", source = "lastnames")
     @Mapping(target = "email", source = "email")
@@ -16,5 +17,6 @@ public interface UserMapper {
     @Mapping(target = "doc.type", source = "documentType")
     @Mapping(target = "doc", ignore = true)
     @Mapping(target = "role", source = "role")
+    @Mapping(target = "isAdmin", source = "isAdmin")
     User toUser(UserEntity entity);
 }

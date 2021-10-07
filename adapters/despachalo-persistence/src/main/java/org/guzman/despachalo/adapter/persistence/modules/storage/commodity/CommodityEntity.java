@@ -3,14 +3,13 @@ package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.company.center.DistributionCenterEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "MERCADERIA")
@@ -20,6 +19,9 @@ public class CommodityEntity {
 
     @Column(name = "almacen_id", nullable = false)
     private Long warehouseId;
+
+    @Column(name = "centro_id")
+    private Long assignedCenterId;
 
     @Column(name = "codigo", length = 50, nullable = false)
     private String code;
@@ -32,6 +34,21 @@ public class CommodityEntity {
 
     @Column(name = "hora_llegada", nullable = false)
     private LocalDateTime arrivalTime;
+
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="almacen_id", insertable = false, updatable = false)
+    private OriginPointEntity originPoint;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="centro_id", insertable = false, updatable = false)
+    private DistributionCenterEntity assignedCenter;
 
     @Override
     public boolean equals(Object o) {

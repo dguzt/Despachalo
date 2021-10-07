@@ -3,13 +3,13 @@ package org.guzman.despachalo.adapter.persistence.modules.dispatch;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.company.user.UserEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "DESPACHO")
@@ -26,6 +26,16 @@ public class DispatchEntity {
 
     @Column(name = "estado_sol_ruta", length = 10)
     private String routeRequestState;
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "analista_id", insertable = false, updatable = false)
+    private UserEntity analyst;
 
     @Override
     public boolean equals(Object o) {

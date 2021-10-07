@@ -1,12 +1,14 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync.truck;
+package org.guzman.despachalo.adapter.persistence.modules.dispatch.truck;
 
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "VEHICULO")
@@ -14,8 +16,20 @@ public class TruckEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo")
+    @Column(name = "codigo", nullable = false)
     private String code;
+
+    @Column(name = "capacidad_peso")
+    private Double weightCapacity;
+
+    @Column(name = "capacidad_volumen")
+    private Double volumeCapacity;
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

@@ -3,13 +3,12 @@ package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "PUNTO_ORIGEN")
@@ -18,16 +17,16 @@ public class OriginPointEntity {
     private Long id;
 
     @Column(name = "codigo", length = 50, nullable = false)
-    private String warehouseId;
+    private String code;
 
-    @Column(name = "direccion", length = 50, nullable = false)
+    @Column(name = "direccion", length = 100, nullable = false)
     private String address;
 
-    @Column(name = "ubi_longitud", nullable = false)
-    private Double longitude;
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
 
-    @Column(name = "ubi_latitud", nullable = false)
-    private Double latitude;
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

@@ -22,10 +22,11 @@ spring:
     username: despachalo
     password: despachalo
     driver-class-name: org.postgresql.Driver
+    initialization-mode: always
 
   jpa:
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     open-in-view: off
 
   servlet:

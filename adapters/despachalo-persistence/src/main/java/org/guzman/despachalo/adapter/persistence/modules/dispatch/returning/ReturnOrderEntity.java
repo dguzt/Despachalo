@@ -1,16 +1,15 @@
-package org.guzman.despachalo.adapter.persistence.modules.dispatch;
+package org.guzman.despachalo.adapter.persistence.modules.dispatch.returning;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.company.user.UserEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "ORDEN_DEVOLUCION")
@@ -27,6 +26,10 @@ public class ReturnOrderEntity {
 
     @Column(name = "fecha_reporte", nullable = false)
     private LocalDateTime reportedAt;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "analista_id", insertable = false, updatable = false)
+    private UserEntity analyst;
 
     @Override
     public boolean equals(Object o) {

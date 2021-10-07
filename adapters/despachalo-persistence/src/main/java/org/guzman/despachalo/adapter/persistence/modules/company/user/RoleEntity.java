@@ -4,9 +4,9 @@ import lombok.*;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "ROL")
@@ -17,6 +17,12 @@ public class RoleEntity {
 
     @Column(name = "nombre", length = 50)
     private String name;
+
+    @Column(name = "fecha_creado")
+    private LocalDateTime createdAt;
+
+    @Column(name = "fecha_actualizado")
+    private LocalDateTime updatedAt;
 
     @Override
     public boolean equals(Object o) {

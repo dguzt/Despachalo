@@ -3,13 +3,12 @@ package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.dispatch.returning.ReturnOrderEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "ITEM_MERCADERIA")
@@ -32,9 +31,13 @@ public class ItemEntity {
     @Column(name = "orden_devolucion_id")
     private Long returnOrderId;
 
-    @ManyToOne
-    @JoinColumn(name="mercaderia_id", nullable=false, insertable = false, updatable = false)
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="mercaderia_id", insertable = false, updatable = false)
     private CommodityEntity commodity;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="orden_devolucion_id", insertable = false, updatable = false)
+    private ReturnOrderEntity returnOrder;
 
     @Override
     public boolean equals(Object o) {

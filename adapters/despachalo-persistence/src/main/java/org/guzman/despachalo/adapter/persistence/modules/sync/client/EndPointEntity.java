@@ -3,13 +3,12 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.client;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
+import org.guzman.despachalo.adapter.persistence.modules.company.center.DistributionCenterEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
 import java.util.Objects;
 
-@ToString
 @Getter @Setter
 @RequiredArgsConstructor
 @Entity @Table(name = "PUNTO_DESTINO")
@@ -24,9 +23,9 @@ public class EndPointEntity {
     private Long clientId;
 
     @Column(name = "centro_dist_id")
-    private Long distributionCenterId;
+    private Long centerId;
 
-    @Column(name = "direccion", length = 50, nullable = false)
+    @Column(name = "direccion", length = 100, nullable = false)
     private String address;
 
     @Column(name = "ubi_longitud", nullable = false)
@@ -34,6 +33,14 @@ public class EndPointEntity {
 
     @Column(name = "ubi_latitud", nullable = false)
     private Double latitude;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "cliente_id", insertable = false, updatable = false)
+    private ClientEntity client;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "centro_dist_id", insertable = false, updatable = false)
+    private DistributionCenterEntity center;
 
     @Override
     public boolean equals(Object o) {

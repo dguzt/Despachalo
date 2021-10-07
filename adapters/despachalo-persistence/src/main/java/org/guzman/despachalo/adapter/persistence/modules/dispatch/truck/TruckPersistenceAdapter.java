@@ -1,4 +1,4 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync.truck;
+package org.guzman.despachalo.adapter.persistence.modules.dispatch.truck;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
