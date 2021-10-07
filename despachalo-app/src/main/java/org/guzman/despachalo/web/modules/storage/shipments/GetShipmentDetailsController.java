@@ -3,7 +3,9 @@ package org.guzman.despachalo.web.modules.storage.shipments;
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;
 import org.guzman.despachalo.core.storage.application.port.in.CheckForAllShipmentOrdersItemsUseCase;
+import org.guzman.despachalo.core.storage.application.port.in.GetCertainAreasUseCase;
 import org.guzman.despachalo.core.storage.application.port.in.GetShipmentDetailsUseCase;
+import org.guzman.despachalo.core.storage.application.port.in.OrderItemsChecked;
 import org.guzman.despachalo.core.storage.domain.Item;
 import org.guzman.despachalo.core.sync.application.port.in.GetCertainProductsUseCase;
 import org.springframework.http.HttpStatus;
@@ -21,6 +23,7 @@ public class GetShipmentDetailsController {
     private final GetShipmentDetailsUseCase useCase;
     private final GetCertainProductsUseCase productsUseCase;
     private final CheckForAllShipmentOrdersItemsUseCase ordersItemsUseCase;
+    private final GetCertainAreasUseCase areasUseCase;
 
     @ResponseStatus(HttpStatus.OK)
     @GetMapping(path = "/storage/shipments/{shipmentId}")
@@ -31,7 +34,6 @@ public class GetShipmentDetailsController {
                 .stream()
                 .map(Item::getProductDetailId)
                 .collect(Collectors.toList());
-
         var products = productsUseCase.execute(productDetailIds);
 
         var ordersIds = shipment.getItems()
@@ -39,9 +41,13 @@ public class GetShipmentDetailsController {
                 .map(Item::getOrderId)
                 .distinct()
                 .collect(Collectors.toList());
-
         var checkedOrders = ordersItemsUseCase.execute(ordersIds, shipmentId, shipment.getAssignedCenterId());
 
-        return new ShipmentDetailsDTO(shipment, products, checkedOrders);
+        var areaIds = checkedOrders.stream()
+                .map(OrderItemsChecked::getZoneAssignedId)
+                .collect(Collectors.toList());
+        var areas = areasUseCase.execute(areaIds);
+
+        return new ShipmentDetailsDTO(shipment, products, checkedOrders, areas);
     }
 }

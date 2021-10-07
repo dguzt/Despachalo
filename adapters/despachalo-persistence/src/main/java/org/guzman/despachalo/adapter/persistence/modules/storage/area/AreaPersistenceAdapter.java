@@ -23,7 +23,8 @@ public class AreaPersistenceAdapter implements
         RegisterAreaPort,
         FindAreaPort,
         FindAreaForOrderPort,
-        GetLeastOccupiedAreaPort{
+        GetLeastOccupiedAreaPort,
+        FindAreasByIdsPort {
 
     private final StoreItemRepository storeItemRepository;
     private final AreaRepository areaRepository;
@@ -72,5 +73,13 @@ public class AreaPersistenceAdapter implements
     @Override
     public Long getLeastOccupiedArea(Long centerId) {
         return areaRepository.findTopByCenterIdOrderByAvailableCapacityDesc(centerId).getId();
+    }
+
+    @Override
+    public List<Area> findAreasByIds(List<Long> areaIds) {
+        return areaRepository.findAllById(areaIds)
+                .stream()
+                .map(areaMapper::toArea)
+                .collect(Collectors.toList());
     }
 }
