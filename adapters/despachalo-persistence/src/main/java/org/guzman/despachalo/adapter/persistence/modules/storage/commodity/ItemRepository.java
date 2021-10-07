@@ -6,5 +6,7 @@ import java.util.List;
 
 public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
     List<ItemEntity> findAllByCommodityId(Long commodityId);
+    List<ItemEntity> findAllByCommodityIdAndOrderId(Long commodityId, Long orderId);
     Integer countAllByCommodityIdAndOrderId(Long commodityId, Long orderId);
+    Integer countAllByCommodityId(Long commodityId);
 }

@@ -1,21 +1,31 @@
 package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 
 import lombok.RequiredArgsConstructor;
+import org.guzman.despachalo.adapter.persistence.modules.storage.area.StoreItemRepository;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
+import org.guzman.despachalo.core.storage.application.port.out.CheckForShipmentCompletedPort;
 import org.guzman.despachalo.core.storage.application.port.out.GetPaginatedShipmentsPort;
 import org.guzman.despachalo.core.storage.application.port.out.GetShipmentDetailsPort;
 import org.guzman.despachalo.core.storage.domain.Shipment;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import static org.guzman.despachalo.core.storage.domain.ShipmentState.STORED;
+
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ShipmentPersistenceAdapter implements GetPaginatedShipmentsPort, GetShipmentDetailsPort {
+public class ShipmentPersistenceAdapter implements
+        GetPaginatedShipmentsPort,
+        GetShipmentDetailsPort,
+        CheckForShipmentCompletedPort {
+
     private final CommodityRepository commodityRepository;
+    private final StoreItemRepository storeItemRepository;
     private final ItemRepository itemRepository;
     private final ShipmentMapper shipmentMapper;
     private final ItemMapper itemMapper;
@@ -53,5 +63,19 @@ public class ShipmentPersistenceAdapter implements GetPaginatedShipmentsPort, Ge
                     s.setItems(items);
                     return s;
                 });
+    }
+
+    @Override
+    public void checkForShipmentCompleted(Long shipmentId) {
+        var total = itemRepository.countAllByCommodityId(shipmentId);
+        var stored = storeItemRepository.countAllByItem_CommodityId(shipmentId);
+
+        if (Objects.equals(total, stored)) {
+            commodityRepository.findById(shipmentId)
+                    .ifPresent(s -> {
+                        s.setState(STORED);
+                        commodityRepository.save(s);
+                    });
+        }
     }
 }
