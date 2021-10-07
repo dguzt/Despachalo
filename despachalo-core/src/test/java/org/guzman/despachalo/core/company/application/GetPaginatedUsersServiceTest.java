@@ -33,7 +33,7 @@ public class GetPaginatedUsersServiceTest {
     }
 
     private User user() {
-        return new User(1L, "John", "Connor", null, "john.connor@despacho.pe", true, null);
+        return new User(1L, 1L,"John", "Connor", null, "john.connor@despacho.pe", true, true, null);
     }
 
     private Paginator<User> page(List<User> users) {

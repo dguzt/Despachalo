@@ -34,7 +34,7 @@ public class GetPaginatedShipmentsServiceTest {
     }
 
     private Shipment shipment() {
-        return new Shipment(1L, "123", "PENDIENTE", null, LocalDateTime.now(), 1L, null);
+        return new Shipment(1L, 1L,1L, "123", "POR LLEGAR", null, LocalDateTime.now(), null);
     }
 
     private Paginator<Shipment> page(List<Shipment> shipments) {

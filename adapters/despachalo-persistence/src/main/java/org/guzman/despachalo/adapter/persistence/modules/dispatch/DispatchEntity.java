@@ -27,6 +27,9 @@ public class DispatchEntity {
     @Column(name = "estado_sol_ruta", length = 10)
     private String routeRequestState;
 
+    @Column(name = "fecha_despacho", nullable = false)
+    private LocalDateTime dispatchAt;
+
     @Column(name = "fecha_creado")
     private LocalDateTime createdAt;
 
