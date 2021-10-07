@@ -12,6 +12,7 @@ public interface AreaMapper {
     @Mapping(target = "description", source = "description")
     @Mapping(target = "availableCapacity", source = "availableCapacity")
     @Mapping(target = "totalCapacity", source = "totalCapacity")
+    @Mapping(target = "centerId", source = "centerId")
     Area toArea(AreaEntity entity);
 
     @Mapping(target = "id", ignore = true)

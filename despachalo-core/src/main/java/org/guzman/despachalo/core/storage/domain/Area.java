@@ -7,6 +7,7 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Area {
     private Long id;
+    private Long centerId;
     private String description;
     private Integer totalCapacity;
     private Integer availableCapacity;
