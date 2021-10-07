@@ -2,8 +2,11 @@
 INSERT INTO empresa(razon_social, ruc) VALUES ('Distribuciones Despáchalo', '77001100233');
 
 -- DISTRIBUTION CENTERS
-INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre)
-VALUES ('Av. Geronimo de Cabrera 470', false, -14.07559496080894, -75.72322936945595, 'Central Ica');
+INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre) VALUES ('Av. Gerónimo de Cabrera 470', false, -14.07559496080894, -75.72322936945595, 'Urubamba');
+INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-01', 20);
+INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-02', 20);
+INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona este E-01', 20);
+INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona este E-02', 20);
 
 -- ROLES
 INSERT INTO rol(fecha_creado, nombre, fecha_actualizado) VALUES (now(), 'ADMIN', null);
