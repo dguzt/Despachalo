@@ -4,6 +4,8 @@ import org.guzman.despachalo.core.storage.domain.Item;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
 

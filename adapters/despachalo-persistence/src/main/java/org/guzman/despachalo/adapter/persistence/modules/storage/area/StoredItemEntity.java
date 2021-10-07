@@ -3,7 +3,6 @@ package org.guzman.despachalo.adapter.persistence.modules.storage.area;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.guzman.despachalo.adapter.persistence.modules.storage.commodity.ItemEntity;
 import org.hibernate.Hibernate;
 
@@ -35,7 +34,7 @@ public class StoredItemEntity {
     @JoinColumn(name = "zona_id", insertable = false, updatable = false)
     private AreaEntity area;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "item_id", insertable = false, updatable = false)
     private ItemEntity item;
 
