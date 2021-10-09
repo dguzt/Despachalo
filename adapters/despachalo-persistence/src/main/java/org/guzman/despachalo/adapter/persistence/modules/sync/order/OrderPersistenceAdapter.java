@@ -4,16 +4,18 @@ import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
+import org.guzman.despachalo.core.sync.application.port.out.GetAllOrdersPort;
 import org.guzman.despachalo.core.sync.application.port.out.GetPaginatedOrdersPort;
 import org.guzman.despachalo.core.sync.domain.Order;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class OrderPersistenceAdapter implements GetPaginatedOrdersPort {
+public class OrderPersistenceAdapter implements GetPaginatedOrdersPort, GetAllOrdersPort {
     private final OrderRepository repository;
     private final OrderMapper mapper;
 
@@ -50,5 +52,14 @@ public class OrderPersistenceAdapter implements GetPaginatedOrdersPort {
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    // TODO: implement SQL for ready order state list
+    @Override
+    public List<Order> getAllReady() {
+        return repository.findAll()
+                .stream()
+                .map(mapper::toOrder)
+                .collect(Collectors.toList());
     }
 }
