@@ -9,6 +9,7 @@ import org.mapstruct.Mapping;
 public interface OrderMapper {
 
     @Mapping(target = "id", source = "id")
+    @Mapping(target = "state", source = "state")
     @Mapping(target = "client", source = "endPoint.client")
     Order toOrder(OrderEntity entity);
 }

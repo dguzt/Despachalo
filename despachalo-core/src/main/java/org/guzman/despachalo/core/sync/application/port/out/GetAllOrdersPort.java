@@ -5,5 +5,5 @@ import org.guzman.despachalo.core.sync.domain.Order;
 import java.util.List;
 
 public interface GetAllOrdersPort {
-    List<Order> getAllReady();
+    List<Order> getAllOrdersByState(String state);
 }

@@ -12,4 +12,5 @@ public class Dispatch {
     private LocalDateTime departureTime;
     private String state;
     private Long analystId;
+    private Integer cantProgrammedOrders;
 }

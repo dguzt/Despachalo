@@ -3,7 +3,6 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.order;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.guzman.despachalo.adapter.persistence.modules.sync.product.ProductDetailEntity;
 import org.hibernate.Hibernate;
 
@@ -27,7 +26,13 @@ public class OrderLineEntity {
     private Integer requestedAmount;
 
     @Column(name = "cantidad_enviada")
-    private Integer sentAmount;
+    private Integer sentAmount = 0;
+
+    @Column(name = "cantidad_enviar")
+    private Integer toSendAmount = 0;
+
+    @Column(name = "cantidad_almacenada")
+    private Integer storedAmount = 0;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pedido_id", insertable = false, updatable = false)

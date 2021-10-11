@@ -14,7 +14,7 @@ public class GetPaginatedDispatchesService implements GetPaginatedDispatchesUseC
     private final GetPaginatedDispatchesPort getPaginatedDispatchesPort;
 
     @Override
-    public Paginator<Dispatch> execute(Filters filters) {
-        return getPaginatedDispatchesPort.getPage(filters);
+    public Paginator<Dispatch> execute(Filters filters, String state) {
+        return getPaginatedDispatchesPort.getPage(filters, state);
     }
 }

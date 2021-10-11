@@ -14,14 +14,10 @@ import static org.guzman.despachalo.core.sync.domain.OrderState.PROGRAMMED;
 @UseCase
 @RequiredArgsConstructor
 public class GetPaginatedOrdersService implements GetPaginatedOrdersUseCase {
-    private final GetPaginatedOrdersPort getPaginatedOrdersPort;
+    private final GetPaginatedOrdersPort ordersPort;
 
     @Override
-    public Paginator<Order> execute(Filters filters, String stateFilter) {
-        switch (stateFilter) {
-            case INCOMPLETE: return getPaginatedOrdersPort.getIncompletePage(filters);
-            case PROGRAMMED: return getPaginatedOrdersPort.getProgrammedPage(filters);
-            default: return getPaginatedOrdersPort.getReadyPage(filters);
-        }
+    public Paginator<Order> execute(Filters filters, String state) {
+        return ordersPort.getOrdersPage(filters, state);
     }
 }

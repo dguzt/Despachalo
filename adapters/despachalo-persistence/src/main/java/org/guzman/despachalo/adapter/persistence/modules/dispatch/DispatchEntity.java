@@ -27,6 +27,9 @@ public class DispatchEntity {
     @Column(name = "estado_sol_ruta", length = 10)
     private String routeRequestState;
 
+    @Column(name = "pedidos_programados", nullable = false)
+    private Integer programmedOrders = 0;
+
     @Column(name = "fecha_despacho", nullable = false)
     private LocalDateTime dispatchAt;
 

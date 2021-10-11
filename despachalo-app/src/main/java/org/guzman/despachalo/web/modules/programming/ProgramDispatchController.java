@@ -1,0 +1,26 @@
+package org.guzman.despachalo.web.modules.programming;
+
+import lombok.RequiredArgsConstructor;
+import org.guzman.despachalo.commons.hexagonal.WebAdapter;
+import org.guzman.despachalo.core.programming.application.port.in.DispatchToRegister;
+import org.guzman.despachalo.core.programming.application.port.in.ProgramDispatchUseCase;
+import org.guzman.despachalo.core.programming.domain.Dispatch;
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
+
+@WebAdapter
+@RestController
+@RequiredArgsConstructor
+public class ProgramDispatchController {
+    private final ProgramDispatchUseCase useCase;
+
+    @ResponseStatus(HttpStatus.OK)
+    @PostMapping(path = "/programming/dispatchs")
+    public Dispatch programDispatch(@RequestBody DispatchToRegister toRegister) {
+        var analystId = 1L;
+        return useCase.execute(toRegister, analystId);
+    }
+}
