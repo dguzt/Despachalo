@@ -24,6 +24,9 @@ public class OrderEntity {
     @Column(name = "despacho_id")
     private Long dispatchId;
 
+    @Column(name = "estado")
+    private String state;
+
     @Column(name = "fecha_creado")
     private LocalDateTime createdAt;
 

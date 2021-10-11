@@ -5,10 +5,12 @@ import org.guzman.despachalo.commons.hexagonal.UseCase;
 import org.guzman.despachalo.core.sync.application.port.in.GetAllOrdersUseCase;
 import org.guzman.despachalo.core.sync.application.port.out.GetAllOrdersPort;
 import org.guzman.despachalo.core.sync.domain.Order;
-import org.guzman.despachalo.core.sync.domain.OrderState;
 
 import java.util.Collections;
 import java.util.List;
+
+import static org.guzman.despachalo.core.sync.domain.OrderState.INCOMPLETE;
+import static org.guzman.despachalo.core.sync.domain.OrderState.PROGRAMMED;
 
 @UseCase
 @RequiredArgsConstructor
@@ -16,7 +18,7 @@ public class GetAllOrdersService implements GetAllOrdersUseCase {
     private final GetAllOrdersPort ordersPort;
 
     @Override
-    public List<Order> execute(OrderState stateFilter) {
+    public List<Order> execute(String stateFilter) {
         switch (stateFilter) {
             case INCOMPLETE:
             case PROGRAMMED:

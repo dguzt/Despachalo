@@ -8,4 +8,5 @@ import lombok.Getter;
 public class Order {
     private Long id;
     private Client client;
+    private Long unitsToAttend;
 }

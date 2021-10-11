@@ -6,8 +6,10 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.sync.application.port.in.GetPaginatedOrdersUseCase;
 import org.guzman.despachalo.core.sync.application.port.out.GetPaginatedOrdersPort;
-import org.guzman.despachalo.core.sync.domain.OrderState;
 import org.guzman.despachalo.core.sync.domain.Order;
+
+import static org.guzman.despachalo.core.sync.domain.OrderState.INCOMPLETE;
+import static org.guzman.despachalo.core.sync.domain.OrderState.PROGRAMMED;
 
 @UseCase
 @RequiredArgsConstructor
@@ -15,7 +17,7 @@ public class GetPaginatedOrdersService implements GetPaginatedOrdersUseCase {
     private final GetPaginatedOrdersPort getPaginatedOrdersPort;
 
     @Override
-    public Paginator<Order> execute(Filters filters, OrderState stateFilter) {
+    public Paginator<Order> execute(Filters filters, String stateFilter) {
         switch (stateFilter) {
             case INCOMPLETE: return getPaginatedOrdersPort.getIncompletePage(filters);
             case PROGRAMMED: return getPaginatedOrdersPort.getProgrammedPage(filters);
