@@ -23,6 +23,7 @@ public class ProgramDispatchController {
     @PostMapping(path = "/programming/dispatches")
     public Dispatch programDispatch(@RequestBody DispatchToRegister toRegister,
                                     @AuthenticationPrincipal WebUserDetails userDetails) {
+        toRegister.setDepartureTime(toRegister.getDepartureTime().minusHours(5L));
         var analystId = userDetails.getUserId();
         return useCase.execute(toRegister, analystId);
     }
