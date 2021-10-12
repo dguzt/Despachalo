@@ -109,6 +109,16 @@ INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VA
 INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 8, 1635);
 INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 9, 1064);
 
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 1, null, 5989);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 2, null, 6300);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 3, null, 5388);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 4, null, 5866);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 5, null, 5746);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 6, null, 4758);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 7, null, 3980);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 8, null, 1635);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, 9, null, 1064);
+
 ---- NODE CLIENT 01
 INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 2, 2247);
 INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 1, 2247);

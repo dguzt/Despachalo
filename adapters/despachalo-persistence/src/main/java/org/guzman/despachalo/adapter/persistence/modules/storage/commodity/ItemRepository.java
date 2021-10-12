@@ -9,4 +9,5 @@ public interface ItemRepository extends JpaRepository<ItemEntity, Long> {
     List<ItemEntity> findAllByCommodityIdAndOrderId(Long commodityId, Long orderId);
     Integer countAllByCommodityIdAndOrderId(Long commodityId, Long orderId);
     Integer countAllByCommodityId(Long commodityId);
+    List<ItemEntity> findAllByOrder_DispatchId(Long dispatchId);
 }

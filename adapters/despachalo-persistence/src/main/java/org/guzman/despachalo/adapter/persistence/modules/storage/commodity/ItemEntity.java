@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.guzman.despachalo.adapter.persistence.modules.dispatch.returning.ReturnOrderEntity;
+import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -30,6 +31,10 @@ public class ItemEntity {
 
     @Column(name = "orden_devolucion_id")
     private Long returnOrderId;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name="pedido_id", insertable = false, updatable = false)
+    private OrderEntity order;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="mercaderia_id", insertable = false, updatable = false)

@@ -20,7 +20,8 @@ public class RoutingScheduler {
     private final GenerateRoutesForDispatchUseCase routesForDispatchUseCase;
     private final Logger logger = LoggerFactory.getLogger(RoutingScheduler.class);
 
-    @Scheduled(cron = "2 * * * *")
+    // @Scheduled(cron = "0 57 0,13 ? * *")
+    @Scheduled(cron = "0 0/1 * ? * *")
     public void scheduleTaskUsingCronExpression() {
 
         logger.info("Check for next dispatch routing generation");

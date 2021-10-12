@@ -2,24 +2,22 @@ package org.guzman.despachalo.adapter.persistence.modules.dispatch;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.adapter.persistence.modules.programming.ProgrammedVehiclePersistenceAdapter;
+import org.guzman.despachalo.adapter.persistence.modules.storage.area.StoreItemRepository;
+import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderPersistenceAdapter;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderRepository;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.programming.application.port.in.DispatchToRegister;
-import org.guzman.despachalo.core.programming.application.port.out.GetDispatchDetailsPort;
-import org.guzman.despachalo.core.programming.application.port.out.GetNextDispatchRoutingGenerationPort;
-import org.guzman.despachalo.core.programming.application.port.out.GetPaginatedDispatchesPort;
-import org.guzman.despachalo.core.programming.application.port.out.ProgramDispatchPort;
-import org.guzman.despachalo.core.programming.domain.Dispatch;
-import org.guzman.despachalo.core.programming.domain.DispatchDetails;
-import org.guzman.despachalo.core.programming.domain.DispatchState;
-import org.guzman.despachalo.core.programming.domain.RouteRequestState;
+import org.guzman.despachalo.core.programming.application.port.out.*;
+import org.guzman.despachalo.core.programming.domain.*;
 import org.guzman.despachalo.core.sync.domain.OrderState;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -29,13 +27,16 @@ public class DispatchPersistenceAdapter implements
         GetPaginatedDispatchesPort,
         ProgramDispatchPort,
         GetDispatchDetailsPort,
-        GetNextDispatchRoutingGenerationPort {
+        GetNextDispatchRoutingGenerationPort,
+        ConfirmDispatchPort,
+        GetDispatchAreasPort {
 
     private final ProgrammedVehiclePersistenceAdapter programmedVehiclePersistenceAdapter;
     private final OrderPersistenceAdapter orderPersistenceAdapter;
     private final OrderRepository orderRepository;
     private final DispatchRepository dispatchRepository;
     private final DispatchMapper dispatchMapper;
+    private final StoreItemRepository storeItemRepository;
 
     @Override
     public Paginator<Dispatch> getPage(Filters filters, String state) {
@@ -111,5 +112,26 @@ public class DispatchPersistenceAdapter implements
         });
 
         return row.map(dispatchMapper::toDispatch);
+    }
+
+    @Override
+    public void confirmDispatch(Long dispatchId) {
+        var now = LocalDateTime.now();
+        dispatchRepository.findById(dispatchId)
+                .ifPresent(dispatchEntity -> {
+                    dispatchEntity.setState(DispatchState.CONFIRMED);
+                    dispatchEntity.setUpdatedAt(now);
+                    dispatchRepository.save(dispatchEntity);
+                });
+    }
+
+    @Override
+    public List<AreaWithOrders> getDispatchAreas(Long dispatchId) {
+        var orderIds = orderRepository.findAllByDispatchId(dispatchId)
+                .stream()
+                .map(OrderEntity::getId)
+                .collect(Collectors.toList());
+        var areasAndOrders = new HashMap<Long, List<Long>>();
+        return null;
     }
 }

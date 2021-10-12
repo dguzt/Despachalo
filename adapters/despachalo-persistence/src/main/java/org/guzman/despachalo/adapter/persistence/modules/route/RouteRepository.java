@@ -6,4 +6,5 @@ import java.util.List;
 
 public interface RouteRepository extends JpaRepository<RouteEntity, Long> {
     List<RouteEntity> findAllByProgrammedVehicleIdOrderByDeliveryOrderAsc(Long vehicleId);
+    List<RouteEntity> findAllByProgrammedVehicle_DispatchIdOrderByDeliveryOrderAsc(Long dispatchId);
 }

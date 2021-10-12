@@ -31,7 +31,7 @@ public class RouteEntity {
     @JoinColumn(name = "vehiculo_id", insertable = false, updatable = false)
     private ProgrammedVehicleEntity programmedVehicle;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "pedido_id", insertable = false, updatable = false)
     private OrderEntity order;
 

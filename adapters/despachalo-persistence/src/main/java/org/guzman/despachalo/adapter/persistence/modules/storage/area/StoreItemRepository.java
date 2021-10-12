@@ -10,4 +10,5 @@ public interface StoreItemRepository extends JpaRepository<StoredItemEntity, Lon
     Optional<StoredItemEntity> findTopByItem_OrderIdOrderByStoredAtAsc(Long orderId);
     Integer countAllByItem_CommodityIdAndItem_OrderId(Long commodityId, Long orderId);
     Integer countAllByItem_CommodityId(Long commodityId);
+    List<StoredItemEntity> findAllByItem_OrderId(Long orderIds);
 }

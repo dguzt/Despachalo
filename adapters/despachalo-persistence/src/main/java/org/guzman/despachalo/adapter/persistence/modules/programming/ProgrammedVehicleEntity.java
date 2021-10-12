@@ -19,10 +19,10 @@ public class ProgrammedVehicleEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "vehiculo_id", nullable = false)
+    @Column(name = "vehiculo_id")
     private Long vehicleId;
 
-    @Column(name = "conductor_id", nullable = false)
+    @Column(name = "conductor_id")
     private Long driverId;
 
     @Column(name = "despacho_id", nullable = false)

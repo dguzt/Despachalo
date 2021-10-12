@@ -5,7 +5,9 @@ import org.guzman.despachalo.adapter.persistence.modules.dispatch.driver.DriverM
 import org.guzman.despachalo.adapter.persistence.modules.dispatch.truck.TruckMapper;
 import org.guzman.despachalo.adapter.persistence.modules.route.RouteEntity;
 import org.guzman.despachalo.adapter.persistence.modules.route.RouteRepository;
+import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
+import org.guzman.despachalo.core.common.domain.Location;
 import org.guzman.despachalo.core.programming.domain.VehicleDetails;
 
 import java.util.List;
@@ -27,12 +29,19 @@ public class ProgrammedVehiclePersistenceAdapter {
                     var truck = truckMapper.toTruck(programmedVehicleEntity.getTruck());
                     var driver = driverMapper.toDriver(programmedVehicleEntity.getDriver());
                     var orders = routeRepository
-                            .findAllByProgrammedVehicleIdOrderByDeliveryOrderAsc(programmedVehicleEntity.getId())
-                            .stream()
+                            .findAllByProgrammedVehicleIdOrderByDeliveryOrderAsc(programmedVehicleEntity.getId());
+
+                    var orderIds = orders.stream()
                             .map(RouteEntity::getOrderId)
                             .collect(Collectors.toList());
 
-                    return new VehicleDetails(truck, driver, orders);
+                    var locations = orders.stream()
+                            .map(RouteEntity::getOrder)
+                            .map(OrderEntity::getEndPoint)
+                            .map(endpoint -> new Location(endpoint.getLatitude(), endpoint.getLongitude()))
+                            .collect(Collectors.toList());
+
+                    return new VehicleDetails(truck, driver, orderIds, locations);
                 })
                 .collect(Collectors.toList());
     }

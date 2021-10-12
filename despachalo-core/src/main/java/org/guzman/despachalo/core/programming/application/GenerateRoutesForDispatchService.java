@@ -20,6 +20,7 @@ public class GenerateRoutesForDispatchService implements GenerateRoutesForDispat
     private final GetEndpointsCostsPort endpointsCostsPort;
     private final GetCenterWithEndpointCostsPort centerWithEndpointCostsPort;
     private final RegisterRoutesPort routesPort;
+    private final ChangeStateToDoneForRoutingPort routingPort;
 
     @Override
     public void execute(Long dispatchId, Double commonCapacity) {
@@ -34,6 +35,7 @@ public class GenerateRoutesForDispatchService implements GenerateRoutesForDispat
         var routes = algorithm.execute(command);
         var routesToRegister = generateRoutesToRegister(pairMatrix.getValue0(), dispatchId, routes, mappingEndpoints);
         routesPort.registerRoutes(routesToRegister);
+        routingPort.changeStateToDoneForRouting(dispatchId);
     }
 
     private Set<List<RouteToRegister>> generateRoutesToRegister(
@@ -48,7 +50,7 @@ public class GenerateRoutesForDispatchService implements GenerateRoutesForDispat
                 .map(route -> {
                     var nodes = route.getNodes();
                     var routesToRegister = new ArrayList<RouteToRegister>();
-                    for (int pos = 1; pos < nodes.size(); pos++) {
+                    for (int pos = 1; pos < nodes.size()-1; pos++) {
                         var nodeId = nodes.get(pos);
                         var orderId = mappingByNodeId.get(nodeId).getOrderId();
                         var routeToRegister = new RouteToRegister(orderId, dispatchId, pos);
@@ -60,7 +62,7 @@ public class GenerateRoutesForDispatchService implements GenerateRoutesForDispat
     }
 
     private List<Double> generateDemand(Map<Long, EntryMappingEndpoint> mappingEndpoints) {
-        var accumulatedDemand = new ArrayList<>(Collections.nCopies(mappingEndpoints.size(), 0d));
+        var accumulatedDemand = new ArrayList<>(Collections.nCopies(mappingEndpoints.size()+1, 0d));
         mappingEndpoints.forEach((endpointId, entry) -> {
             var index = mappingEndpoints.get(endpointId).getPosition();
             accumulatedDemand.set(index, entry.getDemand());
