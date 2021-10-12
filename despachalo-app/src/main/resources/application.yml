@@ -7,6 +7,8 @@ despachalo:
     expiration-in-minutes: 432000
     allowed-domains:
       - http://127.0.0.1:3000
+  routing:
+    common-capacity: 10.0
 
 server:
   port: 8080

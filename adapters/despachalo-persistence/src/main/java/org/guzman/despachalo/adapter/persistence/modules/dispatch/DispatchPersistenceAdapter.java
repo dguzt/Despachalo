@@ -9,6 +9,7 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.programming.application.port.in.DispatchToRegister;
 import org.guzman.despachalo.core.programming.application.port.out.GetDispatchDetailsPort;
+import org.guzman.despachalo.core.programming.application.port.out.GetNextDispatchRoutingGenerationPort;
 import org.guzman.despachalo.core.programming.application.port.out.GetPaginatedDispatchesPort;
 import org.guzman.despachalo.core.programming.application.port.out.ProgramDispatchPort;
 import org.guzman.despachalo.core.programming.domain.Dispatch;
@@ -27,7 +28,8 @@ import java.util.stream.Collectors;
 public class DispatchPersistenceAdapter implements
         GetPaginatedDispatchesPort,
         ProgramDispatchPort,
-        GetDispatchDetailsPort {
+        GetDispatchDetailsPort,
+        GetNextDispatchRoutingGenerationPort {
 
     private final ProgrammedVehiclePersistenceAdapter programmedVehiclePersistenceAdapter;
     private final OrderPersistenceAdapter orderPersistenceAdapter;
@@ -93,5 +95,21 @@ public class DispatchPersistenceAdapter implements
                             orders,
                             vehicleDetails);
                 });
+    }
+
+    @Override
+    public Optional<Dispatch> getNextDispatchRoutingGeneration() {
+        var alreadyOneExecuting = dispatchRepository.findTopByRouteRequestStateOrderByCreatedAtDesc(RouteRequestState.PROCESSING);
+        if (alreadyOneExecuting.isPresent()) {
+            return Optional.empty();
+        }
+
+        var row = dispatchRepository.findTopByRouteRequestStateOrderByCreatedAtDesc(RouteRequestState.PENDING);
+        row.ifPresent(entity -> {
+            entity.setRouteRequestState(RouteRequestState.PROCESSING);
+            dispatchRepository.save(entity);
+        });
+
+        return row.map(dispatchMapper::toDispatch);
     }
 }
