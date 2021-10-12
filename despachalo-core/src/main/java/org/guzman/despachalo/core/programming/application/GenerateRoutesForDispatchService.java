@@ -82,6 +82,7 @@ public class GenerateRoutesForDispatchService implements GenerateRoutesForDispat
         var centerWithCosts = centerWithEndpointCostsPort
                 .getCenterWithEndpointCosts(dispatchId, endpointIds);
 
+        matrix.set(0, 0, 0d);
         centerWithCosts.getEndpointWithCosts()
                 .forEach(endWithCost -> {
                     var r = 0;

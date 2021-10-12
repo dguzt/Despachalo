@@ -97,6 +97,106 @@ INSERT INTO punto_destino(direccion, centro_dist_id, cliente_id, codigo, ubi_lat
 INSERT INTO pedido(fecha_creado, despacho_id, tienda_id, fecha_actualizado, estado) VALUES (timezone('utc', now()), null, 9, null, 'INCOMPLETO');
 INSERT INTO linea_pedido(pedido_id, detalle_producto_id, cantidad_solicitada, cantidad_enviada, cantidad_enviar, cantidad_almacenada) VALUES (9, 3, 4, 0, 4, 0);
 ------------------------------------------------------------------------------------------------------------------------
+-- ROUTING
+---- CENTER NODE
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 1, 5989);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 2, 6300);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 3, 5388);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 4, 5866);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 5, 5746);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 6, 4758);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 7, 3980);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 8, 1635);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (1, null, 9, 1064);
+
+---- NODE CLIENT 01
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 2, 2247);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 1, 2247);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 3, 7595);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 1, 7595);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 4, 8579);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 1, 8579);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 5, 8890);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 1, 8890);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 6, 8396);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 1, 8396);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 7, 7088);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 1, 7088);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 8, 7441);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 1, 7441);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 1, 9, 6916);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 1, 6916);
+
+---- NODE CLIENT 02
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 3, 7233);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 2, 7233);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 4, 8217);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 2, 8217);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 5, 8528);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 2, 8528);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 6, 8033);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 2, 8033);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 7, 7995);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 2, 7995);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 8, 7751);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 2, 7751);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 2, 9, 7226);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 2, 7226);
+
+---- NODE CLIENT 03
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 4, 1371);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 3, 1371);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 5, 1334);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 3, 1334);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 6, 3696);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 3, 3696);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 7, 5183);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 3, 5183);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 8, 7756);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 3, 7756);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 3, 9, 7599);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 3, 7599);
+
+---- NODE CLIENT 04
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 5, 767);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 4, 767);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 6, 2759);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 4, 2759);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 7, 4246);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 4, 4246);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 8, 6819);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 4, 6819);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 4, 9, 6662);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 4, 6662);
+
+---- NODE CLIENT 05
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 6, 2506);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 5, 2506);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 7, 3993);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 5, 3993);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 8, 6566);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 5, 6566);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 5, 9, 6410);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 5, 6410);
+
+---- NODE CLIENT 06
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 7, 1118);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 6, 1118);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 8, 5558);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 6, 5558);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 6, 9, 5401);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 6, 5401);
+
+---- NODE CLIENT 07
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 8, 4719);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 7, 4719);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 7, 9, 4562);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 7, 4562);
+
+---- NODE CLIENT 08
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 8, 9, 1322);
+INSERT INTO distancia(nodo_centro_id, nodo_llegada_id, nodo_salida_id, costo) VALUES (null, 9, 8, 1322);
+------------------------------------------------------------------------------------------------------------------------
 -- ORIGIN POINT
 INSERT INTO punto_origen(direccion, codigo, fecha_creado, fecha_actualizado)
 VALUES ('Av. Nicolás de Piérola 189-403, Cercado de Lima 15491', 'ORIG-001', timezone('utc', now()), null);

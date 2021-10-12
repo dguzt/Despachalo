@@ -3,6 +3,7 @@ package org.guzman.despachalo.adapter.persistence.modules.route;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.guzman.despachalo.adapter.persistence.modules.company.center.DistributionCenterEntity;
 import org.guzman.despachalo.adapter.persistence.modules.sync.client.EndPointEntity;
 import org.hibernate.Hibernate;
 
@@ -17,14 +18,17 @@ public class DistanceEntity {
     @Column(name = "id")
     private Long id;
 
-    @Column(name = "nodo_salida_id", nullable = false)
+    @Column(name = "nodo_salida_id")
     private Long outputNodeId;
 
-    @Column(name = "nodo_llegada_id", nullable = false)
+    @Column(name = "nodo_llegada_id")
     private Long inputNodeId;
 
-    @Column(name = "distancia")
-    private Double distance = 0d;
+    @Column(name = "nodo_centro_id")
+    private Long centerNodeId;
+
+    @Column(name = "costo")
+    private Double cost = 0d;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nodo_salida_id", insertable = false, updatable = false)
@@ -33,6 +37,10 @@ public class DistanceEntity {
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "nodo_llegada_id", insertable = false, updatable = false)
     private EndPointEntity inputNode;
+
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nodo_centro_id", insertable = false, updatable = false)
+    private DistributionCenterEntity centerNode;
 
     @Override
     public boolean equals(Object o) {
