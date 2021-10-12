@@ -3,7 +3,6 @@ package org.guzman.despachalo.adapter.persistence.modules.route;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import lombok.ToString;
 import org.guzman.despachalo.adapter.persistence.modules.programming.ProgrammedVehicleEntity;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.hibernate.Hibernate;
@@ -28,7 +27,7 @@ public class RouteEntity {
     @Column(name = "pedido_id", nullable = false)
     private Long orderId;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "vehiculo_id", insertable = false, updatable = false)
     private ProgrammedVehicleEntity programmedVehicle;
 

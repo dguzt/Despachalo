@@ -25,6 +25,9 @@ public class TruckEntity {
     @Column(name = "capacidad_volumen")
     private Double volumeCapacity;
 
+    @Column(name = "placa_vehiculo")
+    private String vehiclePlate;
+
     @Column(name = "fecha_creado")
     private LocalDateTime createdAt;
 

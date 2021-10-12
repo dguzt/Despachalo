@@ -28,11 +28,11 @@ public class ProgrammedVehicleEntity {
     @Column(name = "despacho_id", nullable = false)
     private Long dispatchId;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "vehiculo_id", insertable = false, updatable = false)
     private TruckEntity truck;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "conductor_id", insertable = false, updatable = false)
     private DriverEntity driver;
 

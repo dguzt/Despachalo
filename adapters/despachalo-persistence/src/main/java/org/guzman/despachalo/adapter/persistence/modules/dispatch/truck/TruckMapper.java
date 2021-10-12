@@ -9,5 +9,6 @@ public interface TruckMapper {
 
     @Mapping(target = "id", source = "id")
     @Mapping(target = "code", source = "code")
+    @Mapping(target = "plate", source = "vehiclePlate")
     Truck toTruck(TruckEntity truckEntity);
 }

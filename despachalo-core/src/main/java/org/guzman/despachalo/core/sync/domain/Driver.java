@@ -5,8 +5,8 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class Truck {
-    Long id;
-    String code;
-    String plate;
+public class Driver {
+    private Long id;
+    private String documentType;
+    private String documentNumber;
 }

@@ -1,7 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.sync.order;
 
 import lombok.RequiredArgsConstructor;
-import org.guzman.despachalo.adapter.persistence.modules.storage.commodity.ItemRepository;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
@@ -11,7 +10,6 @@ import org.guzman.despachalo.core.sync.application.port.out.GetAllOrdersPort;
 import org.guzman.despachalo.core.sync.application.port.out.GetPaginatedOrdersPort;
 import org.guzman.despachalo.core.sync.domain.Order;
 import org.javatuples.Pair;
-import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
@@ -27,24 +25,9 @@ public class OrderPersistenceAdapter implements
         ChangeOrderToReadyPort,
         ConfirmIfAllItemsAreStoredForOrderPort {
 
-    private final ItemRepository itemRepository;
     private final OrderLineRepository orderLineRepository;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-
-    private Paginator<Order> paginateResults(Page<OrderEntity> page, Filters filters) {
-        var data = page.getContent()
-                .stream()
-                .map(orderMapper::toOrder)
-                .collect(Collectors.toList());
-
-        return Paginator.<Order>builder()
-                .page(filters.getPage())
-                .pageSize(filters.getPageSize())
-                .total(page.getTotalElements())
-                .data(data)
-                .build();
-    }
 
     @Override
     public void changeOrderToReady(Long orderId) {
@@ -109,5 +92,17 @@ public class OrderPersistenceAdapter implements
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    public List<Order> getAllByDispatchId(Long dispatchId) {
+        return orderRepository.findAllByDispatchId(dispatchId)
+                .stream()
+                .map(orderMapper::toOrder)
+                .peek(order -> {
+                    var res = calculateItemsForOrder(order.getId());
+                    order.setToSendUnits(res.getValue0());
+                    order.setStoredUnits(res.getValue1());
+                })
+                .collect(Collectors.toList());
     }
 }
