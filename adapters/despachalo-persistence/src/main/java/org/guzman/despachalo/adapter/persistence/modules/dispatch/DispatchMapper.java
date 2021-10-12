@@ -15,8 +15,8 @@ public interface DispatchMapper {
     @Mapping(target = "cantProgrammedOrders", source = "programmedOrders")
     Dispatch toDispatch(DispatchEntity dispatchEntity);
 
-    @Mapping(target = "analystId", source = "analystId")
     @Mapping(target = "dispatchAt", source = "departureTime")
+    @Mapping(target = "analystId", ignore = true)
     @Mapping(target = "state", ignore = true)
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "analyst", ignore = true)

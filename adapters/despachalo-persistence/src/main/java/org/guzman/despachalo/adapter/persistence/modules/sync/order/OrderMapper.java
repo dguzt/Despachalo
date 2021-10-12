@@ -11,5 +11,9 @@ public interface OrderMapper {
     @Mapping(target = "id", source = "id")
     @Mapping(target = "state", source = "state")
     @Mapping(target = "client", source = "endPoint.client")
+    @Mapping(target = "requestedUnits", ignore = true)
+    @Mapping(target = "sentUnits", ignore = true)
+    @Mapping(target = "storedUnits", ignore = true)
+    @Mapping(target = "toSendUnits", ignore = true)
     Order toOrder(OrderEntity entity);
 }

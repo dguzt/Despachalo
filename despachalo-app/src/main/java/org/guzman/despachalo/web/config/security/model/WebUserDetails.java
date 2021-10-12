@@ -23,6 +23,10 @@ public class WebUserDetails implements UserDetails {
                 .collect(Collectors.toList());
     }
 
+    public Long getUserId() {
+        return user.getId();
+    }
+
     public Boolean isAdmin() {
         return user.getIsAdmin();
     }

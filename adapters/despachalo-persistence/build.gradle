@@ -6,6 +6,7 @@ dependencies {
     implementation project(':commons:common-pagination')
     implementation project(':despachalo-core')
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation 'org.mapstruct:mapstruct:1.4.2.Final'
     implementation 'org.javatuples:javatuples:1.2'
 
