@@ -12,7 +12,7 @@ import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.programming.application.port.in.DispatchToRegister;
 import org.guzman.despachalo.core.programming.application.port.out.*;
 import org.guzman.despachalo.core.programming.domain.*;
-import org.guzman.despachalo.core.sync.domain.OrderState;
+import org.guzman.despachalo.core.sync.order.domain.OrderState;
 import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;

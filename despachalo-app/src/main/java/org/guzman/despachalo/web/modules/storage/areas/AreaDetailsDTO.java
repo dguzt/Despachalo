@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.guzman.despachalo.core.company.domain.DistributionCenter;
 import org.guzman.despachalo.core.storage.application.port.in.AreaWithDetails;
-import org.guzman.despachalo.core.sync.domain.Product;
+import org.guzman.despachalo.core.sync.product.domain.Product;
 
 import java.util.List;
 

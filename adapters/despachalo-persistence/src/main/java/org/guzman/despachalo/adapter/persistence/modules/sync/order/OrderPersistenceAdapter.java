@@ -6,16 +6,16 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.storage.application.port.out.ChangeOrderToReadyPort;
 import org.guzman.despachalo.core.storage.application.port.out.ConfirmIfAllItemsAreStoredForOrderPort;
-import org.guzman.despachalo.core.sync.application.port.out.GetAllOrdersPort;
-import org.guzman.despachalo.core.sync.application.port.out.GetPaginatedOrdersPort;
-import org.guzman.despachalo.core.sync.domain.Order;
+import org.guzman.despachalo.core.sync.order.application.port.out.GetAllOrdersPort;
+import org.guzman.despachalo.core.sync.order.application.port.out.GetPaginatedOrdersPort;
+import org.guzman.despachalo.core.sync.order.domain.Order;
 import org.javatuples.Pair;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static org.guzman.despachalo.core.sync.domain.OrderState.READY;
+import static org.guzman.despachalo.core.sync.order.domain.OrderState.READY;
 
 @PersistenceAdapter
 @RequiredArgsConstructor

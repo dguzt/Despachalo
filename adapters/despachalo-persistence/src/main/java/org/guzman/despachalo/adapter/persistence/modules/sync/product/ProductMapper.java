@@ -1,6 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.sync.product;
 
-import org.guzman.despachalo.core.sync.domain.Product;
+import org.guzman.despachalo.core.sync.product.domain.Product;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

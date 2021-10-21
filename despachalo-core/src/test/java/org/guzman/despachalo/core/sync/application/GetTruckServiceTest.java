@@ -1,7 +1,9 @@
 package org.guzman.despachalo.core.sync.application;
 
-import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
-import org.guzman.despachalo.core.sync.domain.Truck;
+import org.guzman.despachalo.core.sync.vehicle.application.port.out.GetTruckPort;
+import org.guzman.despachalo.core.sync.vehicle.domain.Truck;
+import org.guzman.despachalo.core.sync.vehicle.application.GetTruckService;
+import org.guzman.despachalo.core.sync.vehicle.application.TruckNotFoundException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

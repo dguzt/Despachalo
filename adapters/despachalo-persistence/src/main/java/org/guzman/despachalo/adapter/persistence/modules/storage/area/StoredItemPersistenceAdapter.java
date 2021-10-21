@@ -11,7 +11,7 @@ import org.guzman.despachalo.core.storage.application.port.out.AreOrderItemsStor
 import org.guzman.despachalo.core.storage.application.port.out.GetItemsStoredInAreaPort;
 import org.guzman.despachalo.core.storage.application.port.out.StoreOrderItemsInAreaPort;
 import org.guzman.despachalo.core.storage.domain.Item;
-import org.guzman.despachalo.core.sync.domain.OrderState;
+import org.guzman.despachalo.core.sync.order.domain.OrderState;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;

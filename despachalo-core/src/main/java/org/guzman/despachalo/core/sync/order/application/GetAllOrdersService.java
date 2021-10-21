@@ -1,10 +1,10 @@
-package org.guzman.despachalo.core.sync.application;
+package org.guzman.despachalo.core.sync.order.application;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.UseCase;
-import org.guzman.despachalo.core.sync.application.port.in.GetAllOrdersUseCase;
-import org.guzman.despachalo.core.sync.application.port.out.GetAllOrdersPort;
-import org.guzman.despachalo.core.sync.domain.Order;
+import org.guzman.despachalo.core.sync.order.application.port.in.GetAllOrdersUseCase;
+import org.guzman.despachalo.core.sync.order.application.port.out.GetAllOrdersPort;
+import org.guzman.despachalo.core.sync.order.domain.Order;
 
 import java.util.List;
 

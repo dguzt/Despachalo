@@ -5,7 +5,7 @@ import org.guzman.despachalo.commons.hexagonal.WebAdapter;
 import org.guzman.despachalo.core.company.application.port.in.GetCenterDetailsUseCase;
 import org.guzman.despachalo.core.storage.application.port.in.GetAreaDetailsUseCase;
 import org.guzman.despachalo.core.storage.domain.Item;
-import org.guzman.despachalo.core.sync.application.port.in.GetCertainProductsUseCase;
+import org.guzman.despachalo.core.sync.product.application.port.in.GetCertainProductsUseCase;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

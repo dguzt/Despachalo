@@ -1,15 +1,12 @@
-package org.guzman.despachalo.core.sync.application;
+package org.guzman.despachalo.core.sync.order.application;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.UseCase;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
-import org.guzman.despachalo.core.sync.application.port.in.GetPaginatedOrdersUseCase;
-import org.guzman.despachalo.core.sync.application.port.out.GetPaginatedOrdersPort;
-import org.guzman.despachalo.core.sync.domain.Order;
-
-import static org.guzman.despachalo.core.sync.domain.OrderState.INCOMPLETE;
-import static org.guzman.despachalo.core.sync.domain.OrderState.PROGRAMMED;
+import org.guzman.despachalo.core.sync.order.application.port.in.GetPaginatedOrdersUseCase;
+import org.guzman.despachalo.core.sync.order.application.port.out.GetPaginatedOrdersPort;
+import org.guzman.despachalo.core.sync.order.domain.Order;
 
 @UseCase
 @RequiredArgsConstructor

@@ -3,7 +3,7 @@ package org.guzman.despachalo.core.programming.domain;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.guzman.despachalo.core.sync.domain.Order;
+import org.guzman.despachalo.core.sync.order.domain.Order;
 
 import java.util.List;
 

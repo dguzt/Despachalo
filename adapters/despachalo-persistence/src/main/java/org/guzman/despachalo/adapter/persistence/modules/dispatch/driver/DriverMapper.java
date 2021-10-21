@@ -1,6 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.dispatch.driver;
 
-import org.guzman.despachalo.core.sync.domain.Driver;
+import org.guzman.despachalo.core.sync.vehicle.domain.Driver;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

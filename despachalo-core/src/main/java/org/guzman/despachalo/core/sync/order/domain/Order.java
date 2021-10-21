@@ -1,4 +1,4 @@
-package org.guzman.despachalo.core.sync.domain;
+package org.guzman.despachalo.core.sync.order.domain;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,7 +1,7 @@
 package org.guzman.despachalo.adapter.persistence.modules.dispatch.truck;
 
-import org.guzman.despachalo.core.sync.application.port.out.GetTruckPort;
-import org.guzman.despachalo.core.sync.domain.Truck;
+import org.guzman.despachalo.core.sync.vehicle.application.port.out.GetTruckPort;
+import org.guzman.despachalo.core.sync.vehicle.domain.Truck;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;

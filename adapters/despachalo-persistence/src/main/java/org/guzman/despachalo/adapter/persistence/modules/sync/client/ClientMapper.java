@@ -1,6 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.sync.client;
 
-import org.guzman.despachalo.core.sync.domain.Client;
+import org.guzman.despachalo.core.sync.order.domain.Client;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

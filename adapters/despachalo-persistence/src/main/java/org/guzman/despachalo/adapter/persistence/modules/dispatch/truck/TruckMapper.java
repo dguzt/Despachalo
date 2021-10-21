@@ -1,6 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.dispatch.truck;
 
-import org.guzman.despachalo.core.sync.domain.Truck;
+import org.guzman.despachalo.core.sync.vehicle.domain.Truck;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 

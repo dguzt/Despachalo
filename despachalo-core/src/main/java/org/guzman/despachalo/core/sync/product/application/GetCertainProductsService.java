@@ -1,10 +1,10 @@
-package org.guzman.despachalo.core.sync.application;
+package org.guzman.despachalo.core.sync.product.application;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.UseCase;
-import org.guzman.despachalo.core.sync.application.port.in.GetCertainProductsUseCase;
-import org.guzman.despachalo.core.sync.application.port.out.SearchProductsPort;
-import org.guzman.despachalo.core.sync.domain.Product;
+import org.guzman.despachalo.core.sync.product.application.port.in.GetCertainProductsUseCase;
+import org.guzman.despachalo.core.sync.product.application.port.out.SearchProductsPort;
+import org.guzman.despachalo.core.sync.product.domain.Product;
 
 import java.util.List;
 

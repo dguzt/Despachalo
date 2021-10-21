@@ -1,4 +1,4 @@
-package org.guzman.despachalo.core.sync.domain;
+package org.guzman.despachalo.core.sync.product.domain;
 
 import lombok.Value;
 

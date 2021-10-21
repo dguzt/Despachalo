@@ -5,7 +5,7 @@ import lombok.Getter;
 import org.guzman.despachalo.core.storage.application.port.in.OrderItemsChecked;
 import org.guzman.despachalo.core.storage.domain.Area;
 import org.guzman.despachalo.core.storage.domain.Shipment;
-import org.guzman.despachalo.core.sync.domain.Product;
+import org.guzman.despachalo.core.sync.product.domain.Product;
 
 import java.util.List;
 
