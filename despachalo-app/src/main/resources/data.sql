@@ -2,7 +2,7 @@
 INSERT INTO empresa(razon_social, ruc) VALUES ('Distribuciones Despáchalo', '77001100233');
 
 -- DISTRIBUTION CENTERS
-INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre) VALUES ('Av. Gerónimo de Cabrera 470', false, -14.07559496080894, -75.72322936945595, 'Urubamba');
+INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre) VALUES ('Av. Gerónimo de Cabrera 470, Ica, Ica', false, -14.07559496080894, -75.72322936945595, 'Ica Central');
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-01', 20);
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-02', 20);
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona este E-01', 20);
@@ -45,7 +45,7 @@ VALUES (timezone('utc', now()), 3, null, 20, 20);
 -- CLIENTS
 -- CLIENT 1
 INSERT INTO cliente(razon_social, codigo, fecha_creado, ruc, fecha_actualizado) VALUES ('Tiendas Calderón', 'CLI-121', timezone('utc', now()), '11000000001', null);
-INSERT INTO punto_destino(direccion, centro_dist_id, cliente_id, codigo, ubi_latitud, ubi_longitud) VALUES ('E,F, Parcona 11003', 1, 1, 'DEST-121-1', -14.053507168527837, -75.69183897375429);
+INSERT INTO punto_destino(direccion, centro_dist_id, cliente_id, codigo, ubi_latitud, ubi_longitud) VALUES ('E,F, Parcona 11003, Ica', 1, 1, 'DEST-121-1', -14.053507168527837, -75.69183897375429);
 INSERT INTO pedido(fecha_creado, despacho_id, tienda_id, fecha_actualizado, estado) VALUES (timezone('utc', now()), null, 1, null, 'INCOMPLETO');
 INSERT INTO linea_pedido(pedido_id, detalle_producto_id, cantidad_solicitada, cantidad_enviada, cantidad_enviar, cantidad_almacenada) VALUES (1, 1, 4, 0, 4, 0);
 
