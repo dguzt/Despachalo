@@ -58,7 +58,7 @@ public class UserEntity {
     @JoinColumn(name = "rol_id", insertable = false, updatable = false)
     private RoleEntity role;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "centro_id", insertable = false, updatable = false)
     private DistributionCenterEntity center;
 

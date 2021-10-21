@@ -17,10 +17,10 @@ INSERT INTO usuario(activo, centro_id, fecha_creado, num_documento, tipo_documen
 VALUES (true, 1, timezone('utc', now()), '70807585', 'DNI', 'jhair.guzman@despachalo.pe', '$2a$12$S2H/0.i7lq2d8uos7ko0WOCDtrWQtEwi9t3KLH2ySsyEYHp99UqZa', true, 'Guzmán', 'Jhair', 1, null);
 
 INSERT INTO usuario(activo, centro_id, fecha_creado, num_documento, tipo_documento, correo, contrasena_hash, es_admin, apellidos, nombres, rol_id, fecha_actualizado)
-VALUES (true, 1, timezone('utc', now()), '65607980', 'DNI', 'rocio.ventura@despachalo.pe', '$2a$12$S2H/0.i7lq2d8uos7ko0WOCDtrWQtEwi9t3KLH2ySsyEYHp99UqZa', false, 'Rocío', 'Ventura', 2, null);
+VALUES (true, 1, timezone('utc', now()), '65607980', 'DNI', 'rocio.ventura@despachalo.pe', '$2a$12$S2H/0.i7lq2d8uos7ko0WOCDtrWQtEwi9t3KLH2ySsyEYHp99UqZa', false, 'Ventura', 'Rocío', 2, null);
 
 INSERT INTO usuario(activo, centro_id, fecha_creado, num_documento, tipo_documento, correo, contrasena_hash, es_admin, apellidos, nombres, rol_id, fecha_actualizado)
-VALUES (true, 1, timezone('utc', now()), '65607585', 'DNI', 'jorge.arias@despachalo.pe', '$2a$12$S2H/0.i7lq2d8uos7ko0WOCDtrWQtEwi9t3KLH2ySsyEYHp99UqZa', false, 'Jorge', 'Arias', 2, null);
+VALUES (true, 1, timezone('utc', now()), '65607585', 'DNI', 'jorge.arias@despachalo.pe', '$2a$12$S2H/0.i7lq2d8uos7ko0WOCDtrWQtEwi9t3KLH2ySsyEYHp99UqZa', false, 'Arias', 'Jorge', 2, null);
 ------------------------------------------------------------------------------------------------------------------------
 -- PRODUCTS
 INSERT INTO producto(codigo, fecha_creado, descripcion, fecha_actualizado)
