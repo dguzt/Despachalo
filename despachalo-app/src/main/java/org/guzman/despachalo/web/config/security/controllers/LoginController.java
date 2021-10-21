@@ -2,6 +2,8 @@ package org.guzman.despachalo.web.config.security.controllers;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;
+import org.guzman.despachalo.web.config.security.model.Credentials;
+import org.guzman.despachalo.web.config.security.model.Token;
 import org.guzman.despachalo.web.config.security.model.WebUserDetails;
 import org.guzman.despachalo.web.config.security.services.JwtService;
 import org.guzman.despachalo.web.config.security.services.WebUserDetailsService;
@@ -19,26 +21,26 @@ import org.springframework.web.bind.annotation.RestController;
 @WebAdapter
 @RestController
 @RequiredArgsConstructor
-public class AuthenticationController {
-    private final Logger logger = LoggerFactory.getLogger(AuthenticationController.class);
+public class LoginController {
+    private final Logger logger = LoggerFactory.getLogger(LoginController.class);
     private final AuthenticationManager authenticationManager;
     private final JwtService jwtService;
     private final WebUserDetailsService webUserDetailsService;
 
     @PostMapping("/auth/login")
     @ResponseStatus(HttpStatus.OK)
-    public AuthenticationResponse login(@RequestBody AuthenticationRequest authenticationRequest) {
+    public Token login(@RequestBody Credentials credentials) {
         try {
-            var authToken = new UsernamePasswordAuthenticationToken(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+            var authToken = new UsernamePasswordAuthenticationToken(credentials.getEmail(), credentials.getPassword());
             authenticationManager.authenticate(authToken);
         } catch (BadCredentialsException ex) {
-            logger.info("Trying to login with email: {}", authenticationRequest.getEmail());
+            logger.info("Trying to login with email: {}", credentials.getEmail());
             throw new WrongCredentialsException();
         }
 
-        final var userDetails = (WebUserDetails) webUserDetailsService.loadUserByUsername(authenticationRequest.getEmail());
+        final var userDetails = (WebUserDetails) webUserDetailsService.loadUserByUsername(credentials.getEmail());
         final var token = jwtService.generateToken(userDetails);
 
-        return new AuthenticationResponse(token);
+        return new Token(token);
     }
 }

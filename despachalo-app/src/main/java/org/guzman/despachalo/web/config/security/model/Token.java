@@ -1,10 +1,10 @@
-package org.guzman.despachalo.web.config.security.controllers;
+package org.guzman.despachalo.web.config.security.model;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class AuthenticationResponse {
+public class Token {
     private String jwt;
 }

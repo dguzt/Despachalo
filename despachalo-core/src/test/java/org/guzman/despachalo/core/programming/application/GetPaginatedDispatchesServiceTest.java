@@ -4,6 +4,7 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.programming.application.port.out.GetPaginatedDispatchesPort;
 import org.guzman.despachalo.core.programming.domain.Dispatch;
+import org.guzman.despachalo.core.programming.domain.DispatchState;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -34,7 +35,7 @@ public class GetPaginatedDispatchesServiceTest {
     }
 
     private Dispatch dispatch() {
-        return new Dispatch(1L, LocalDateTime.now(), "PENDIENTE", 1L);
+        return new Dispatch(1L, LocalDateTime.now(), "PENDIENTE", 1L, 0);
     }
 
     private Paginator<Dispatch> page(List<Dispatch> dispatches) {
@@ -52,10 +53,10 @@ public class GetPaginatedDispatchesServiceTest {
         var filters = filters();
         var page = page(List.of(dispatch));
 
-        when(getPaginatedDispatchesPort.getPage(filters))
+        when(getPaginatedDispatchesPort.getPage(filters, DispatchState.PENDING))
                 .thenReturn(page);
 
-        var result = getPaginatedDispatchesService.execute(filters);
+        var result = getPaginatedDispatchesService.execute(filters, DispatchState.PENDING);
         assertEquals(result.getPage(), page.getPage());
         assertEquals(result.getData().get(0), dispatch);
         assertEquals(result.getData().get(0).getId(), dispatch.getId());

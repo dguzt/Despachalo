@@ -1,5 +1,6 @@
 package org.guzman.despachalo.web.config.security.model;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.adapter.persistence.modules.company.user.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
@@ -13,6 +14,7 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class WebUserDetails implements UserDetails {
     private final String email;
+    @Getter
     private final UserEntity user;
 
     @Override

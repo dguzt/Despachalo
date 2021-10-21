@@ -25,7 +25,7 @@ public class GetTruckServiceTest {
     private GetTruckService getTruckService;
 
     private Optional<Truck> truckFoundOptional() {
-        var truck = new Truck(1L, "123456");
+        var truck = new Truck(1L, "123456", "ABC-123");
         return Optional.of(truck);
     }
 
