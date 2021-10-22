@@ -1,8 +1,9 @@
-package org.guzman.despachalo.adapter.persistence.modules.sync;
+package org.guzman.despachalo.adapter.persistence.modules.sync.load;
 
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import org.guzman.despachalo.adapter.persistence.modules.company.user.UserEntity;
 import org.hibernate.Hibernate;
 
 import javax.persistence.*;
@@ -19,8 +20,21 @@ public class SyncEntity {
     @Column(name = "fecha_sincro")
     private LocalDateTime syncAt;
 
+    @Column(name = "responsable_id")
+    private Long responsibleId;
+
+    @Column(name = "tipo_dato")
+    private String dataType;
+
+    @Column(name = "estado", nullable = false)
+    private String state;
+
     @Column(name = "metadata")
     private String metadata;
+
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "responsable_id", insertable = false, updatable = false)
+    private UserEntity responsible;
 
     @Override
     public boolean equals(Object o) {
