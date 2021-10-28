@@ -1,0 +1,24 @@
+version '0.1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation project(':commons:common-error')
+    implementation project(':commons:common-hexagonal')
+    implementation 'com.amazonaws:aws-java-sdk:1.12.90'
+
+    implementation 'org.springframework.boot:spring-boot'
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testImplementation 'org.junit.jupiter:junit-jupiter-api'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+}
+
+test {
+    useJUnitPlatform()
+}

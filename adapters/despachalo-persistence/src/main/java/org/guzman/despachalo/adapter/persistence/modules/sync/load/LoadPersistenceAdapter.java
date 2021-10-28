@@ -5,14 +5,20 @@ import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.sync.load.application.port.out.GetPaginatedLoadsPort;
+import org.guzman.despachalo.core.sync.load.application.port.out.RegisterLoadForSyncPort;
+import org.guzman.despachalo.core.sync.load.application.port.out.StoreLoadFilePort;
 import org.guzman.despachalo.core.sync.load.domain.Load;
+import org.guzman.despachalo.core.sync.load.domain.LoadToRegister;
+import org.guzman.despachalo.external.awss3.AwsStorageExternalService;
 import org.springframework.data.domain.PageRequest;
 
+import java.io.File;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class LoadPersistenceAdapter implements GetPaginatedLoadsPort {
+public class LoadPersistenceAdapter implements GetPaginatedLoadsPort, StoreLoadFilePort, RegisterLoadForSyncPort {
+    private final AwsStorageExternalService awsStorageExternalService;
     private final SyncRepository syncRepository;
     private final LoadMapper loadMapper;
 
@@ -32,5 +38,17 @@ public class LoadPersistenceAdapter implements GetPaginatedLoadsPort {
                 .total(page.getTotalElements())
                 .data(data)
                 .build();
+    }
+
+    @Override
+    public String storeLoadFile(File file) {
+        var loadPath = "loads/";
+        return awsStorageExternalService.saveFile(file, loadPath);
+    }
+
+    @Override
+    public void registerLoadForSync(LoadToRegister toRegister) {
+        var row = loadMapper.toEntity(toRegister);
+        syncRepository.save(row);
     }
 }

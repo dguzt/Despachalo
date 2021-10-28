@@ -29,6 +29,9 @@ public class SyncEntity {
     @Column(name = "estado", nullable = false)
     private String state;
 
+    @Column(name = "archivo_url", nullable = false)
+    private String urlFile;
+
     @Column(name = "metadata")
     private String metadata;
 

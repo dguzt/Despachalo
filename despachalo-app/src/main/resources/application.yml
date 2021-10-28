@@ -9,6 +9,15 @@ despachalo:
       - http://127.0.0.1:3000
   routing:
     common-capacity: 10.0
+  storage:
+    aws:
+      region: ""
+      credentials:
+        access-key: ""
+        secret-key: ""
+      bucket:
+        name: ""
+      minutes-presigned: 360
 
 server:
   port: 8080

@@ -7,4 +7,6 @@ include 'commons:common-error'
 include 'commons:common-hexagonal'
 include 'commons:common-pagination'
 include 'algorithm'
+include 'external:awss3'
 
+findProject(':external:awss3')?.name = 'awss3'
