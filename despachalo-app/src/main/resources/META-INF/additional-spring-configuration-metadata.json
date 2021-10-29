@@ -1,0 +1,13 @@
+{
+  "properties": [
+    {
+      "name": "despachalo.module-name",
+      "type": "java.lang.String",
+      "description": "Module name shown in Swagger page."
+    },
+    {
+      "name": "despachalo.api-version",
+      "type": "java.lang.String",
+      "description": "Api version shown in Swagger page."
+    }
+  ] }
