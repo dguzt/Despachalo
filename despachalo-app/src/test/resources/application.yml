@@ -22,11 +22,17 @@ spring:
     username: despachalo
     password: despachalo
     driver-class-name: org.h2.Driver
+    initialization-mode: never
 
   jpa:
     hibernate:
       ddl-auto: create-drop
     database-platform: org.hibernate.dialect.H2Dialect
+    properties:
+      hibernate:
+        jdbc:
+          time_zone: UTC
+        format_sql: true
 
   servlet:
     multipart:
