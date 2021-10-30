@@ -1,0 +1,3 @@
+codigo pedido,codigo punto destino,codigo producto*,cantidad solicitada*
+ORDER001,DESTINATION_POINT001,PROD001,4,PROD002,4
+ORDER002,DESTINATION_POINT002,PROD002,3,PROD003,5

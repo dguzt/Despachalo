@@ -3,6 +3,7 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.load;
 import org.guzman.despachalo.adapter.persistence.modules.company.user.UserMapper;
 import org.guzman.despachalo.core.sync.load.domain.Load;
 import org.guzman.despachalo.core.sync.load.domain.LoadToRegister;
+import org.guzman.despachalo.core.sync.load.domain.SyncDetails;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
@@ -25,4 +26,8 @@ public interface LoadMapper {
     @Mapping(target = "responsible", ignore = true)
     @Mapping(target = "metadata", ignore = true)
     SyncEntity toEntity(LoadToRegister toRegister);
+
+    @Mapping(target = "fileUrl", source = "urlFile")
+    @Mapping(target = "load", source = ".")
+    SyncDetails toSyncDetails(SyncEntity entity);
 }

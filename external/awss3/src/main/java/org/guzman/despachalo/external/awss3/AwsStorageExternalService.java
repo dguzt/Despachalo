@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.extra.ExternalService;
 
 import java.io.File;
+import java.io.InputStream;
 import java.net.URL;
 import java.nio.file.Paths;
 import java.time.LocalDateTime;
@@ -53,6 +54,15 @@ public class AwsStorageExternalService {
         return s3Client
                 .getUrl(bucketName, fileKey)
                 .toString();
+    }
+
+    public InputStream getFileIn(String fileKey) {
+        var bucketName = awsStorageConfig.getBucket().getName();
+        var s3Client = this.getS3Client();
+
+        return s3Client
+                .getObject(bucketName, fileKey)
+                .getObjectContent();
     }
 
     public URL generatePresignedUrlForObject(String fileKey) {

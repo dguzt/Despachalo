@@ -1,0 +1,3 @@
+codigo punto destino,codigo cliente,direccion,ubicacion-latitud,ubicacion-longitud,ubigeo
+DESTINATION_POINT001,CLIENT001,"E,F, Parcona 11003, Ica",-14.053507168527837,-75.69183897375429,110101
+DESTINATION_POINT002,CLIENT002,"Garcilazo De La Vega, Ica 11003",-14.039284663853005,-75.69699020503809,110101

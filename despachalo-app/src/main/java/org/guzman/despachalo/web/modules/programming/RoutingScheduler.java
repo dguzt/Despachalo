@@ -32,9 +32,8 @@ public class RoutingScheduler {
         }
 
         var dispatch =dispatchOptional.get();
-        logger.info("PROCESSING. Dispatch routes generating with id: " + dispatch.getId());
+        logger.info("PROCESSING. Dispatch routes generating with id: {}", dispatch.getId());
         routesForDispatchUseCase.execute(dispatch.getId(), routingVars.getCommonCapacity());
-        logger.info("FINISHED. Dispatch routes generated with id: " + dispatch.getId());
+        logger.info("FINISHED. Dispatch routes generated with id: {}", dispatch.getId());
     }
-
 }
