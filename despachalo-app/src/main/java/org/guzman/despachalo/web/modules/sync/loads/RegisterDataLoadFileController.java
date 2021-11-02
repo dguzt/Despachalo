@@ -27,7 +27,8 @@ public class RegisterDataLoadFileController {
     @PostMapping(value = "/sync/loads", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public void registerSpecialistsBulkLoad(@RequestParam("file") MultipartFile csvMultipartFile,
                                             @AuthenticationPrincipal WebUserDetails userDetails) throws IOException {
+        var originalName = csvMultipartFile.getOriginalFilename();
         var csvFile = tmpFileHelper.multipartToTmpFile(csvMultipartFile);
-        useCase.execute(userDetails.getUserId(), csvFile);
+        useCase.execute(userDetails.getUserId(), csvFile, originalName);
     }
 }

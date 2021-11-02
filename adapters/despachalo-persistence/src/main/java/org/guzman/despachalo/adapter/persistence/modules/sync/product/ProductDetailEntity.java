@@ -20,10 +20,10 @@ public class ProductDetailEntity {
     private Long productId;
 
     @Column(name = "peso", nullable = false)
-    private Float weight;
+    private Double weight;
 
     @Column(name = "volumen", nullable = false)
-    private Float volume;
+    private Double volume;
 
     @Column(name = "fecha_creado")
     private LocalDateTime createdAt;

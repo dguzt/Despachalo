@@ -24,14 +24,14 @@ public class RegisterDataLoadFileService implements RegisterDataLoadFileUseCase 
     private final RegisterLoadForSyncPort syncPort;
 
     @Override
-    public void execute(Long responsibleId, File csv) {
+    public void execute(Long responsibleId, File csv, String originalName) {
         try {
             var type = dataFileIdentifier.identify(csv);
 
             var url = filePort.storeLoadFile(csv);
             var now = LocalDateTime.now();
 
-            var toRegister = new LoadToRegister(responsibleId, LoadState.PENDING, type, url, now);
+            var toRegister = new LoadToRegister(responsibleId, LoadState.PENDING, type, url, now, originalName);
             syncPort.registerLoadForSync(toRegister);
         } catch(IOException e) {
             logger.error("Cannot read csv file given to register when identifying its data type.");

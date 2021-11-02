@@ -13,4 +13,5 @@ public class LoadToRegister {
     private String dataType;
     private String urlFile;
     private LocalDateTime syncAt;
+    private String originalName;
 }

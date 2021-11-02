@@ -23,11 +23,13 @@ public interface LoadMapper {
     @Mapping(target = "responsibleId", source = "responsibleId")
     @Mapping(target = "syncAt", source = "syncAt")
     @Mapping(target = "urlFile", source = "urlFile")
+    @Mapping(target = "originalName", source = "originalName")
     @Mapping(target = "responsible", ignore = true)
     @Mapping(target = "metadata", ignore = true)
     SyncEntity toEntity(LoadToRegister toRegister);
 
     @Mapping(target = "fileUrl", source = "urlFile")
+    @Mapping(target = "originalName", source = "originalName")
     @Mapping(target = "load", source = ".")
     SyncDetails toSyncDetails(SyncEntity entity);
 }

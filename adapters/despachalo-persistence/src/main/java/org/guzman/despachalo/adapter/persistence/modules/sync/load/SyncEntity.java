@@ -35,6 +35,9 @@ public class SyncEntity {
     @Column(name = "metadata")
     private String metadata;
 
+    @Column(name = "archivo_original")
+    private String originalName;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "responsable_id", insertable = false, updatable = false)
     private UserEntity responsible;

@@ -9,6 +9,6 @@ public class Product {
     String description;
 
     Long detailsId;
-    Float weight;
-    Float volume;
+    Double weight;
+    Double volume;
 }

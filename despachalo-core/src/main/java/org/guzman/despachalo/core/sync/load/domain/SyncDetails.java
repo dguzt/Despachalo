@@ -8,4 +8,5 @@ import lombok.Getter;
 public class SyncDetails {
     private Load load;
     private String fileUrl;
+    private String originalName;
 }
