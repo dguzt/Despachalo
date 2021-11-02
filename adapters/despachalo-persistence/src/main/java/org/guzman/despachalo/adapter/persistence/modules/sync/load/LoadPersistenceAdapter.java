@@ -6,6 +6,7 @@ import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.sync.load.application.port.out.*;
+import org.guzman.despachalo.core.sync.load.application.processors.DataFileProcessor;
 import org.guzman.despachalo.core.sync.load.domain.Load;
 import org.guzman.despachalo.core.sync.load.domain.LoadState;
 import org.guzman.despachalo.core.sync.load.domain.LoadToRegister;
@@ -75,6 +76,16 @@ public class LoadPersistenceAdapter implements
     public File getLoadFile(String uri) throws IOException {
         var in = awsStorageExternalService.getFileIn(uri);
         return fileHelper.inputStreamToTmpFile(in);
+    }
+
+    @Override
+    public void registerSyncResult(Long syncId, String state, DataFileProcessor.Results results) {
+        syncRepository.findById(syncId).ifPresent(r -> {
+            r.setOkRows(results.getOk());
+            r.setErrorRows(results.getError());
+            r.setState(state);
+            syncRepository.save(r);
+        });
     }
 
     @Override

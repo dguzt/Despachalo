@@ -9,4 +9,6 @@ public class SyncDetails {
     private Load load;
     private String fileUrl;
     private String originalName;
+    private Integer okRows;
+    private Integer errorRows;
 }

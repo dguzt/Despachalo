@@ -11,7 +11,8 @@ public class DestinationPointsFileProcessor implements FileProcessor {
     }
 
     @Override
-    public void process(DataFrame<Object> dataFrame){
+    public Integer process(DataFrame<Object> dataFrame){
         checkUniqueCodes(dataFrame);
+        return 0;
     }
 }

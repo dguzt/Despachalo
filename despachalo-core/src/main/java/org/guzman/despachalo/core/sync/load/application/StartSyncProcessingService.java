@@ -30,8 +30,8 @@ public class StartSyncProcessingService implements StartSyncProcessingUseCase {
         syncResultPort.registerSyncResult(sync.getLoad().getId(), PROCESSING);
         try {
             var csv = filePort.getLoadFile(sync.getFileUrl());
-            processor.process(csv, sync.getLoad().getDataType());
-            syncResultPort.registerSyncResult(sync.getLoad().getId(), DONE);
+            var res = processor.process(csv, sync.getLoad().getDataType());
+            syncResultPort.registerSyncResult(sync.getLoad().getId(), DONE, res);
             logger.info("[SYNC][DONE] Sync finished successfully");
 
         } catch (IOException e) {

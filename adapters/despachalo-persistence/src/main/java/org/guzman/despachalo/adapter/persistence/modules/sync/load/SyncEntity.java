@@ -32,11 +32,14 @@ public class SyncEntity {
     @Column(name = "archivo_url", nullable = false)
     private String urlFile;
 
-    @Column(name = "metadata")
-    private String metadata;
-
     @Column(name = "archivo_original")
     private String originalName;
+
+    @Column(name = "filas_ok", nullable = false)
+    private Integer okRows = 0;
+
+    @Column(name = "filas_error", nullable = false)
+    private Integer errorRows = 0;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "responsable_id", insertable = false, updatable = false)

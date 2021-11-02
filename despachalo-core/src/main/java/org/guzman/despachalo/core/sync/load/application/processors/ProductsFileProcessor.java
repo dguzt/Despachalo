@@ -24,16 +24,16 @@ public class ProductsFileProcessor implements FileProcessor {
     private final RegisterProductsPort registerProductsPort;
 
     @Override
-    public void process(DataFrame<Object> dataFrame) {
-        var a = dataFrame.select(emptyFilter.filterNoEmptyStrings(PRODUCT_CODE));
-        var b = a.select(emptyFilter.filterNoEmptyStrings(PRODUCT_CODE));
-        var c = b.select(emptyFilter.filterNoEmptyStrings(DESCRIPTION));
-        var d = c.select(emptyFilter.filterNoEmptyNumbers(WEIGHT));
-        var e = d.select(emptyFilter.filterNoEmptyNumbers(VOLUME));
+    public Integer process(DataFrame<Object> dataFrame) {
+        var codeClean = dataFrame.select(emptyFilter.filterNoEmptyStrings(PRODUCT_CODE));
+        var descClean = codeClean.select(emptyFilter.filterNoEmptyStrings(DESCRIPTION));
+        var weightClean = descClean.select(emptyFilter.filterNoEmptyNumbers(WEIGHT));
+        var volumeClean = weightClean.select(emptyFilter.filterNoEmptyNumbers(VOLUME));
 
-        var uniqueCodes =  uniqueFilter.filterUnique(e, PRODUCT_CODE);
+        var uniqueCodes =  uniqueFilter.filterUnique(volumeClean, PRODUCT_CODE);
         var products = mapperDataFrame.mapToObj(uniqueCodes, mapToProduct());
         registerProductsPort.registerProducts(products);
+        return products.size();
     }
 
     private Function<List<Object>, ProductToRegister> mapToProduct() {
