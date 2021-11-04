@@ -1,0 +1,19 @@
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    implementation project(':commons:common-error')
+    implementation project(':commons:common-hexagonal')
+    compile "net.sf.jasperreports:jasperreports:4.5.1"
+
+    compileOnly 'org.projectlombok:lombok:1.18.20'
+    annotationProcessor 'org.projectlombok:lombok:1.18.20'
+}
+
+test {
+    useJUnitPlatform()
+}
