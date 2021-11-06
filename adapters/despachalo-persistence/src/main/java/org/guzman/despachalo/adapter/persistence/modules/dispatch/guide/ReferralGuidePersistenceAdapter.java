@@ -2,36 +2,40 @@ package org.guzman.despachalo.adapter.persistence.modules.dispatch.guide;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
-import org.guzman.despachalo.core.sync.load.application.port.out.GetReferralGuidePort;
+import org.guzman.despachalo.core.programming.application.port.out.GetDataForReferralGuidePort;
+import org.guzman.despachalo.core.programming.application.port.out.GetReferralGuidePort;
+import org.guzman.despachalo.core.programming.domain.ReferralGuideData;
 import org.guzman.despachalo.external.referralguidepdf.*;
 import org.guzman.despachalo.external.referralguidepdf.export.pdf.PdfGuideExporter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.time.LocalDateTime;
 import java.util.Collections;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ReferralGuidePersistenceAdapter implements GetReferralGuidePort {
+public class ReferralGuidePersistenceAdapter implements GetDataForReferralGuidePort, GetReferralGuidePort {
     private final Logger logger = LoggerFactory.getLogger(ReferralGuidePersistenceAdapter.class);
     private final PdfGuideExporter pdfGuideExporter;
 
     @Override
-    public File getReferralGuide() {
-        try {
-            var now = LocalDateTime.now();
+    public ReferralGuideData getDataForReferralGuide(Long dispatchId, Long programmedVehicleId, Long orderId) {
+        return null;
+    }
 
-            var company = new SendingCompany("Despáchalo Pe", "12345678902");
-            var client = new TargetClient("Tiendas Gutierrez", "1234567801");
-            var transport = new Transport(TransportType.PRIVATE, now, now, TransportReason.SALE, "300");
-            var originPoint = new OriginPoint("Av San Martín 120", "12345");
-            var destinationPoint = new DestinationPoint("Av Julio Carranza 340", "12345");
+    @Override
+    public File getReferralGuide(ReferralGuideData data) {
+        try {
+            var company = new SendingCompany(data.getCompany().getBusinessName(), data.getCompany().getRuc());
+            var client = new TargetClient(data.getClient().getBusinessName(), data.getClient().getRuc());
+            var transport = new Transport(TransportType.PRIVATE, data.getIssuedAt(), data.getTransportedAt(), TransportReason.SALE, data.getTotalWeight().toString());
+            var originPoint = new OriginPoint(data.getOriginPoint().getAddress(), data.getOriginPoint().getGeoCode());
+            var destinationPoint = new DestinationPoint(data.getDestinationPoint().getAddress(), data.getDestinationPoint().getGeoCode());
             var vehicles = Collections.<TransportVehicle>emptyList();
 
             var guideData = ReferralGuide.builder()
-                    .id("EG01-2")
+                    .id(String.format("EG01-%d", data.getId()))
                     .company(company)
                     .client(client)
                     .transport(transport)

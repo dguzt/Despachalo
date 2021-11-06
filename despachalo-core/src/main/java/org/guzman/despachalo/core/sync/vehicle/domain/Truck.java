@@ -7,6 +7,5 @@ import lombok.Getter;
 @AllArgsConstructor
 public class Truck {
     Long id;
-    String code;
     String plate;
 }

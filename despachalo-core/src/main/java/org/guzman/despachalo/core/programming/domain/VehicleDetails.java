@@ -11,6 +11,7 @@ import java.util.List;
 @Getter
 @AllArgsConstructor
 public class VehicleDetails {
+    private Long id;
     private Truck vehicle;
     private Driver driver;
     private List<Long> orderIdsToDispatch;

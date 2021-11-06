@@ -16,9 +16,6 @@ public class TruckEntity {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "codigo", nullable = false)
-    private String code;
-
     @Column(name = "capacidad_peso")
     private Double weightCapacity;
 

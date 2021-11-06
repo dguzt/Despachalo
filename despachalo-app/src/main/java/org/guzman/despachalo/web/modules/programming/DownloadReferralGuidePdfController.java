@@ -2,7 +2,7 @@ package org.guzman.despachalo.web.modules.programming;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.WebAdapter;
-import org.guzman.despachalo.core.sync.load.application.port.in.GetDispatchReferralGuideUseCase;
+import org.guzman.despachalo.core.programming.application.port.in.GetDispatchReferralGuideUseCase;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -23,9 +23,13 @@ public class DownloadReferralGuidePdfController {
     private final GetDispatchReferralGuideUseCase useCase;
 
     @ResponseStatus(HttpStatus.OK)
-    @GetMapping(path = "/programming/dispatches/{dispatchId}/referral-guide")
-    public ResponseEntity<Object> getDispatchDetails(@PathVariable("dispatchId") Long dispatchId) throws IOException {
-        final var filePath = useCase.execute(dispatchId).getAbsolutePath();
+    @GetMapping(path = "/programming/dispatches/{dispatchId}/vehicles/{vehicleId}/orders/{orderId}/guide")
+    public ResponseEntity<Object> getDispatchDetails(
+            @PathVariable("dispatchId") Long dispatchId,
+            @PathVariable("vehicleId") Long programmedVehicleId,
+            @PathVariable("orderId") Long orderId) throws IOException {
+
+        final var filePath = useCase.execute(dispatchId, programmedVehicleId, orderId).getAbsolutePath();
         final var pdfBytes = Files.readAllBytes(Paths.get(filePath));
 
         var headers = new HttpHeaders();
