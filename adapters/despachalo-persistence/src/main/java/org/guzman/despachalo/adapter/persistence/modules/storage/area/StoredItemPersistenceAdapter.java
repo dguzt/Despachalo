@@ -12,6 +12,7 @@ import org.guzman.despachalo.core.storage.application.port.out.GetItemsStoredInA
 import org.guzman.despachalo.core.storage.application.port.out.StoreOrderItemsInAreaPort;
 import org.guzman.despachalo.core.storage.domain.Item;
 import org.guzman.despachalo.core.sync.order.domain.OrderState;
+import org.javatuples.Pair;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
@@ -32,6 +33,7 @@ public class StoredItemPersistenceAdapter implements
     private final ItemRepository itemRepository;
     private final StoreItemRepository storeItemRepository;
     private final ItemMapper itemMapper;
+    private final ItemStoredMapper itemStoredMapper;
 
     @Override
     public List<Item> getItemsStoredInArea(Long areaId) {
@@ -108,5 +110,15 @@ public class StoredItemPersistenceAdapter implements
             order.setState(OrderState.READY);
             orderRepository.save(order);
         }
+    }
+
+    public List<Pair<Long, List<Item>>> getItemsForOrders(List<Long> orderIds) {
+        return orderIds.stream()
+                .map(orderId -> {
+                   var storedItems = storeItemRepository.findAllByItem_OrderId(orderId);
+                   var items = itemStoredMapper.toItems(storedItems);
+                   return Pair.with(orderId, items);
+                })
+                .collect(Collectors.toList());
     }
 }

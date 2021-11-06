@@ -11,4 +11,5 @@ public class Item {
     private Long productDetailId;
     private Long orderId;
     private Long shipmentId;
+    private Long areaId;
 }

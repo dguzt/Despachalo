@@ -2,7 +2,7 @@ package org.guzman.despachalo.adapter.persistence.modules.dispatch;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.adapter.persistence.modules.programming.ProgrammedVehiclePersistenceAdapter;
-import org.guzman.despachalo.adapter.persistence.modules.storage.area.StoreItemRepository;
+import org.guzman.despachalo.adapter.persistence.modules.storage.area.StoredItemPersistenceAdapter;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderEntity;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderPersistenceAdapter;
 import org.guzman.despachalo.adapter.persistence.modules.sync.order.OrderRepository;
@@ -12,6 +12,7 @@ import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.programming.application.port.in.DispatchToRegister;
 import org.guzman.despachalo.core.programming.application.port.out.*;
 import org.guzman.despachalo.core.programming.domain.*;
+import org.guzman.despachalo.core.sync.order.domain.Order;
 import org.guzman.despachalo.core.sync.order.domain.OrderState;
 import org.springframework.data.domain.PageRequest;
 
@@ -36,7 +37,7 @@ public class DispatchPersistenceAdapter implements
     private final OrderRepository orderRepository;
     private final DispatchRepository dispatchRepository;
     private final DispatchMapper dispatchMapper;
-    private final StoreItemRepository storeItemRepository;
+    private final StoredItemPersistenceAdapter storedItemPersistenceAdapter;
 
     @Override
     public Paginator<Dispatch> getPage(Filters filters, String state) {
@@ -87,6 +88,8 @@ public class DispatchPersistenceAdapter implements
                 .map(row -> {
                     var dispatch = dispatchMapper.toDispatch(row);
                     var orders = orderPersistenceAdapter.getAllByDispatchId(dispatchId);
+                    var orderIds = orders.stream().map(Order::getId).collect(Collectors.toList());
+                    var storedItems = storedItemPersistenceAdapter.getItemsForOrders(orderIds);
                     var vehicleDetails = programmedVehiclePersistenceAdapter
                             .getProgrammedVehiclesForDispatch(dispatchId);
                     return new DispatchDetails(
@@ -94,7 +97,8 @@ public class DispatchPersistenceAdapter implements
                             vehicleDetails.size(),
                             row.getRouteRequestState(),
                             orders,
-                            vehicleDetails);
+                            vehicleDetails,
+                            storedItems);
                 });
     }
 
@@ -132,6 +136,8 @@ public class DispatchPersistenceAdapter implements
                 .map(OrderEntity::getId)
                 .collect(Collectors.toList());
         var areasAndOrders = new HashMap<Long, List<Long>>();
+
+
         return null;
     }
 }

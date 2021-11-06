@@ -28,6 +28,9 @@ public class EndPointEntity {
     @Column(name = "direccion", length = 100, nullable = false)
     private String address;
 
+    @Column(name = "ubigeo", length = 10)
+    private String geoCode;
+
     @Column(name = "ubi_longitud", nullable = false)
     private Double longitude;
 

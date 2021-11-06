@@ -8,6 +8,7 @@ dependencies {
     implementation project(':commons:common-error')
     implementation project(':commons:common-hexagonal')
     implementation project(':commons:common-pagination')
+    implementation project(':external:awss3')
     implementation project(':algorithm')
 
     implementation 'org.slf4j:slf4j-api:1.7.32'
