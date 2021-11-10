@@ -13,7 +13,7 @@ public final class ProductColumns {
     public static final String NAME_COL_WEIGHT       = "peso";
     public static final String NAME_COL_VOLUME       = "volumen";
 
-    public static final List<String> NAME_COLUMNS = List.of(
+    public static final List<Object> NAME_COLUMNS = List.of(
       NAME_COL_PRODUCT_CODE,
       NAME_COL_DESCRIPTION,
       NAME_COL_WEIGHT,

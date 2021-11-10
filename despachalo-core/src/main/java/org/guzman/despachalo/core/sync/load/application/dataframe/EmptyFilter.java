@@ -8,7 +8,7 @@ public class EmptyFilter {
     public DataFrame.Predicate<Object> filterNoEmptyStrings(Integer columnIndex) {
         return (row) -> {
             try {
-                var value = (String) row.get(columnIndex);
+                var value = row.get(columnIndex).toString();
                 return value != null && !value.isEmpty();
             } catch (RuntimeException e) {
                 return false;

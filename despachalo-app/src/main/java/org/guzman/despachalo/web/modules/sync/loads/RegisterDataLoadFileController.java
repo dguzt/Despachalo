@@ -28,7 +28,7 @@ public class RegisterDataLoadFileController {
     public void registerSpecialistsBulkLoad(@RequestParam("file") MultipartFile csvMultipartFile,
                                             @AuthenticationPrincipal WebUserDetails userDetails) throws IOException {
         var originalName = csvMultipartFile.getOriginalFilename();
-        var csvFile = tmpFileHelper.multipartToTmpFile(csvMultipartFile);
+        var csvFile = tmpFileHelper.multipartToTmpFile(csvMultipartFile, ".csv");
         useCase.execute(userDetails.getUserId(), csvFile, originalName);
     }
 }

@@ -41,8 +41,8 @@ public class ProductsFileProcessor implements FileProcessor {
         return (row) -> ProductToRegister.builder()
                     .code(       (String) row.get(PRODUCT_CODE))
                     .description((String) row.get(DESCRIPTION))
-                    .volume(     (Double)  row.get(VOLUME))
-                    .weight(     (Double)  row.get(WEIGHT))
+                    .volume(     (Double) row.get(VOLUME))
+                    .weight(     (Double) row.get(WEIGHT))
                     .createdAt(now)
                     .updatedAt(now)
                     .build();

@@ -32,7 +32,7 @@ public class StartSyncProcessingService implements StartSyncProcessingUseCase {
             var csv = filePort.getLoadFile(sync.getFileUrl());
             var res = processor.process(csv, sync.getLoad().getDataType());
             syncResultPort.registerSyncResult(sync.getLoad().getId(), DONE, res);
-            logger.info("[SYNC][DONE] Sync finished successfully");
+            logger.info("[SYNC][DONE] Sync finished successfully with results: ok={}, error={}", res.getOk(), res.getError());
 
         } catch (IOException e) {
             logger.error("[SYNC][FAILED]. Cannot sync because of IO Error: {}", e.getMessage());
