@@ -26,6 +26,9 @@ public class DistributionCenterEntity {
     @Column(name = "direccion", length = 100)
     private String address;
 
+    @Column(name = "ubigeo", length = 6)
+    private String geocode;
+
     @Column(name = "eliminado")
     private Boolean deleted = false;
 

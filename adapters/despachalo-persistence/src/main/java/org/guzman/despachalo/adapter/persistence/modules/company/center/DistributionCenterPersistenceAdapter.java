@@ -8,9 +8,11 @@ import org.guzman.despachalo.core.company.application.port.in.CenterData;
 import org.guzman.despachalo.core.company.application.port.in.DistributionCenterToRegister;
 import org.guzman.despachalo.core.company.application.port.out.*;
 import org.guzman.despachalo.core.company.domain.DistributionCenter;
+import org.guzman.despachalo.core.sync.load.application.port.out.FindCentersByGeocodesPort;
 import org.springframework.data.domain.PageRequest;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -21,7 +23,8 @@ public class DistributionCenterPersistenceAdapter implements
         GetPaginatedDistributionCentersPort,
         CheckIfCenterExistsPort,
         GetAllCentersDataPort,
-        FindCenterPort {
+        FindCenterPort,
+        FindCentersByGeocodesPort {
 
     private final DistributionCenterRepository repository;
     private final DistributionCenterMapper mapper;
@@ -68,5 +71,14 @@ public class DistributionCenterPersistenceAdapter implements
     public Optional<DistributionCenter> findCenter(Long centerId) {
         return repository.findByIdAndDeletedIsFalse(centerId)
                 .map(mapper::toDistributionCenter);
+    }
+
+    @Override
+    public Map<String, Long> findCentersByGeocodes(List<String> geocodes) {
+        return repository.findAllByGeocodeIn(geocodes)
+                .stream()
+                .collect(Collectors.toMap(
+                        DistributionCenterEntity::getGeocode,
+                        DistributionCenterEntity::getId));
     }
 }

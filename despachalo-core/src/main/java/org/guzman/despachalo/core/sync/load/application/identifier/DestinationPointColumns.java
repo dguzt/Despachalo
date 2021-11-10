@@ -17,6 +17,15 @@ public final class DestinationPointColumns {
     public static final String NAME_COL_LOCATION_LONGITUDE     = "ubicacion-longitud";
     public static final String NAME_COL_GEOCODE                = "ubigeo";
 
+    public static final List<Class> COL_TYPES = List.of(
+            String.class,
+            String.class,
+            String.class,
+            Double.class,
+            Double.class,
+            String.class
+    );
+
     public static final List<Object> NAME_COLUMNS = List.of(
             NAME_COL_DESTINATION_POINT_CODE,
             NAME_COL_CLIENT_CODE,

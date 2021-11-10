@@ -14,6 +14,7 @@ public interface DistributionCenterMapper {
     @Mapping(target = "address", source = "address")
     @Mapping(target = "latitude", source = "location.latitude")
     @Mapping(target = "longitude", source = "location.longitude")
+    @Mapping(target = "geocode", ignore = true)
     @Mapping(target = "deleted", ignore = true)
     DistributionCenterEntity toEntity(DistributionCenterToRegister toRegister);
 

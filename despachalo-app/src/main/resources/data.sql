@@ -2,7 +2,7 @@
 INSERT INTO empresa(razon_social, ruc) VALUES ('Distribuciones Despáchalo', '77001100233');
 
 -- DISTRIBUTION CENTERS
-INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre) VALUES ('Av. Gerónimo de Cabrera 470, Ica, Ica', false, -14.07559496080894, -75.72322936945595, 'Ica Central');
+INSERT INTO centro_distribucion(direccion, eliminado, ubi_latitud, ubi_longitud, nombre, ubigeo) VALUES ('Av. Gerónimo de Cabrera 470, Ica, Ica', false, -14.07559496080894, -75.72322936945595, 'Ica Central', '1101');
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-01', 20);
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona sur S-02', 20);
 INSERT INTO zona_almacenamiento(capacidad_disponible, centro_distribucion_id, descripcion, capacidad_total) VALUES (20, 1, 'Zona este E-01', 20);

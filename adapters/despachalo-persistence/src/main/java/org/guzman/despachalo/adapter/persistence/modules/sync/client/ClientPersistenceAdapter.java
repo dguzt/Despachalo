@@ -2,17 +2,19 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.client;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
+import org.guzman.despachalo.core.sync.load.application.port.out.FindClientIdsByCodesPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterClientsPort;
 import org.guzman.despachalo.core.sync.load.domain.ClientToRegister;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ClientPersistenceAdapter implements RegisterClientsPort {
+public class ClientPersistenceAdapter implements RegisterClientsPort, FindClientIdsByCodesPort {
     private final ClientRepository clientRepository;
     private final ClientMapper clientMapper;
 
@@ -44,5 +46,14 @@ public class ClientPersistenceAdapter implements RegisterClientsPort {
                 .collect(Collectors.toList());
 
         clientRepository.saveAll(rows);
+    }
+
+    @Override
+    public Map<String, Long> findClientIdsByCodes(List<String> codes) {
+        return clientRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        ClientEntity::getCode,
+                        ClientEntity::getId));
     }
 }

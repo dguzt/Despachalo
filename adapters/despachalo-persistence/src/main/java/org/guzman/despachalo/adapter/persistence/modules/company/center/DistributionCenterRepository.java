@@ -12,4 +12,6 @@ public interface DistributionCenterRepository extends JpaRepository<Distribution
     Boolean existsByIdAndDeletedIsFalse(Long id);
     List<DistributionCenterEntity> findAllByDeletedIsFalse();
     Optional<DistributionCenterEntity> findByIdAndDeletedIsFalse(Long centerId);
+
+    List<DistributionCenterEntity> findAllByGeocodeIn(List<String> geocodes);
 }
