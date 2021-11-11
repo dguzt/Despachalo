@@ -26,6 +26,9 @@ public class CommodityEntity {
     @Column(name = "codigo", length = 50, nullable = false)
     private String code;
 
+    @Column(name = "ubigeo")
+    private String geocode;
+
     @Column(name = "placa_vehiculo", nullable = false)
     private String vehiclePlate;
 

@@ -6,6 +6,7 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.storage.application.port.out.ChangeOrderToReadyPort;
 import org.guzman.despachalo.core.storage.application.port.out.ConfirmIfAllItemsAreStoredForOrderPort;
+import org.guzman.despachalo.core.sync.load.application.port.out.GetMappedOrderIdsPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterOrdersPort;
 import org.guzman.despachalo.core.sync.load.domain.OrderToInsert;
 import org.guzman.despachalo.core.sync.order.application.port.out.GetAllOrdersPort;
@@ -17,6 +18,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
@@ -29,7 +31,8 @@ public class OrderPersistenceAdapter implements
         GetAllOrdersPort,
         ChangeOrderToReadyPort,
         ConfirmIfAllItemsAreStoredForOrderPort,
-        RegisterOrdersPort {
+        RegisterOrdersPort,
+        GetMappedOrderIdsPort {
 
     private final OrderLineRepository orderLineRepository;
     private final OrderRepository orderRepository;
@@ -144,5 +147,14 @@ public class OrderPersistenceAdapter implements
 
             orderLineRepository.saveAll(lines);
         });
+    }
+
+    @Override
+    public Map<String, Long> getMappedOrderIds(List<String> codes) {
+        return orderRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        OrderEntity::getCode,
+                        OrderEntity::getId));
     }
 }

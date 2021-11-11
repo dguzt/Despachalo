@@ -4,6 +4,9 @@ import joinery.DataFrame;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class UniqueFilter {
@@ -34,5 +37,13 @@ public class UniqueFilter {
 
             return true;
         });
+    }
+
+    public List<String> uniqueCols(DataFrame<Object> dataFrame, Integer column) {
+        return dataFrame
+                .unique(column)
+                .col(column)
+                .stream().map(Object::toString)
+                .collect(Collectors.toList());
     }
 }

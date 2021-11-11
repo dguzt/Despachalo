@@ -2,17 +2,19 @@ package org.guzman.despachalo.adapter.persistence.modules.storage.commodity;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
+import org.guzman.despachalo.core.sync.load.application.port.out.GetMappedOriginPointIdsPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterOriginPointsPort;
 import org.guzman.despachalo.core.sync.load.domain.OriginPointToRegister;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class OriginPointPersistenceAdapter implements RegisterOriginPointsPort {
+public class OriginPointPersistenceAdapter implements RegisterOriginPointsPort, GetMappedOriginPointIdsPort {
     private final OriginPointRepository originPointRepository;
     private final OriginPointMapper originPointMapper;
 
@@ -44,5 +46,14 @@ public class OriginPointPersistenceAdapter implements RegisterOriginPointsPort {
                 .collect(Collectors.toList());
 
         originPointRepository.saveAll(rows);
+    }
+
+    @Override
+    public Map<String, Long> getMappedOriginPointIds(List<String> codes) {
+        return originPointRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        OriginPointEntity::getCode,
+                        OriginPointEntity::getId));
     }
 }
