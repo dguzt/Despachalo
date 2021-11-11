@@ -2,17 +2,20 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.product;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
+import org.guzman.despachalo.core.sync.load.application.port.out.GetMappedProductIdsPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterProductsPort;
 import org.guzman.despachalo.core.sync.load.domain.ProductToRegister;
 import org.guzman.despachalo.core.sync.product.application.port.out.SearchProductsPort;
 import org.guzman.despachalo.core.sync.product.domain.Product;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class ProductPersistenceAdapter implements SearchProductsPort, RegisterProductsPort {
+public class ProductPersistenceAdapter implements SearchProductsPort, RegisterProductsPort, GetMappedProductIdsPort {
     private final ProductDetailRepository productDetailRepository;
     private final ProductDetailsMapper productDetailsMapper;
     private final ProductRepository productRepository;
@@ -49,5 +52,14 @@ public class ProductPersistenceAdapter implements SearchProductsPort, RegisterPr
                     detailsRow.setProductId(saved.getId());
                     productDetailRepository.save(detailsRow);
                 });
+    }
+
+    @Override
+    public Map<String, Long> getMappedProductIds(List<String> codes) {
+        return productRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        ProductEntity::getCode,
+                        ProductEntity::getId));
     }
 }

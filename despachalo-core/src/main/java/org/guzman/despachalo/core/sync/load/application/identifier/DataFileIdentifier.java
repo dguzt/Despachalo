@@ -11,7 +11,6 @@ import java.util.List;
 
 @Service
 public class DataFileIdentifier {
-    private static final Integer COLUMN_ROW = 0;
 
     public String identify(File file) throws IOException {
         var dataFrame = DataFrame.readCsv(file.getPath());
@@ -45,9 +44,7 @@ public class DataFileIdentifier {
     }
 
     private boolean checkIfCommodity(List<Object> columns) {
-        var colsStatic = CommodityColumns.NAME_COLUMNS_STATIC;
-        var colsVariable = CommodityColumns.NAME_COLUMNS_VAR;
-        return checkIfIter(columns, colsStatic, colsVariable);
+        return checkIf(columns, CommodityColumns.NAME_COLUMNS);
     }
 
     private boolean checkIfOriginPoint(List<Object> columns) {
@@ -55,9 +52,7 @@ public class DataFileIdentifier {
     }
 
     private boolean checkIfOrder(List<Object> columns) {
-        var colsStatic = OrderColumns.NAME_COLUMNS_STATIC;
-        var colsVariable = OrderColumns.NAME_COLUMNS_VAR;
-        return checkIfIter(columns, colsStatic, colsVariable);
+        return checkIf(columns, OrderColumns.NAME_COLUMNS);
     }
 
     private boolean checkIfDestinationPoint(List<Object> columns) {
@@ -81,24 +76,6 @@ public class DataFileIdentifier {
         for (int i = 0; i < columnsToCheck.size(); i++) {
             var col = (String) columnsToCheck.get(i);
             var name = columnsToMap.get(i);
-            if (!name.equals(col)) {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private boolean checkIfIter(List<Object> columnsToCheck, List<Object> columnsStaticToMap, List<Object> columnsVarToMap) {
-        var sameLength = columnsToCheck.size() >= (columnsStaticToMap.size() + columnsVarToMap.size());
-        if (!sameLength) {
-            return false;
-        }
-
-        for (int i = 0; i < columnsStaticToMap.size(); i++) {
-            var name = (String) columnsStaticToMap.get(i);
-            var col = (String) columnsToCheck.get(i);
-
             if (!name.equals(col)) {
                 return false;
             }

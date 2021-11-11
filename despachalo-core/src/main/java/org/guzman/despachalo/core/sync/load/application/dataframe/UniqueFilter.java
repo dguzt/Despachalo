@@ -13,6 +13,10 @@ public class UniqueFilter {
         return dataFrame.unique(uniqueColumn);
     }
 
+    public DataFrame<Object> filterUnique(DataFrame<Object> dataFrame, Integer ...uniqueColumns) {
+        return dataFrame.unique(uniqueColumns);
+    }
+
     public DataFrame<Object> filterNoUnique(DataFrame<Object> dataFrame, Integer uniqueColumn) {
         var unique = filterUnique(dataFrame, uniqueColumn);
         if (unique.length() == dataFrame.length()) {

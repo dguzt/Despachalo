@@ -19,14 +19,4 @@ public final class OrderColumns {
             NAME_COL_PRODUCT_CODE,
             NAME_COL_REQUESTED_AMOUNT
     );
-
-    public static final List<Object> NAME_COLUMNS_STATIC = List.of(
-            NAME_COL_ORDER_CODE,
-            NAME_COL_DESTINATION_POINT_CODE
-    );
-
-    public static final List<Object> NAME_COLUMNS_VAR = List.of(
-            NAME_COL_PRODUCT_CODE,
-            NAME_COL_REQUESTED_AMOUNT
-    );
 }

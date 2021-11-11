@@ -6,13 +6,18 @@ import org.guzman.despachalo.commons.pagination.Filters;
 import org.guzman.despachalo.commons.pagination.Paginator;
 import org.guzman.despachalo.core.storage.application.port.out.ChangeOrderToReadyPort;
 import org.guzman.despachalo.core.storage.application.port.out.ConfirmIfAllItemsAreStoredForOrderPort;
+import org.guzman.despachalo.core.sync.load.application.port.out.RegisterOrdersPort;
+import org.guzman.despachalo.core.sync.load.domain.OrderToInsert;
 import org.guzman.despachalo.core.sync.order.application.port.out.GetAllOrdersPort;
 import org.guzman.despachalo.core.sync.order.application.port.out.GetPaginatedOrdersPort;
 import org.guzman.despachalo.core.sync.order.domain.Order;
+import org.guzman.despachalo.core.sync.order.domain.OrderState;
 import org.javatuples.Pair;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static org.guzman.despachalo.core.sync.order.domain.OrderState.READY;
@@ -23,11 +28,13 @@ public class OrderPersistenceAdapter implements
         GetPaginatedOrdersPort,
         GetAllOrdersPort,
         ChangeOrderToReadyPort,
-        ConfirmIfAllItemsAreStoredForOrderPort {
+        ConfirmIfAllItemsAreStoredForOrderPort,
+        RegisterOrdersPort {
 
     private final OrderLineRepository orderLineRepository;
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
+    private final OrderLineMapper orderLineMapper;
 
     @Override
     public void changeOrderToReady(Long orderId) {
@@ -104,5 +111,38 @@ public class OrderPersistenceAdapter implements
                     order.setStoredUnits(res.getValue1());
                 })
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public void registerOrders(List<OrderToInsert> toInsert) {
+        var now = LocalDateTime.now();
+        var codes = toInsert.stream()
+                .map(OrderToInsert::getCode)
+                .collect(Collectors.toList());
+        var orders = orderRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        OrderEntity::getCode,
+                        Function.identity()));
+
+        toInsert.forEach(order -> {
+            if (orders.containsKey(order.getCode())) {
+                return;
+            }
+
+            var row = orderMapper.toEntity(order);
+            row.setState(OrderState.INCOMPLETE);
+            row.setCreatedAt(now);
+
+            var orderId = orderRepository.save(row).getId();
+
+            var lines = order.getLines()
+                    .stream()
+                    .map(orderLineMapper::toEntity)
+                    .peek(r -> r.setOrderId(orderId))
+                    .collect(Collectors.toList());
+
+            orderLineRepository.saveAll(lines);
+        });
     }
 }

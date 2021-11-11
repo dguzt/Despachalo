@@ -31,18 +31,4 @@ public final class CommodityColumns {
             NAME_COL_ITEM_PRODUCT_CODE,
             NAME_COL_ITEM_ORDER_CODE
     );
-
-    public static final List<Object> NAME_COLUMNS_STATIC = List.of(
-            NAME_COL_COMMODITY_CODE,
-            NAME_COL_ORIGIN_POINT_CODE,
-            NAME_COL_PLATE,
-            NAME_COL_DELIVERY_GEOCODE,
-            NAME_COL_ARRIVAL_DATE
-    );
-
-    public static final List<Object> NAME_COLUMNS_VAR = List.of(
-            NAME_COL_ITEM_CODE,
-            NAME_COL_ITEM_PRODUCT_CODE,
-            NAME_COL_ITEM_ORDER_CODE
-    );
 }

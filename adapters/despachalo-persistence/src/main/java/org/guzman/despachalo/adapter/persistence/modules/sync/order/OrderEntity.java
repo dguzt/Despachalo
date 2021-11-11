@@ -27,6 +27,9 @@ public class OrderEntity {
     @Column(name = "estado")
     private String state;
 
+    @Column(name = "codigo")
+    private String code;
+
     @Column(name = "fecha_creado")
     private LocalDateTime createdAt;
 

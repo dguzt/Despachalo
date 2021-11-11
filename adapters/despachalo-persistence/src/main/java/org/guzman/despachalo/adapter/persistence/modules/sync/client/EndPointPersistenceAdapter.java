@@ -2,17 +2,19 @@ package org.guzman.despachalo.adapter.persistence.modules.sync.client;
 
 import lombok.RequiredArgsConstructor;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
+import org.guzman.despachalo.core.sync.load.application.port.out.GetMappedDestinationPointIdsPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterDestinationPointsPort;
 import org.guzman.despachalo.core.sync.load.domain.DestinationPointToRegister;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
-public class EndPointPersistenceAdapter implements RegisterDestinationPointsPort {
+public class EndPointPersistenceAdapter implements RegisterDestinationPointsPort, GetMappedDestinationPointIdsPort {
     private final EndPointMapper mapper;
     private final EndPointRepository endPointRepository;
 
@@ -41,5 +43,14 @@ public class EndPointPersistenceAdapter implements RegisterDestinationPointsPort
                 .collect(Collectors.toList());
 
         endPointRepository.saveAll(rows);
+    }
+
+    @Override
+    public Map<String, Long> getMappedDestinationPointIds(List<String> codes) {
+        return endPointRepository.findAllByCodeIn(codes)
+                .stream()
+                .collect(Collectors.toMap(
+                        EndPointEntity::getCode,
+                        EndPointEntity::getId));
     }
 }

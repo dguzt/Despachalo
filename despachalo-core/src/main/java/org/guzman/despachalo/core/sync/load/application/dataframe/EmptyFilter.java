@@ -38,6 +38,17 @@ public class EmptyFilter {
         };
     }
 
+    public DataFrame.Predicate<Object> filterNoEmptyLongs(Integer columnIndex) {
+        return (row) -> {
+            try {
+                var value = (Long) row.get(columnIndex);
+                return value != null && !value.equals(0L);
+            } catch (RuntimeException e) {
+                return false;
+            }
+        };
+    }
+
     public DataFrame.Predicate<Object> filterEmptyNumbers(Integer columnIndex) {
         return (row) -> {
             try {
