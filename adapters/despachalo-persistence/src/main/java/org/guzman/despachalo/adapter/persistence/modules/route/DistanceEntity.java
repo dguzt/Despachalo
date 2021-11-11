@@ -1,5 +1,6 @@
 package org.guzman.despachalo.adapter.persistence.modules.route;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -11,6 +12,7 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Getter @Setter
+@AllArgsConstructor
 @RequiredArgsConstructor
 @Entity @Table(name = "DISTANCIA")
 public class DistanceEntity {

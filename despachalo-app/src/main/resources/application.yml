@@ -18,6 +18,11 @@ despachalo:
       bucket:
         name: ""
       minutes-presigned: 360
+  sync:
+    directory-path: ""
+    responsible-id: 1
+  mapping:
+    api-key: ""
 
 server:
   port: 8080

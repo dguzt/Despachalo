@@ -1,12 +1,12 @@
 package org.guzman.despachalo.adapter.persistence.modules.sync.client;
 
 import lombok.RequiredArgsConstructor;
+import org.guzman.despachalo.adapter.persistence.modules.programming.MappingDistancePersistenceAdapter;
 import org.guzman.despachalo.commons.hexagonal.PersistenceAdapter;
 import org.guzman.despachalo.core.sync.load.application.port.out.GetMappedDestinationPointIdsPort;
 import org.guzman.despachalo.core.sync.load.application.port.out.RegisterDestinationPointsPort;
 import org.guzman.despachalo.core.sync.load.domain.DestinationPointToRegister;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -17,10 +17,10 @@ import java.util.stream.Collectors;
 public class EndPointPersistenceAdapter implements RegisterDestinationPointsPort, GetMappedDestinationPointIdsPort {
     private final EndPointMapper mapper;
     private final EndPointRepository endPointRepository;
+    private final MappingDistancePersistenceAdapter distancePersistenceAdapter;
 
     @Override
     public void registerDestinationPoints(List<DestinationPointToRegister> toRegister) {
-        var now = LocalDateTime.now();
         var codes = toRegister.stream()
                 .map(DestinationPointToRegister::getCode)
                 .collect(Collectors.toList());
@@ -42,7 +42,13 @@ public class EndPointPersistenceAdapter implements RegisterDestinationPointsPort
                 })
                 .collect(Collectors.toList());
 
-        endPointRepository.saveAll(rows);
+        var saved = endPointRepository.saveAll(rows);
+        var locations = saved.stream()
+                .collect(Collectors.toMap(
+                        EndPointEntity::getId,
+                        Function.identity()));
+
+        distancePersistenceAdapter.request();
     }
 
     @Override

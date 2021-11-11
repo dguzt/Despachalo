@@ -12,6 +12,7 @@ import org.guzman.despachalo.core.sync.load.application.port.out.RegisterDestina
 import org.guzman.despachalo.core.sync.load.domain.DestinationPointToRegister;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -36,7 +37,7 @@ public class DestinationPointsFileProcessor implements FileProcessor {
     private static final Integer CENTER_ID = GEOCODE + 2;
 
     @Override
-    public Integer process(DataFrame<Object> dataFrame) {
+    public Integer process(DataFrame<Object> dataFrame) throws IOException {
         var df = dataFrame.convert(COL_TYPES.toArray(Class[]::new));
 
         var noEmpties = filterEmpties(df);
