@@ -16,6 +16,7 @@ import org.springframework.data.domain.PageRequest;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -28,7 +29,8 @@ public class LoadPersistenceAdapter implements
         RegisterLoadForSyncPort,
         GetSyncDetailsPort,
         RegisterSyncResultPort,
-        GetNextSyncPort {
+        GetNextSyncPort,
+        GetFilenamesInSyncPort {
 
     private static final String LOADS_PATH = "loads/";
     private final AwsStorageExternalService awsStorageExternalService;
@@ -104,5 +106,13 @@ public class LoadPersistenceAdapter implements
         }
 
         return syncRepository.findTopByStateOrderBySyncAt(LoadState.PENDING).map(SyncEntity::getId);
+    }
+
+    @Override
+    public List<String> getFilenamesInSync() {
+        return syncRepository.findAll()
+                .stream()
+                .map(SyncEntity::getOriginalName)
+                .collect(Collectors.toList());
     }
 }
