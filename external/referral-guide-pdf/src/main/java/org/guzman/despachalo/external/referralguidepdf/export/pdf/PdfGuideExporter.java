@@ -2,12 +2,12 @@ package org.guzman.despachalo.external.referralguidepdf.export.pdf;
 
 import lombok.RequiredArgsConstructor;
 import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.engine.data.JRBeanArrayDataSource;
 import org.guzman.despachalo.commons.hexagonal.extra.HelperService;
 import org.guzman.despachalo.external.referralguidepdf.ReferralGuide;
 import org.guzman.despachalo.external.referralguidepdf.helpers.TmpFile;
 
 import java.io.File;
-import java.io.IOException;
 import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,12 +17,15 @@ import java.util.Map;
 public class PdfGuideExporter {
     private final TmpFile tmpFile;
 
-    public File generatePdf(ReferralGuide referralGuide) throws JRException, IOException {
-        var parameters = parameters(referralGuide);
+    public File generatePdf(ReferralGuide referralGuide) throws JRException {
+        var vehicles = referralGuide.getVehicles();
+        var dsVehicles = new JRBeanArrayDataSource(vehicles.toArray());
+
+        var parameters = parameters(referralGuide, dsVehicles);
         var guideJasperStream = getClass().getResourceAsStream("/referral-guide.jrxml");
 
         var jasperReport = JasperCompileManager.compileReport(guideJasperStream);
-        var jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, new JREmptyDataSource());
+        var jasperPrint = JasperFillManager.fillReport(jasperReport, parameters, dsVehicles);
         var filename = tmpFile.newTmpFilename("pdf");
 
         exportToTmp(jasperPrint, filename);
@@ -33,10 +36,11 @@ public class PdfGuideExporter {
         JasperExportManager.exportReportToPdfFile(jasperPrint, filename);
     }
 
-    private Map<String, Object> parameters(ReferralGuide guide) {
+    private Map<String, Object> parameters(ReferralGuide guide, JRBeanArrayDataSource dsVehicles) {
         var dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
         var parameters = new HashMap<String, Object>();
 
+        parameters.put("D_DS_VEHICLES_ROWS", dsVehicles);
         parameters.put("D_COMPANY_NAME", guide.getCompany().getName());
         parameters.put("D_COMPANY_RUC", guide.getCompany().getRuc());
         parameters.put("D_GUIDE_ID", guide.getId());

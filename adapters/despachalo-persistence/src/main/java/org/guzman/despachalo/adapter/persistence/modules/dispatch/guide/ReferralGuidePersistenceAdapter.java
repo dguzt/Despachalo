@@ -21,7 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.File;
-import java.util.Collections;
+import java.util.List;
 
 @PersistenceAdapter
 @RequiredArgsConstructor
@@ -65,7 +65,7 @@ public class ReferralGuidePersistenceAdapter implements GetDataForReferralGuideP
                 orderId,
                 company,
                 client,
-                300,
+                120,
                 vehicleDetails,
                 originPoint,
                 destinationPoint,
@@ -82,7 +82,9 @@ public class ReferralGuidePersistenceAdapter implements GetDataForReferralGuideP
             var transport = new Transport(TransportType.PRIVATE, data.getIssuedAt(), data.getTransportedAt(), TransportReason.SALE, data.getTotalWeight().toString());
             var originPoint = new OriginPoint(data.getOriginPoint().getAddress(), data.getOriginPoint().getGeoCode());
             var destinationPoint = new DestinationPoint(data.getDestinationPoint().getAddress(), data.getDestinationPoint().getGeoCode());
-            var vehicles = Collections.<TransportVehicle>emptyList();
+
+            var vehicle = new TransportVehicle(data.getVehicle().getVehicle().getPlate());
+            var vehicles = List.of(vehicle);
 
             var guideData = ReferralGuide.builder()
                     .id(String.format("EG01-%d", data.getId()))
